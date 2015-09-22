@@ -1,0 +1,240 @@
+ARM Linker, 5.03 [Build 76] [MDK-ARM Lite]
+
+==============================================================================
+
+Section Cross References
+
+    main.o(i.I2C_Configuration) refers to stm32f4xx_rcc.o(i.RCC_AHB1PeriphClockCmd) for RCC_AHB1PeriphClockCmd
+    main.o(i.I2C_Configuration) refers to stm32f4xx_rcc.o(i.RCC_APB1PeriphClockCmd) for RCC_APB1PeriphClockCmd
+    main.o(i.I2C_Configuration) refers to stm32f4xx_gpio.o(i.GPIO_Init) for GPIO_Init
+    main.o(i.I2C_Configuration) refers to stm32f4xx_gpio.o(i.GPIO_PinAFConfig) for GPIO_PinAFConfig
+    main.o(i.I2C_Configuration) refers to stm32f4xx_i2c.o(i.I2C_DeInit) for I2C_DeInit
+    main.o(i.I2C_Configuration) refers to stm32f4xx_i2c.o(i.I2C_Init) for I2C_Init
+    main.o(i.I2C_Configuration) refers to stm32f4xx_i2c.o(i.I2C_Cmd) for I2C_Cmd
+    main.o(i.I2C_Configuration) refers to main.o(.data) for .data
+    main.o(i.I2C_Configuration) refers to main.o(.bss) for .bss
+    main.o(i.Led_Config) refers to stm32f4xx_rcc.o(i.RCC_AHB1PeriphClockCmd) for RCC_AHB1PeriphClockCmd
+    main.o(i.Led_Config) refers to stm32f4xx_gpio.o(i.GPIO_Init) for GPIO_Init
+    main.o(i.Led_Config) refers to main.o(.data) for .data
+    main.o(i.MPU6050_Get_Data) refers to mpu6050.o(i.MPU6050_GetRawAccelTempGyro) for MPU6050_GetRawAccelTempGyro
+    main.o(i.MPU6050_Get_Data) refers to kalman.o(i.kalmanX_single) for kalmanX_single
+    main.o(i.MPU6050_Get_Data) refers to kalman.o(i.kalmanY_single) for kalmanY_single
+    main.o(i.MPU6050_Get_Data) refers to kalman.o(i.kalmanZ_single) for kalmanZ_single
+    main.o(i.MPU6050_Get_Data) refers to f2d.o(.text) for __aeabi_f2d
+    main.o(i.MPU6050_Get_Data) refers to atan2.o(i.__hardfp_atan2) for __hardfp_atan2
+    main.o(i.MPU6050_Get_Data) refers to dmul.o(.text) for __aeabi_dmul
+    main.o(i.MPU6050_Get_Data) refers to d2f.o(.text) for __aeabi_d2f
+    main.o(i.MPU6050_Get_Data) refers to ddiv.o(.text) for __aeabi_ddiv
+    main.o(i.MPU6050_Get_Data) refers to dadd.o(.text) for __aeabi_dadd
+    main.o(i.MPU6050_Get_Data) refers to kalman.o(i.kalman_filter_angleX) for kalman_filter_angleX
+    main.o(i.MPU6050_Get_Data) refers to kalman.o(i.kalman_filter_angleY) for kalman_filter_angleY
+    main.o(i.MPU6050_Get_Data) refers to main.o(.bss) for .bss
+    main.o(i.MPU6050_Get_Data) refers to main.o(.data) for .data
+    main.o(i.MPU6050_Get_Offset) refers to mpu6050.o(i.MPU6050_GetRawAccelTempGyro) for MPU6050_GetRawAccelTempGyro
+    main.o(i.MPU6050_Get_Offset) refers to main.o(.bss) for .bss
+    main.o(i.MPU6050_Get_Offset) refers to main.o(.data) for .data
+    main.o(i.MPU_Get_Start) refers to mpu6050.o(i.MPU6050_GetRawAccelTempGyro) for MPU6050_GetRawAccelTempGyro
+    main.o(i.MPU_Get_Start) refers to dflti.o(.text) for __aeabi_i2d
+    main.o(i.MPU_Get_Start) refers to atan2.o(i.__hardfp_atan2) for __hardfp_atan2
+    main.o(i.MPU_Get_Start) refers to dmul.o(.text) for __aeabi_dmul
+    main.o(i.MPU_Get_Start) refers to d2f.o(.text) for __aeabi_d2f
+    main.o(i.MPU_Get_Start) refers to main.o(.bss) for .bss
+    main.o(i.MPU_Get_Start) refers to main.o(.data) for .data
+    main.o(i.MPU_Get_Start) refers to kalman.o(.data) for x_angle
+    main.o(i.SysTick_Handler) refers to main.o(i.MPU6050_Get_Data) for MPU6050_Get_Data
+    main.o(i.main) refers to main.o(i.I2C_Configuration) for I2C_Configuration
+    main.o(i.main) refers to mpu6050.o(i.MPU6050_Initialize) for MPU6050_Initialize
+    main.o(i.main) refers to main.o(i.delay_ms) for delay_ms
+    main.o(i.main) refers to main.o(i.MPU6050_Get_Offset) for MPU6050_Get_Offset
+    main.o(i.main) refers to main.o(i.Led_Config) for Led_Config
+    main.o(i.main) refers to main.o(i.MPU_Get_Start) for MPU_Get_Start
+    main.o(i.main) refers to stm32f4xx_gpio.o(i.GPIO_SetBits) for GPIO_SetBits
+    main.o(i.main) refers to system_stm32f4xx.o(.data) for SystemCoreClock
+    system_stm32f4xx.o(i.SystemCoreClockUpdate) refers to system_stm32f4xx.o(.data) for .data
+    system_stm32f4xx.o(i.SystemInit) refers to system_stm32f4xx.o(i.SetSysClock) for SetSysClock
+    startup_stm32f4xx.o(RESET) refers to startup_stm32f4xx.o(STACK) for __initial_sp
+    startup_stm32f4xx.o(RESET) refers to startup_stm32f4xx.o(.text) for Reset_Handler
+    startup_stm32f4xx.o(RESET) refers to stm32f4xx_it.o(i.NMI_Handler) for NMI_Handler
+    startup_stm32f4xx.o(RESET) refers to stm32f4xx_it.o(i.HardFault_Handler) for HardFault_Handler
+    startup_stm32f4xx.o(RESET) refers to stm32f4xx_it.o(i.MemManage_Handler) for MemManage_Handler
+    startup_stm32f4xx.o(RESET) refers to stm32f4xx_it.o(i.BusFault_Handler) for BusFault_Handler
+    startup_stm32f4xx.o(RESET) refers to stm32f4xx_it.o(i.UsageFault_Handler) for UsageFault_Handler
+    startup_stm32f4xx.o(RESET) refers to stm32f4xx_it.o(i.SVC_Handler) for SVC_Handler
+    startup_stm32f4xx.o(RESET) refers to stm32f4xx_it.o(i.DebugMon_Handler) for DebugMon_Handler
+    startup_stm32f4xx.o(RESET) refers to stm32f4xx_it.o(i.PendSV_Handler) for PendSV_Handler
+    startup_stm32f4xx.o(RESET) refers to main.o(i.SysTick_Handler) for SysTick_Handler
+    startup_stm32f4xx.o(.text) refers to system_stm32f4xx.o(i.SystemInit) for SystemInit
+    startup_stm32f4xx.o(.text) refers to entry.o(.ARM.Collect$$$$00000000) for __main
+    stm32f4xx_gpio.o(i.GPIO_DeInit) refers to stm32f4xx_rcc.o(i.RCC_AHB1PeriphResetCmd) for RCC_AHB1PeriphResetCmd
+    stm32f4xx_rcc.o(i.RCC_GetClocksFreq) refers to stm32f4xx_rcc.o(.data) for .data
+    stm32f4xx_rcc.o(i.RCC_WaitForHSEStartUp) refers to stm32f4xx_rcc.o(i.RCC_GetFlagStatus) for RCC_GetFlagStatus
+    stm32f4xx_i2c.o(i.I2C_DeInit) refers to stm32f4xx_rcc.o(i.RCC_APB1PeriphResetCmd) for RCC_APB1PeriphResetCmd
+    stm32f4xx_i2c.o(i.I2C_Init) refers to stm32f4xx_rcc.o(i.RCC_GetClocksFreq) for RCC_GetClocksFreq
+    stm32f4xx_adc.o(i.ADC_DeInit) refers to stm32f4xx_rcc.o(i.RCC_APB2PeriphResetCmd) for RCC_APB2PeriphResetCmd
+    stm32f4xx_can.o(i.CAN_DeInit) refers to stm32f4xx_rcc.o(i.RCC_APB1PeriphResetCmd) for RCC_APB1PeriphResetCmd
+    stm32f4xx_can.o(i.CAN_GetITStatus) refers to stm32f4xx_can.o(i.CheckITStatus) for CheckITStatus
+    stm32f4xx_tim.o(i.TIM_DeInit) refers to stm32f4xx_rcc.o(i.RCC_APB2PeriphResetCmd) for RCC_APB2PeriphResetCmd
+    stm32f4xx_tim.o(i.TIM_DeInit) refers to stm32f4xx_rcc.o(i.RCC_APB1PeriphResetCmd) for RCC_APB1PeriphResetCmd
+    stm32f4xx_tim.o(i.TIM_ETRClockMode1Config) refers to stm32f4xx_tim.o(i.TIM_ETRConfig) for TIM_ETRConfig
+    stm32f4xx_tim.o(i.TIM_ETRClockMode2Config) refers to stm32f4xx_tim.o(i.TIM_ETRConfig) for TIM_ETRConfig
+    stm32f4xx_tim.o(i.TIM_ICInit) refers to stm32f4xx_tim.o(i.TIM_SetIC4Prescaler) for TIM_SetIC4Prescaler
+    stm32f4xx_tim.o(i.TIM_ICInit) refers to stm32f4xx_tim.o(i.TI1_Config) for TI1_Config
+    stm32f4xx_tim.o(i.TIM_ICInit) refers to stm32f4xx_tim.o(i.TIM_SetIC1Prescaler) for TIM_SetIC1Prescaler
+    stm32f4xx_tim.o(i.TIM_ICInit) refers to stm32f4xx_tim.o(i.TI2_Config) for TI2_Config
+    stm32f4xx_tim.o(i.TIM_ICInit) refers to stm32f4xx_tim.o(i.TIM_SetIC2Prescaler) for TIM_SetIC2Prescaler
+    stm32f4xx_tim.o(i.TIM_ICInit) refers to stm32f4xx_tim.o(i.TIM_SetIC3Prescaler) for TIM_SetIC3Prescaler
+    stm32f4xx_tim.o(i.TIM_ITRxExternalClockConfig) refers to stm32f4xx_tim.o(i.TIM_SelectInputTrigger) for TIM_SelectInputTrigger
+    stm32f4xx_tim.o(i.TIM_PWMIConfig) refers to stm32f4xx_tim.o(i.TI2_Config) for TI2_Config
+    stm32f4xx_tim.o(i.TIM_PWMIConfig) refers to stm32f4xx_tim.o(i.TIM_SetIC2Prescaler) for TIM_SetIC2Prescaler
+    stm32f4xx_tim.o(i.TIM_PWMIConfig) refers to stm32f4xx_tim.o(i.TI1_Config) for TI1_Config
+    stm32f4xx_tim.o(i.TIM_PWMIConfig) refers to stm32f4xx_tim.o(i.TIM_SetIC1Prescaler) for TIM_SetIC1Prescaler
+    stm32f4xx_tim.o(i.TIM_TIxExternalClockConfig) refers to stm32f4xx_tim.o(i.TI1_Config) for TI1_Config
+    stm32f4xx_tim.o(i.TIM_TIxExternalClockConfig) refers to stm32f4xx_tim.o(i.TIM_SelectInputTrigger) for TIM_SelectInputTrigger
+    stm32f4xx_tim.o(i.TIM_TIxExternalClockConfig) refers to stm32f4xx_tim.o(i.TI2_Config) for TI2_Config
+    stm32f4xx_usart.o(i.USART_DeInit) refers to stm32f4xx_rcc.o(i.RCC_APB2PeriphResetCmd) for RCC_APB2PeriphResetCmd
+    stm32f4xx_usart.o(i.USART_DeInit) refers to stm32f4xx_rcc.o(i.RCC_APB1PeriphResetCmd) for RCC_APB1PeriphResetCmd
+    stm32f4xx_usart.o(i.USART_Init) refers to stm32f4xx_rcc.o(i.RCC_GetClocksFreq) for RCC_GetClocksFreq
+    mpu6050.o(i.MPU6050_GetDeviceID) refers to mpu6050.o(i.MPU6050_ReadBits) for MPU6050_ReadBits
+    mpu6050.o(i.MPU6050_GetFullScaleAccelRange) refers to mpu6050.o(i.MPU6050_ReadBits) for MPU6050_ReadBits
+    mpu6050.o(i.MPU6050_GetFullScaleGyroRange) refers to mpu6050.o(i.MPU6050_ReadBits) for MPU6050_ReadBits
+    mpu6050.o(i.MPU6050_GetRawAccelTempGyro) refers to mpu6050.o(i.MPU6050_I2C_BufferRead) for MPU6050_I2C_BufferRead
+    mpu6050.o(i.MPU6050_GetSleepModeStatus) refers to mpu6050.o(i.MPU6050_ReadBit) for MPU6050_ReadBit
+    mpu6050.o(i.MPU6050_I2C_BufferRead) refers to stm32f4xx_i2c.o(i.I2C_GetFlagStatus) for I2C_GetFlagStatus
+    mpu6050.o(i.MPU6050_I2C_BufferRead) refers to stm32f4xx_i2c.o(i.I2C_GenerateSTART) for I2C_GenerateSTART
+    mpu6050.o(i.MPU6050_I2C_BufferRead) refers to stm32f4xx_i2c.o(i.I2C_CheckEvent) for I2C_CheckEvent
+    mpu6050.o(i.MPU6050_I2C_BufferRead) refers to stm32f4xx_i2c.o(i.I2C_Send7bitAddress) for I2C_Send7bitAddress
+    mpu6050.o(i.MPU6050_I2C_BufferRead) refers to stm32f4xx_i2c.o(i.I2C_Cmd) for I2C_Cmd
+    mpu6050.o(i.MPU6050_I2C_BufferRead) refers to stm32f4xx_i2c.o(i.I2C_SendData) for I2C_SendData
+    mpu6050.o(i.MPU6050_I2C_BufferRead) refers to stm32f4xx_i2c.o(i.I2C_AcknowledgeConfig) for I2C_AcknowledgeConfig
+    mpu6050.o(i.MPU6050_I2C_BufferRead) refers to stm32f4xx_i2c.o(i.I2C_GenerateSTOP) for I2C_GenerateSTOP
+    mpu6050.o(i.MPU6050_I2C_BufferRead) refers to stm32f4xx_i2c.o(i.I2C_ReceiveData) for I2C_ReceiveData
+    mpu6050.o(i.MPU6050_I2C_ByteWrite) refers to stm32f4xx_i2c.o(i.I2C_GenerateSTART) for I2C_GenerateSTART
+    mpu6050.o(i.MPU6050_I2C_ByteWrite) refers to stm32f4xx_i2c.o(i.I2C_CheckEvent) for I2C_CheckEvent
+    mpu6050.o(i.MPU6050_I2C_ByteWrite) refers to stm32f4xx_i2c.o(i.I2C_Send7bitAddress) for I2C_Send7bitAddress
+    mpu6050.o(i.MPU6050_I2C_ByteWrite) refers to stm32f4xx_i2c.o(i.I2C_SendData) for I2C_SendData
+    mpu6050.o(i.MPU6050_I2C_ByteWrite) refers to stm32f4xx_i2c.o(i.I2C_GenerateSTOP) for I2C_GenerateSTOP
+    mpu6050.o(i.MPU6050_Initialize) refers to mpu6050.o(i.MPU6050_SetClockSource) for MPU6050_SetClockSource
+    mpu6050.o(i.MPU6050_Initialize) refers to mpu6050.o(i.MPU6050_SetFullScaleGyroRange) for MPU6050_SetFullScaleGyroRange
+    mpu6050.o(i.MPU6050_Initialize) refers to mpu6050.o(i.MPU6050_SetFullScaleAccelRange) for MPU6050_SetFullScaleAccelRange
+    mpu6050.o(i.MPU6050_Initialize) refers to mpu6050.o(i.MPU6050_SetSleepModeStatus) for MPU6050_SetSleepModeStatus
+    mpu6050.o(i.MPU6050_ReadBit) refers to mpu6050.o(i.MPU6050_I2C_BufferRead) for MPU6050_I2C_BufferRead
+    mpu6050.o(i.MPU6050_ReadBits) refers to mpu6050.o(i.MPU6050_I2C_BufferRead) for MPU6050_I2C_BufferRead
+    mpu6050.o(i.MPU6050_SetClockSource) refers to mpu6050.o(i.MPU6050_WriteBits) for MPU6050_WriteBits
+    mpu6050.o(i.MPU6050_SetFullScaleAccelRange) refers to mpu6050.o(i.MPU6050_WriteBits) for MPU6050_WriteBits
+    mpu6050.o(i.MPU6050_SetFullScaleGyroRange) refers to mpu6050.o(i.MPU6050_WriteBits) for MPU6050_WriteBits
+    mpu6050.o(i.MPU6050_SetSleepModeStatus) refers to mpu6050.o(i.MPU6050_WriteBit) for MPU6050_WriteBit
+    mpu6050.o(i.MPU6050_TestConnection) refers to mpu6050.o(i.MPU6050_GetDeviceID) for MPU6050_GetDeviceID
+    mpu6050.o(i.MPU6050_WriteBit) refers to mpu6050.o(i.MPU6050_I2C_BufferRead) for MPU6050_I2C_BufferRead
+    mpu6050.o(i.MPU6050_WriteBit) refers to mpu6050.o(i.MPU6050_I2C_ByteWrite) for MPU6050_I2C_ByteWrite
+    mpu6050.o(i.MPU6050_WriteBits) refers to mpu6050.o(i.MPU6050_I2C_BufferRead) for MPU6050_I2C_BufferRead
+    mpu6050.o(i.MPU6050_WriteBits) refers to mpu6050.o(i.MPU6050_I2C_ByteWrite) for MPU6050_I2C_ByteWrite
+    kalman.o(i.kalmanX_single) refers to kalman.o(.data) for .data
+    kalman.o(i.kalmanY_single) refers to kalman.o(.data) for .data
+    kalman.o(i.kalmanZ_single) refers to kalman.o(.data) for .data
+    kalman.o(i.kalman_filter_angleX) refers to kalman.o(.data) for .data
+    kalman.o(i.kalman_filter_angleX) refers to kalman.o(.bss) for .bss
+    kalman.o(i.kalman_filter_angleY) refers to kalman.o(.data) for .data
+    kalman.o(i.kalman_filter_angleY) refers to kalman.o(.bss) for .bss
+    pwm.o(i.PWM_Config) refers to stm32f4xx_rcc.o(i.RCC_APB1PeriphClockCmd) for RCC_APB1PeriphClockCmd
+    pwm.o(i.PWM_Config) refers to stm32f4xx_tim.o(i.TIM_TimeBaseInit) for TIM_TimeBaseInit
+    pwm.o(i.PWM_Config) refers to stm32f4xx_tim.o(i.TIM_OC1Init) for TIM_OC1Init
+    pwm.o(i.PWM_Config) refers to stm32f4xx_tim.o(i.TIM_OC1PreloadConfig) for TIM_OC1PreloadConfig
+    pwm.o(i.PWM_Config) refers to stm32f4xx_tim.o(i.TIM_OC2Init) for TIM_OC2Init
+    pwm.o(i.PWM_Config) refers to stm32f4xx_tim.o(i.TIM_OC2PreloadConfig) for TIM_OC2PreloadConfig
+    pwm.o(i.PWM_Config) refers to stm32f4xx_tim.o(i.TIM_OC3Init) for TIM_OC3Init
+    pwm.o(i.PWM_Config) refers to stm32f4xx_tim.o(i.TIM_OC3PreloadConfig) for TIM_OC3PreloadConfig
+    pwm.o(i.PWM_Config) refers to stm32f4xx_tim.o(i.TIM_OC4Init) for TIM_OC4Init
+    pwm.o(i.PWM_Config) refers to stm32f4xx_tim.o(i.TIM_OC4PreloadConfig) for TIM_OC4PreloadConfig
+    pwm.o(i.PWM_Config) refers to stm32f4xx_tim.o(i.TIM_ARRPreloadConfig) for TIM_ARRPreloadConfig
+    pwm.o(i.PWM_Config) refers to stm32f4xx_tim.o(i.TIM_Cmd) for TIM_Cmd
+    pwm.o(i.PWM_Config) refers to pwm.o(.bss) for .bss
+    atan2.o(i.__hardfp_atan2) refers (Special) to iusefp.o(.text) for __I$use$fp
+    atan2.o(i.__hardfp_atan2) refers to dadd.o(.text) for __aeabi_dadd
+    atan2.o(i.__hardfp_atan2) refers to atan.o(i.atan) for atan
+    atan2.o(i.__hardfp_atan2) refers to ddiv.o(.text) for __aeabi_ddiv
+    atan2.o(i.__hardfp_atan2) refers to fabs.o(i.fabs) for fabs
+    atan2.o(i.__hardfp_atan2) refers to qnan.o(.constdata) for __mathlib_zero
+    atan2.o(i.__softfp_atan2) refers (Special) to iusefp.o(.text) for __I$use$fp
+    atan2.o(i.__softfp_atan2) refers to atan2.o(i.__hardfp_atan2) for __hardfp_atan2
+    atan2.o(i.atan2) refers (Special) to iusefp.o(.text) for __I$use$fp
+    atan2.o(i.atan2) refers to atan2.o(i.__hardfp_atan2) for __hardfp_atan2
+    atan2_x.o(i.____hardfp_atan2$lsc) refers (Special) to iusefp.o(.text) for __I$use$fp
+    atan2_x.o(i.____hardfp_atan2$lsc) refers to dadd.o(.text) for __aeabi_dadd
+    atan2_x.o(i.____hardfp_atan2$lsc) refers to atan.o(i.atan) for atan
+    atan2_x.o(i.____hardfp_atan2$lsc) refers to errno.o(i.__set_errno) for __set_errno
+    atan2_x.o(i.____hardfp_atan2$lsc) refers to ddiv.o(.text) for __aeabi_ddiv
+    atan2_x.o(i.____hardfp_atan2$lsc) refers to fabs.o(i.fabs) for fabs
+    atan2_x.o(i.____hardfp_atan2$lsc) refers to qnan.o(.constdata) for __mathlib_zero
+    atan2_x.o(i.____softfp_atan2$lsc) refers (Special) to iusefp.o(.text) for __I$use$fp
+    atan2_x.o(i.____softfp_atan2$lsc) refers to atan2_x.o(i.____hardfp_atan2$lsc) for ____hardfp_atan2$lsc
+    atan2_x.o(i.__atan2$lsc) refers (Special) to iusefp.o(.text) for __I$use$fp
+    atan2_x.o(i.__atan2$lsc) refers to atan2_x.o(i.____hardfp_atan2$lsc) for ____hardfp_atan2$lsc
+    entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry10a.o(.ARM.Collect$$$$0000000D) for __rt_final_cpp
+    entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry11a.o(.ARM.Collect$$$$0000000F) for __rt_final_exit
+    entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry7b.o(.ARM.Collect$$$$00000008) for _main_clock
+    entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry8b.o(.ARM.Collect$$$$0000000A) for _main_cpp_init
+    entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry9a.o(.ARM.Collect$$$$0000000B) for _main_init
+    entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry5.o(.ARM.Collect$$$$00000004) for _main_scatterload
+    entry.o(.ARM.Collect$$$$00000000) refers (Special) to entry2.o(.ARM.Collect$$$$00000001) for _main_stk
+    dadd.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
+    dadd.o(.text) refers to llshl.o(.text) for __aeabi_llsl
+    dadd.o(.text) refers to llsshr.o(.text) for __aeabi_lasr
+    dadd.o(.text) refers to depilogue.o(.text) for _double_epilogue
+    dmul.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
+    dmul.o(.text) refers to depilogue.o(.text) for _double_epilogue
+    ddiv.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
+    ddiv.o(.text) refers to depilogue.o(.text) for _double_round
+    dflti.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
+    dflti.o(.text) refers to depilogue.o(.text) for _double_epilogue
+    f2d.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
+    d2f.o(.text) refers (Special) to iusefp.o(.text) for __I$use$fp
+    d2f.o(.text) refers to fepilogue.o(.text) for _float_round
+    atan.o(i.__hardfp_atan) refers (Special) to iusefp.o(.text) for __I$use$fp
+    atan.o(i.__hardfp_atan) refers to dadd.o(.text) for __aeabi_dadd
+    atan.o(i.__hardfp_atan) refers to fpclassify.o(i.__ARM_fpclassify) for __ARM_fpclassify
+    atan.o(i.__hardfp_atan) refers to dunder.o(i.__mathlib_dbl_underflow) for __mathlib_dbl_underflow
+    atan.o(i.__hardfp_atan) refers to fabs.o(i.fabs) for fabs
+    atan.o(i.__hardfp_atan) refers to dmul.o(.text) for __aeabi_dmul
+    atan.o(i.__hardfp_atan) refers to ddiv.o(.text) for __aeabi_ddiv
+    atan.o(i.__hardfp_atan) refers to poly.o(i.__kernel_poly) for __kernel_poly
+    atan.o(i.__hardfp_atan) refers to atan.o(.constdata) for .constdata
+    atan.o(i.__softfp_atan) refers (Special) to iusefp.o(.text) for __I$use$fp
+    atan.o(i.__softfp_atan) refers to atan.o(i.__hardfp_atan) for __hardfp_atan
+    atan.o(i.atan) refers (Special) to iusefp.o(.text) for __I$use$fp
+    atan.o(i.atan) refers to atan.o(i.__hardfp_atan) for __hardfp_atan
+    atan.o(.constdata) refers (Special) to iusefp.o(.text) for __I$use$fp
+    atan_x.o(i.____hardfp_atan$lsc) refers (Special) to iusefp.o(.text) for __I$use$fp
+    atan_x.o(i.____hardfp_atan$lsc) refers to dadd.o(.text) for __aeabi_dadd
+    atan_x.o(i.____hardfp_atan$lsc) refers to fabs.o(i.fabs) for fabs
+    atan_x.o(i.____hardfp_atan$lsc) refers to dmul.o(.text) for __aeabi_dmul
+    atan_x.o(i.____hardfp_atan$lsc) refers to ddiv.o(.text) for __aeabi_ddiv
+    atan_x.o(i.____hardfp_atan$lsc) refers to poly.o(i.__kernel_poly) for __kernel_poly
+    atan_x.o(i.____hardfp_atan$lsc) refers to atan_x.o(.constdata) for .constdata
+    atan_x.o(i.____softfp_atan$lsc) refers (Special) to iusefp.o(.text) for __I$use$fp
+    atan_x.o(i.____softfp_atan$lsc) refers to atan_x.o(i.____hardfp_atan$lsc) for ____hardfp_atan$lsc
+    atan_x.o(i.__atan$lsc) refers (Special) to iusefp.o(.text) for __I$use$fp
+    atan_x.o(i.__atan$lsc) refers to atan_x.o(i.____hardfp_atan$lsc) for ____hardfp_atan$lsc
+    atan_x.o(.constdata) refers (Special) to iusefp.o(.text) for __I$use$fp
+    fabs.o(i.__hardfp_fabs) refers (Special) to iusefp.o(.text) for __I$use$fp
+    fabs.o(i.__softfp_fabs) refers (Special) to iusefp.o(.text) for __I$use$fp
+    fabs.o(i.fabs) refers (Special) to iusefp.o(.text) for __I$use$fp
+    qnan.o(.constdata) refers (Special) to iusefp.o(.text) for __I$use$fp
+    entry2.o(.ARM.Collect$$$$00000001) refers to entry2.o(.ARM.Collect$$$$00002712) for __lit__00000000
+    entry2.o(.ARM.Collect$$$$00002712) refers to startup_stm32f4xx.o(STACK) for __initial_sp
+    entry2.o(__vectab_stack_and_reset_area) refers to startup_stm32f4xx.o(STACK) for __initial_sp
+    entry2.o(__vectab_stack_and_reset_area) refers to entry.o(.ARM.Collect$$$$00000000) for __main
+    entry5.o(.ARM.Collect$$$$00000004) refers to init.o(.text) for __scatterload
+    entry9a.o(.ARM.Collect$$$$0000000B) refers to main.o(i.main) for main
+    entry9b.o(.ARM.Collect$$$$0000000C) refers to main.o(i.main) for main
+    errno.o(i.__aeabi_errno_addr) refers to errno.o(.data) for .data
+    errno.o(i.__read_errno) refers to errno.o(.data) for .data
+    errno.o(i.__set_errno) refers to errno.o(.data) for .data
+    depilogue.o(.text) refers to llshl.o(.text) for __aeabi_llsl
+    depilogue.o(.text) refers to llushr.o(.text) for __aeabi_llsr
+    dunder.o(i.__mathlib_dbl_underflow) refers to dmul.o(.text) for __aeabi_dmul
+    fpclassify.o(i.__ARM_fpclassify) refers (Special) to iusefp.o(.text) for __I$use$fp
+    poly.o(i.__kernel_poly) refers (Special) to iusefp.o(.text) for __I$use$fp
+    poly.o(i.__kernel_poly) refers to dmul.o(.text) for __aeabi_dmul
+    poly.o(i.__kernel_poly) refers to dadd.o(.text) for __aeabi_dadd
+    init.o(.text) refers to entry5.o(.ARM.Collect$$$$00000004) for __main_after_scatterload
+

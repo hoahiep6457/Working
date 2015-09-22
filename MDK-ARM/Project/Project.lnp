@@ -1,0 +1,21 @@
+--cpu Cortex-M4.fp
+".\project\stm32f4xx_it.o"
+".\project\main.o"
+".\project\system_stm32f4xx.o"
+".\project\startup_stm32f4xx.o"
+".\project\misc.o"
+".\project\stm32f4xx_gpio.o"
+".\project\stm32f4xx_rcc.o"
+".\project\stm32f4xx_i2c.o"
+".\project\stm32f4xx_adc.o"
+".\project\stm32f4xx_can.o"
+".\project\stm32f4xx_tim.o"
+".\project\stm32f4xx_usart.o"
+".\project\mpu6050.o"
+".\project\kalman.o"
+".\project\pid.o"
+".\project\pwm.o"
+--library_type=microlib --strict --scatter ".\Project\Project.sct"
+--summary_stderr --info summarysizes --map --xref --callgraph --symbols
+--info sizes --info totals --info unused --info veneers
+--list ".\Project\Project.map" -o .\Project\Project.axf
