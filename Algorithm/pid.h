@@ -1,5 +1,10 @@
 #ifndef PID_H_
 #define PID_H_
+
+#ifdef __cplusplus
+ extern "C" {
+#endif
+
 #define pid_sampletime  0.01
 //variable PID
 #define   Kp  ? //value;
@@ -18,4 +23,8 @@ typedef struct {
 } pid_t;
 float PID_Adjustment(pid_t pid, float setpoint, float target);
 void PID_Init(void);
+
+#ifdef __cplusplus
+}
+#endif
 #endif
