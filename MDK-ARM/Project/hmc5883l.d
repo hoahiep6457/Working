@@ -1,5 +1,5 @@
-.\project\hmc5883l.o: ..\sensor\HMC5883L.c
-.\project\hmc5883l.o: ..\sensor\HMC5883L.h
+.\project\hmc5883l.o: ..\Sensor\HMC5883L.c
+.\project\hmc5883l.o: ..\Sensor\HMC5883L.h
 .\project\hmc5883l.o: C:\Keil\ARM\ARMCC\bin\..\include\stdbool.h
 .\project\hmc5883l.o: C:\Keil\ARM\ARMCC\bin\..\include\stdint.h
 .\project\hmc5883l.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
@@ -8,7 +8,7 @@
 .\project\hmc5883l.o: C:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cmFunc.h
 .\project\hmc5883l.o: C:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cm4_simd.h
 .\project\hmc5883l.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h
-.\project\hmc5883l.o: ..\..\mpu6050\stm32f4xx_conf.h
+.\project\hmc5883l.o: ..\..\Working\stm32f4xx_conf.h
 .\project\hmc5883l.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_adc.h
 .\project\hmc5883l.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 .\project\hmc5883l.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_can.h

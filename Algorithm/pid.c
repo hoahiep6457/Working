@@ -5,7 +5,7 @@
 #include "pid.h"
 float error;
 float diff;
-float PID_Adjustment(pid_t pid, float setpoint, float target)
+float PID_Adjustment(pid_t *pid, float setpoint, float target)
 {
 	error = setpoint - target;
 	diff =  error - pid->lastError;
@@ -15,12 +15,12 @@ float PID_Adjustment(pid_t pid, float setpoint, float target)
 	pid->Ki_Value += Ki*error*pid_sampletime;
 	pid->Kd_Value = Kd*diff/pid_sampletime;
 	//Update ouput
-	pid->Ouput = pid->Kp_Value + pid->Ki_Value + pid->Kd_Value;
-	if (pid->Ouput > Outmax){
+	pid->Output = pid->Kp_Value + pid->Ki_Value + pid->Kd_Value;
+	if (pid->Output > Outmax){
 		pid->Output = Outmax;
 	}
-	if (pid->Outmax < Outmin){
-		pid->Output =  Outmin;
+	if (pid->Output < Outmin){
+		pid->Output = Outmin;
 	}
 	return pid->Output;
 }

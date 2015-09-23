@@ -3,9 +3,9 @@
 #include <math.h>
 #include "MPU6050.h"
 #include "Kalman.h"
-#include "main.h"
 #include "pwm.h"
 #include "i2c.h"
+
 #define GYRO_LSB  32.8 //Gyro FS1000
 #define ACC_LSB   2048 //Accel FS16 
 #define RAD_TO_DEG  57.2957795131
@@ -15,6 +15,16 @@
 	 PB9 --- I2C1_SDA
 	*/
 
+TIM_TimeBaseInitTypeDef    TIM_TimeBaseStructure;
+TIM_OCInitTypeDef          TIM_OCInitStructure;
+NVIC_InitTypeDef           NVIC_InitStructure;
+GPIO_InitTypeDef           GPIO_InitStructure;
+DMA_InitTypeDef            DMA_InitStructure;
+ADC_InitTypeDef            ADC_InitStructure;
+ADC_CommonInitTypeDef      ADC_CommonInitStructure;
+EXTI_InitTypeDef  		   	 EXTI_InitStructure;	
+USART_InitTypeDef 		     USART_InitStructure;
+I2C_InitTypeDef   		     I2C_InitStructure;
 
 void MPU_Get_Start(void);
 void Led_Config(void);
@@ -49,6 +59,7 @@ int main(void)
   delay_ms(10);
   //TIM2_Config_Counter();
 	SysTick_Config(SystemCoreClock / 99);//start to read MPU each 10 ms
+	PWM_Config();
 	GPIO_SetBits(GPIOD, GPIO_Pin_12|GPIO_Pin_13|GPIO_Pin_14|GPIO_Pin_15);
 
 	//DeviceID =  MPU6050_GetDeviceID();
@@ -119,6 +130,7 @@ void PID_update(void)
 {
 
 }
+
 
 void Delay(__IO uint32_t nCount)
 {

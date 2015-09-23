@@ -7,7 +7,7 @@
 .\project\misc.o: C:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cmFunc.h
 .\project\misc.o: C:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cm4_simd.h
 .\project\misc.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h
-.\project\misc.o: ..\..\quadcopter\stm32f4xx_conf.h
+.\project\misc.o: ..\..\Working\stm32f4xx_conf.h
 .\project\misc.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_adc.h
 .\project\misc.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 .\project\misc.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_can.h

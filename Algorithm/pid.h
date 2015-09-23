@@ -7,12 +7,12 @@
 
 #define pid_sampletime  0.01
 //variable PID
-#define   Kp  ? //value;
-#define   Ki  ??
-#define   Kd  ???
+#define   Kp  100 //value;
+#define   Ki  50
+#define   Kd  5
 
-#define   Outmax  ??,
-#define   Outmin  fdf
+#define   Outmax  800
+#define   Outmin  800
 
 typedef struct {
   float lastError;
@@ -21,7 +21,7 @@ typedef struct {
   float Kd_Value;
   float Output;
 } pid_t;
-float PID_Adjustment(pid_t pid, float setpoint, float target);
+float PID_Adjustment(pid_t *pid, float setpoint, float target);
 void PID_Init(void);
 
 #ifdef __cplusplus

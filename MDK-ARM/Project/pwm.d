@@ -6,7 +6,7 @@
 .\project\pwm.o: C:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cmFunc.h
 .\project\pwm.o: C:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cm4_simd.h
 .\project\pwm.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h
-.\project\pwm.o: ..\..\quadcopter\stm32f4xx_conf.h
+.\project\pwm.o: ..\..\Working\stm32f4xx_conf.h
 .\project\pwm.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_adc.h
 .\project\pwm.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 .\project\pwm.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_can.h
@@ -34,4 +34,4 @@
 .\project\pwm.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_usart.h
 .\project\pwm.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h
 .\project\pwm.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h
-.\project\pwm.o: ..\..\quadcopter\main.h
+.\project\pwm.o: ..\Driver\pwm.h

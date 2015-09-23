@@ -357,7 +357,7 @@
               <MiscControls></MiscControls>
               <Define>STM32F4XX, USE_STDPERIPH_DRIVER</Define>
               <Undefine></Undefine>
-              <IncludePath>..\..\quadcopter;..\Libraries\CMSIS\Device\ST\STM32F4xx\Include;..\Libraries\STM32F4xx_StdPeriph_Driver\inc;..\sensor;..\Algorithm</IncludePath>
+              <IncludePath>..\Driver;..\Libraries\CMSIS\Device\ST\STM32F4xx\Include;..\Libraries\STM32F4xx_StdPeriph_Driver\inc;..\Algorithm;..\..\Working;..\Sensor</IncludePath>
             </VariousControls>
           </Cads>
           <Aads>
@@ -483,6 +483,11 @@
               <FileType>1</FileType>
               <FilePath>..\sensor\MPU6050.c</FilePath>
             </File>
+            <File>
+              <FileName>HMC5883L.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Sensor\HMC5883L.c</FilePath>
+            </File>
           </Files>
         </Group>
         <Group>
@@ -507,6 +512,11 @@
               <FileName>pwm.c</FileName>
               <FileType>1</FileType>
               <FilePath>..\Driver\pwm.c</FilePath>
+            </File>
+            <File>
+              <FileName>i2c.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Driver\i2c.c</FilePath>
             </File>
           </Files>
         </Group>

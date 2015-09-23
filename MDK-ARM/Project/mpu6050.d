@@ -8,7 +8,7 @@
 .\project\mpu6050.o: C:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cmFunc.h
 .\project\mpu6050.o: C:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cm4_simd.h
 .\project\mpu6050.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h
-.\project\mpu6050.o: ..\..\quadcopter\stm32f4xx_conf.h
+.\project\mpu6050.o: ..\..\Working\stm32f4xx_conf.h
 .\project\mpu6050.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_adc.h
 .\project\mpu6050.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 .\project\mpu6050.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_can.h

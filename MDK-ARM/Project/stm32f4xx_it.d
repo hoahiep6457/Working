@@ -7,7 +7,7 @@
 .\project\stm32f4xx_it.o: C:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cmFunc.h
 .\project\stm32f4xx_it.o: C:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cm4_simd.h
 .\project\stm32f4xx_it.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h
-.\project\stm32f4xx_it.o: ..\..\quadcopter\stm32f4xx_conf.h
+.\project\stm32f4xx_it.o: ..\..\Working\stm32f4xx_conf.h
 .\project\stm32f4xx_it.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_adc.h
 .\project\stm32f4xx_it.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 .\project\stm32f4xx_it.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_can.h
@@ -35,5 +35,5 @@
 .\project\stm32f4xx_it.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_usart.h
 .\project\stm32f4xx_it.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h
 .\project\stm32f4xx_it.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h
-.\project\stm32f4xx_it.o: ..\sensor\MPU6050.h
+.\project\stm32f4xx_it.o: ..\Sensor\MPU6050.h
 .\project\stm32f4xx_it.o: C:\Keil\ARM\ARMCC\bin\..\include\stdbool.h

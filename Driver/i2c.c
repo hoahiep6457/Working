@@ -1,6 +1,5 @@
 #include "stm32f4xx.h"
 #include "i2c.h"
-#include "main.h"
 
 /*******************************/
 /***MPU6050 I2C configuration***/
@@ -15,7 +14,9 @@ void I2C_Configuration(void)
 #define I2C_SPEED 100000
 #define I2C_DUTYCYCLE I2C_DutyCycle_2
 #endif /* FAST_I2C_MODE*/
-
+	I2C_InitTypeDef   		     I2C_InitStructure;
+	GPIO_InitTypeDef           GPIO_InitStructure;
+	
   RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB, ENABLE);
   RCC_APB1PeriphClockCmd(RCC_APB1Periph_I2C1, ENABLE);
 	

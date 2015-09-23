@@ -1,8 +1,10 @@
 #include "stm32f4xx.h"
-#include "main.h"
-
+#include "pwm.h"
 void PWM_Config(void)
 {
+	TIM_TimeBaseInitTypeDef    TIM_TimeBaseStructure;
+	TIM_OCInitTypeDef          TIM_OCInitStructure;
+	
 	 /* TIM3 clock enable */
   RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3 , ENABLE);
   
@@ -41,5 +43,4 @@ void PWM_Config(void)
 	TIM_ARRPreloadConfig(TIM3, ENABLE);
   /* TIM3 counter enable */
   TIM_Cmd(TIM3, ENABLE);
-
 }

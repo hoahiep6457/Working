@@ -6,7 +6,7 @@
 .\project\main.o: C:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cmFunc.h
 .\project\main.o: C:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cm4_simd.h
 .\project\main.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h
-.\project\main.o: ..\..\quadcopter\stm32f4xx_conf.h
+.\project\main.o: ..\..\Working\stm32f4xx_conf.h
 .\project\main.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_adc.h
 .\project\main.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
 .\project\main.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_can.h
@@ -36,7 +36,8 @@
 .\project\main.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h
 .\project\main.o: C:\Keil\ARM\ARMCC\bin\..\include\stdlib.h
 .\project\main.o: C:\Keil\ARM\ARMCC\bin\..\include\math.h
-.\project\main.o: ..\sensor\MPU6050.h
+.\project\main.o: ..\Sensor\MPU6050.h
 .\project\main.o: C:\Keil\ARM\ARMCC\bin\..\include\stdbool.h
 .\project\main.o: ..\Algorithm\Kalman.h
-.\project\main.o: ..\main.h
+.\project\main.o: ..\Driver\pwm.h
+.\project\main.o: ..\Driver\i2c.h
