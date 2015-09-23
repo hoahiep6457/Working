@@ -509,14 +509,14 @@
           <GroupName>Driver</GroupName>
           <Files>
             <File>
-              <FileName>pwm.c</FileName>
+              <FileName>quad_i2c_ctrl.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Driver\pwm.c</FilePath>
+              <FilePath>..\Driver\quad_i2c_ctrl.c</FilePath>
             </File>
             <File>
-              <FileName>i2c.c</FileName>
+              <FileName>quad_pwm_ctrl.c</FileName>
               <FileType>1</FileType>
-              <FilePath>..\Driver\i2c.c</FilePath>
+              <FilePath>..\Driver\quad_pwm_ctrl.c</FilePath>
             </File>
           </Files>
         </Group>

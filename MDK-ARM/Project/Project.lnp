@@ -15,8 +15,8 @@
 ".\project\hmc5883l.o"
 ".\project\kalman.o"
 ".\project\pid.o"
-".\project\pwm.o"
-".\project\i2c.o"
+".\project\quad_i2c_ctrl.o"
+".\project\quad_pwm_ctrl.o"
 --library_type=microlib --strict --scatter ".\Project\Project.sct"
 --summary_stderr --info summarysizes --map --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers

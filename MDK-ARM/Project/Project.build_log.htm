@@ -23,88 +23,92 @@ compiling main.c...
   uint8_t MPU6050_GetDeviceID();
 ..\Sensor\MPU6050.h(398): warning:  #1-D: last line of file ends without a newline
   #endif /* __MPU6050_H */
-..\main.c(90): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\Algorithm\pid.h(44): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\main.c(87): warning:  #1035-D: single-precision operand implicitly converted to double-precision
     gyroX_rate = (gyroX - gyroX_offset)/GYRO_LSB;
-..\main.c(91): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\main.c(88): warning:  #1035-D: single-precision operand implicitly converted to double-precision
         gyroY_rate = (gyroY - gyroY_offset)/GYRO_LSB;
-..\main.c(94): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\main.c(91): warning:  #1035-D: single-precision operand implicitly converted to double-precision
         gyroX_angle += gyroX_rate*DT;
-..\main.c(95): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\main.c(92): warning:  #1035-D: single-precision operand implicitly converted to double-precision
         gyroY_angle += gyroY_rate*DT;
-..\main.c: 11 warnings, 0 errors
+..\main.c(134): warning:  #177-D: variable "BLDC_M" was declared but never referenced
+    u16 BLDC_M[4] = {0};
+..\main.c(135): warning:  #550-D: variable "Pitch" was set but never used
+    s16 Pitch = 0, Roll = 0, Yaw = 0;
+..\main.c(135): warning:  #550-D: variable "Roll" was set but never used
+    s16 Pitch = 0, Roll = 0, Yaw = 0;
+..\main.c(135): warning:  #177-D: variable "Yaw" was declared but never referenced
+    s16 Pitch = 0, Roll = 0, Yaw = 0;
+..\main.c: 16 warnings, 0 errors
 linking...
-Program Size: Code=7416 RO-data=584 RW-data=228 ZI-data=1084  
-".\Project\Project.axf" - 0 Error(s), 11 Warning(s).
+Program Size: Code=6856 RO-data=584 RW-data=228 ZI-data=1124  
+".\Project\Project.axf" - 0 Error(s), 16 Warning(s).
 </pre>
 </body>
 </html>
-c...
+ warning:  #1-D: last line of file ends without a newline
+  /*=====================================================================================================*/
+..\Driver\quad_pwm_ctrl.c: 1 warning, 0 errors
 linking...
-Program Size: Code=6568 RO-data=584 RW-data=228 ZI-data=1084  
-".\Project\Project.axf" - 0 Error(s), 12 Warning(s).
-  #1-D: last line of file ends without a newline
-  #endif 
-..\Driver\i2c.c: 1 warning, 0 errors
-".\Project\Project.axf" - 1 Error(s), 13 Warning(s).
+.\Project\Project.axf: Error: L6218E: Undefined symbol PID_update (referred from main.o).
+Not enough information to list image symbols.
+Finished: 1 information, 0 warning and 1 error messages.
+".\Project\Project.axf" - 1 Error(s), 18 Warning(s).
 Target not created
-d.c(16): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+arning:  #1-D: last line of file ends without a newline
+  /*=====================================================================================================*/
+..\Driver\quad_i2c_ctrl.c: 1 warning, 0 errors
+compiling quad_pwm_ctrl.c...
+..\Driver\quad_pwm_ctrl.c(56): error:  #20: identifier "BLDC2_PWN_MIN" is undefined
+    TIM_OCInitStructure.TIM_Pulse = BLDC2_PWN_MIN;
+..\Driver\quad_pwm_ctrl.c(61): error:  #20: identifier "BLDC3_PWN_MIN" is undefined
+    TIM_OCInitStructure.TIM_Pulse = BLDC3_PWN_MIN;
+..\Driver\quad_pwm_ctrl.c(66): error:  #20: identifier "BLDC4_PWN_MIN" is undefined
+    TIM_OCInitStructure.TIM_Pulse = BLDC4_PWN_MIN;
+..\Driver\quad_pwm_ctrl.c(74): error:  #20: identifier "BLDC_PWM_MIN" is undefined
+    BLDC_M1 = BLDC_PWM_MIN;
+..\Driver\quad_pwm_ctrl.c(99): warning:  #1-D: last line of file ends without a newline
+  /*=====================================================================================================*/
+..\Driver\quad_pwm_ctrl.c: 1 warning, 4 errors
+".\Project\Project.axf" - 4 Error(s), 23 Warning(s).
+Target not created
+ing:  #1295-D: Deprecated declaration HMC5883L_GetMode - give arg types
+  uint8_t HMC5883L_GetMode();
+..\Sensor\HMC5883L.h(103): warning:  #1295-D: Deprecated declaration HMC5883L_GetLockStatus - give arg types
+  bool HMC5883L_GetLockStatus();
+..\Sensor\HMC5883L.h(104): warning:  #1295-D: Deprecated declaration HMC5883L_GetReadyStatus - give arg types
+  bool HMC5883L_GetReadyStatus();
+..\Sensor\HMC5883L.c: 9 warnings, 0 errors
+compiling Kalman.c...
+..\Algorithm\Kalman.c(154): warning:  #1-D: last line of file ends without a newline
+  }
+..\Algorithm\Kalman.c: 1 warning, 0 errors
+compiling pid.c...
+..\..\Working\main.h(7): warning:  #1-D: last line of file ends without a newline
+  #endif 
+..\Algorithm\pid.h(30): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Algorithm\pid.c(15): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+        pid->Ki_Value += Ki*error*pid_sampletime;
+..\Algorithm\pid.c(16): warning:  #1035-D: single-precision operand implicitly converted to double-precision
         pid->Kd_Value = Kd*diff/pid_sampletime;
 ..\Algorithm\pid.c(30): warning:  #1-D: last line of file ends without a newline
   }
 ..\Algorithm\pid.c: 5 warnings, 0 errors
-compiling pwm.c...
-..\..\Working\main.h(7): warning:  #1-D: last line of file ends without a newline
-  #endif 
-..\Driver\pwm.c(47): warning:  #1-D: last line of file ends without a newline
+compiling quad_i2c_ctrl.c...
+compiling quad_pwm_ctrl.c...
+..\Driver\quad_pwm_ctrl.c(8): error:  #20: identifier "s" is undefined
+  s
+..\Driver\quad_pwm_ctrl.c(10): error:  #79: expected a type specifier
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3 , ENABLE);
+..\Driver\quad_pwm_ctrl.c(10): error:  #757: constant "ENABLE" is not a type name
+    RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3 , ENABLE);
+..\Driver\quad_pwm_ctrl.c(49): warning:  #1-D: last line of file ends without a newline
   }
-..\Driver\pwm.c: 2 warnings, 0 errors
-compiling i2c.c...
-..\..\Working\main.h(7): warning:  #1-D: last line of file ends without a newline
-  #endif 
-..\Driver\i2c.c: 1 warning, 0 errors
-linking...
-Program Size: Code=6568 RO-data=584 RW-data=228 ZI-data=1084  
-".\Project\Project.axf" - 0 Error(s), 20 Warning(s).
-..
-..\..\Working\main.h(8): warning:  #1-D: last line of file ends without a newline
-  #endif 
-..\Driver\i2c.c(22): error:  #20: identifier "GPIO_InitStructure" is undefined
-    GPIO_InitStructure.GPIO_Pin = GPIO_Pin_8 | GPIO_Pin_9;
-..\Driver\i2c.c(34): error:  #20: identifier "I2C_InitStructure" is undefined
-    I2C_InitStructure.I2C_Mode = I2C_Mode_I2C;
-..\Driver\i2c.c: 1 warning, 2 errors
-".\Project\Project.axf" - 4 Error(s), 20 Warning(s).
-Target not created
-Structure multiply defined (by i2c.o and main.o).
-.\Project\Project.axf: Error: L6200E: Symbol DMA_InitStructure multiply defined (by pid.o and main.o).
-.\Project\Project.axf: Error: L6200E: Symbol DMA_InitStructure multiply defined (by pwm.o and main.o).
-.\Project\Project.axf: Error: L6200E: Symbol DMA_InitStructure multiply defined (by i2c.o and main.o).
-.\Project\Project.axf: Error: L6200E: Symbol I2C_InitStructure multiply defined (by pid.o and main.o).
-.\Project\Project.axf: Error: L6200E: Symbol I2C_InitStructure multiply defined (by pwm.o and main.o).
-.\Project\Project.axf: Error: L6200E: Symbol I2C_InitStructure multiply defined (by i2c.o and main.o).
-.\Project\Project.axf: Error: L6200E: Symbol TIM_ICInitStructure multiply defined (by pid.o and main.o).
-.\Project\Project.axf: Error: L6200E: Symbol TIM_ICInitStructure multiply defined (by pwm.o and main.o).
-.\Project\Project.axf: Error: L6200E: Symbol TIM_ICInitStructure multiply defined (by i2c.o and main.o).
-.\Project\Project.axf: Error: L6200E: Symbol TIM_OCInitStructure multiply defined (by pid.o and main.o).
-.\Project\Project.axf: Error: L6200E: Symbol TIM_OCInitStructure multiply defined (by pwm.o and main.o).
-.\Project\Project.axf: Error: L6200E: Symbol TIM_OCInitStructure multiply defined (by i2c.o and main.o).
-.\Project\Project.axf: Error: L6200E: Symbol TIM_TimeBaseStructure multiply defined (by pid.o and main.o).
-.\Project\Project.axf: Error: L6200E: Symbol TIM_TimeBaseStructure multiply defined (by pwm.o and main.o).
-.\Project\Project.axf: Error: L6200E: Symbol TIM_TimeBaseStructure multiply defined (by i2c.o and main.o).
-.\Project\Project.axf: Error: L6200E: Symbol USART_InitStructure multiply defined (by pid.o and main.o).
-.\Project\Project.axf: Error: L6200E: Symbol USART_InitStructure multiply defined (by pwm.o and main.o).
-.\Project\Project.axf: Error: L6200E: Symbol USART_InitStructure multiply defined (by i2c.o and main.o).
-.\Project\Project.axf: Error: L6200E: Symbol EXTI_InitStructure multiply defined (by pid.o and main.o).
-.\Project\Project.axf: Error: L6200E: Symbol EXTI_InitStructure multiply defined (by pwm.o and main.o).
-.\Project\Project.axf: Error: L6200E: Symbol EXTI_InitStructure multiply defined (by i2c.o and main.o).
-.\Project\Project.axf: Error: L6200E: Symbol NVIC_InitStructure multiply defined (by pid.o and main.o).
-.\Project\Project.axf: Error: L6200E: Symbol NVIC_InitStructure multiply defined (by pwm.o and main.o).
-.\Project\Project.axf: Error: L6200E: Symbol NVIC_InitStructure multiply defined (by i2c.o and main.o).
-.\Project\Project.axf: Error: L6200E: Symbol GPIO_InitStructure multiply defined (by pid.o and main.o).
-.\Project\Project.axf: Error: L6200E: Symbol GPIO_InitStructure multiply defined (by pwm.o and main.o).
-.\Project\Project.axf: Error: L6200E: Symbol GPIO_InitStructure multiply defined (by i2c.o and main.o).
-Not enough information to list image symbols.
-Not enough information to list the image map.
-Finished: 2 information, 0 warning and 33 error messages.
-".\Project\Project.axf" - 33 Error(s), 20 Warning(s).
+..\Driver\quad_pwm_ctrl.c(7): warning:  #177-D: variable "GPIO_InitStruct" was declared but never referenced
+        GPIO_InitTypeDef           GPIO_InitStruct;
+..\Driver\quad_pwm_ctrl.c: 2 warnings, 3 errors
+".\Project\Project.axf" - 3 Error(s), 35 Warning(s).
 Target not created

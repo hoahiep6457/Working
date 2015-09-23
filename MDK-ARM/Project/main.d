@@ -39,5 +39,6 @@
 .\project\main.o: ..\Sensor\MPU6050.h
 .\project\main.o: C:\Keil\ARM\ARMCC\bin\..\include\stdbool.h
 .\project\main.o: ..\Algorithm\Kalman.h
-.\project\main.o: ..\Driver\pwm.h
-.\project\main.o: ..\Driver\i2c.h
+.\project\main.o: ..\Driver\quad_pwm_ctrl.h
+.\project\main.o: ..\Driver\quad_i2c_ctrl.h
+.\project\main.o: ..\Algorithm\pid.h

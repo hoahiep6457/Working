@@ -3,9 +3,11 @@
 #include <math.h>
 #include "MPU6050.h"
 #include "Kalman.h"
-#include "pwm.h"
-#include "i2c.h"
-
+#include "quad_pwm_ctrl.h"
+#include "quad_i2c_ctrl.h"
+#include "pid.h"
+/*=====================================================================================================*/
+/*=====================================================================================================*/
 #define GYRO_LSB  32.8 //Gyro FS1000
 #define ACC_LSB   2048 //Accel FS16 
 #define RAD_TO_DEG  57.2957795131
@@ -14,18 +16,8 @@
 	 PB8 --- I2C1_SCL              	MPU6050
 	 PB9 --- I2C1_SDA
 	*/
-
-TIM_TimeBaseInitTypeDef    TIM_TimeBaseStructure;
-TIM_OCInitTypeDef          TIM_OCInitStructure;
-NVIC_InitTypeDef           NVIC_InitStructure;
-GPIO_InitTypeDef           GPIO_InitStructure;
-DMA_InitTypeDef            DMA_InitStructure;
-ADC_InitTypeDef            ADC_InitStructure;
-ADC_CommonInitTypeDef      ADC_CommonInitStructure;
-EXTI_InitTypeDef  		   	 EXTI_InitStructure;	
-USART_InitTypeDef 		     USART_InitStructure;
-I2C_InitTypeDef   		     I2C_InitStructure;
-
+/*=====================================================================================================*/
+/*=====================================================================================================*/
 void MPU_Get_Start(void);
 void Led_Config(void);
 void Delay(__IO uint32_t nCount);
@@ -33,7 +25,9 @@ void MPU6050_Get_Data(void);
 void delay_ms(__IO unsigned long ms);
 void MPU6050_Get_Offset(void);
 void TIM2_Config_Counter(void);
-void PID_update(void);
+void PID_Handle(void);
+/*=====================================================================================================*/
+/*=====================================================================================================*/
 //int16_t DeviceID;
 int16_t accX=0,accY=0,accZ=0,gyroX=0,gyroY=0,gyroZ=0;
 int16_t Gyro_zero[7];
@@ -48,6 +42,8 @@ float gyroX_angle, gyroY_angle;
 extern float x_angle, y_angle;
 int32_t nowtime=0,lasttime=0;
 float lengthtime;
+/*=====================================================================================================*/
+/*=====================================================================================================*/
 int main(void)
 {
   I2C_Configuration();  
@@ -59,7 +55,6 @@ int main(void)
   delay_ms(10);
   //TIM2_Config_Counter();
 	SysTick_Config(SystemCoreClock / 99);//start to read MPU each 10 ms
-	PWM_Config();
 	GPIO_SetBits(GPIOD, GPIO_Pin_12|GPIO_Pin_13|GPIO_Pin_14|GPIO_Pin_15);
 
 	//DeviceID =  MPU6050_GetDeviceID();
@@ -67,6 +62,8 @@ int main(void)
   {
 			
   }
+/*=====================================================================================================*/
+/*=====================================================================================================*/
 }
 //read MPU once 10 ms
 void MPU6050_Get_Data(void)
@@ -97,6 +94,8 @@ void MPU6050_Get_Data(void)
 	angleY_kalman = kalman_filter_angleY(angleY, gyroY_rate, DT);
 
 }
+/*=====================================================================================================*/
+/*=====================================================================================================*/
 void MPU_Get_Start(void)
 {
   MPU6050_GetRawAccelTempGyro(MPU6050data);
@@ -112,6 +111,8 @@ void MPU_Get_Start(void)
 	y_angle = angleY;
 	gyroY_angle = angleY;
 }
+/*=====================================================================================================*/
+/*=====================================================================================================*/
 void MPU6050_Get_Offset(void)
 {
   int8_t i;
@@ -126,12 +127,27 @@ void MPU6050_Get_Offset(void)
   gyroY_offset /= 100;
   gyroZ_offset /= 100;
 }
-void PID_update(void)
+/*=====================================================================================================*/
+/*=====================================================================================================*/
+void PID_Handle(void)
 {
+  u16 BLDC_M[4] = {0};
+  s16 Pitch = 0, Roll = 0, Yaw = 0;
+  //PID Angle
+  Roll  = PID_Adjustment(&PID_Roll, 0, angleX_kalman);
+  Pitch = PID_Adjustment(&PID_Pitch, 0, angleY_kalman);
+  //Yaw = PID_Adjustment(&PID_Yaw, 0, );
+  /* Motor Ctrl */
+  //BLDC_M[0] = BasicThr + Pitch + Roll + Yaw;
+  //BLDC_M[1] = BasicThr - Pitch + Roll - Yaw;
+  //BLDC_M[2] = BasicThr - Pitch - Roll + Yaw;
+  //BLDC_M[3] = BasicThr + Pitch - Roll - Yaw;
+  // Thr Ctrl
+  //BLDC_CtrlPWM(BLDC_M[0], BLDC_M[1], BLDC_M[2], BLDC_M[3]);
 
 }
-
-
+/*=====================================================================================================*/
+/*=====================================================================================================*/
 void Delay(__IO uint32_t nCount)
 {
   while(nCount--)
@@ -144,8 +160,12 @@ void delay_ms(__IO unsigned long ms)
 	for (i = 0; i < ms; i++ )
 	for (j = 0; j < 3442; j++ );
 }
+/*=====================================================================================================*/
+/*=====================================================================================================*/
 void Led_Config(void)
 {
+	GPIO_InitTypeDef           GPIO_InitStructure;
+	
   RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOD, ENABLE);
 	
   GPIO_InitStructure.GPIO_Pin=GPIO_Pin_12|GPIO_Pin_13|GPIO_Pin_14|GPIO_Pin_15;
@@ -156,12 +176,15 @@ void Led_Config(void)
   GPIO_Init(GPIOD, &GPIO_InitStructure);
 
 }
+/*=====================================================================================================*/
+/*=====================================================================================================*/
 void SysTick_Handler(void)
 {
 	MPU6050_Get_Data();
-  PID_update();
+  PID_Handle();
 }
-
+/*=====================================================================================================*/
+/*=====================================================================================================*/
 #ifdef  USE_FULL_ASSERT
 void assert_failed(uint8_t* file, uint32_t line)
 {
@@ -172,4 +195,5 @@ void assert_failed(uint8_t* file, uint32_t line)
   {}
 }
 #endif
-
+/*=====================================================================================================*/
+/*=====================================================================================================*/

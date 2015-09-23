@@ -37,7 +37,7 @@ I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h)(0x56029DB1)
 I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h)(0x56029DB1)
 I (..\sensor\MPU6050.h)(0x56029DB2)
 I (C:\Keil\ARM\ARMCC\include\stdbool.h)(0x5284742A)
-F (..\main.c)(0x5602BDA1)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I..\Driver -I..\Libraries\CMSIS\Device\ST\STM32F4xx\Include -I..\Libraries\STM32F4xx_StdPeriph_Driver\inc -I..\Algorithm -I..\..\Working -I..\Sensor-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I C:\Keil\ARM\PACK\Keil\STM32F4xx_DFP\1.0.5\Device\Include-DSTM32F40XX -DSTM32F4XX -DUSE_STDPERIPH_DRIVER -o .\project\main.o --omf_browse .\project\main.crf --depend .\project\main.d)
+F (..\main.c)(0x5602D14B)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I..\Driver -I..\Libraries\CMSIS\Device\ST\STM32F4xx\Include -I..\Libraries\STM32F4xx_StdPeriph_Driver\inc -I..\Algorithm -I..\..\Working -I..\Sensor-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I C:\Keil\ARM\PACK\Keil\STM32F4xx_DFP\1.0.5\Device\Include-DSTM32F40XX -DSTM32F4XX -DUSE_STDPERIPH_DRIVER -o .\project\main.o --omf_browse .\project\main.crf --depend .\project\main.d)
 I (..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h)(0x56029DB1)
 I (C:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cm4.h)(0x512C2C72)
 I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x5284742A)
@@ -77,8 +77,9 @@ I (C:\Keil\ARM\ARMCC\include\math.h)(0x52847424)
 I (..\Sensor\MPU6050.h)(0x56029DB2)
 I (C:\Keil\ARM\ARMCC\include\stdbool.h)(0x5284742A)
 I (..\Algorithm\Kalman.h)(0x56029DB1)
-I (..\Driver\pwm.h)(0x5602BD74)
-I (..\Driver\i2c.h)(0x56029DB1)
+I (..\Driver\quad_pwm_ctrl.h)(0x5602D101)
+I (..\Driver\quad_i2c_ctrl.h)(0x5602C745)
+I (..\Algorithm\pid.h)(0x5602CF85)
 F (..\system_stm32f4xx.c)(0x56029DB2)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I..\Driver -I..\Libraries\CMSIS\Device\ST\STM32F4xx\Include -I..\Libraries\STM32F4xx_StdPeriph_Driver\inc -I..\Algorithm -I..\..\Working -I..\Sensor-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I C:\Keil\ARM\PACK\Keil\STM32F4xx_DFP\1.0.5\Device\Include-DSTM32F40XX -DSTM32F4XX -DUSE_STDPERIPH_DRIVER -o .\project\system_stm32f4xx.o --omf_browse .\project\system_stm32f4xx.crf --depend .\project\system_stm32f4xx.d)
 I (..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h)(0x56029DB1)
 I (C:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cm4.h)(0x512C2C72)
@@ -505,7 +506,7 @@ I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_tim.h)(0x56029DB1)
 I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_usart.h)(0x56029DB1)
 I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h)(0x56029DB1)
 I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h)(0x56029DB1)
-F (..\Algorithm\pid.c)(0x5602BB63)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I..\Driver -I..\Libraries\CMSIS\Device\ST\STM32F4xx\Include -I..\Libraries\STM32F4xx_StdPeriph_Driver\inc -I..\Algorithm -I..\..\Working -I..\Sensor-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I C:\Keil\ARM\PACK\Keil\STM32F4xx_DFP\1.0.5\Device\Include-DSTM32F40XX -DSTM32F4XX -DUSE_STDPERIPH_DRIVER -o .\project\pid.o --omf_browse .\project\pid.crf --depend .\project\pid.d)
+F (..\Algorithm\pid.c)(0x5602CF91)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I..\Driver -I..\Libraries\CMSIS\Device\ST\STM32F4xx\Include -I..\Libraries\STM32F4xx_StdPeriph_Driver\inc -I..\Algorithm -I..\..\Working -I..\Sensor-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I C:\Keil\ARM\PACK\Keil\STM32F4xx_DFP\1.0.5\Device\Include-DSTM32F40XX -DSTM32F4XX -DUSE_STDPERIPH_DRIVER -o .\project\pid.o --omf_browse .\project\pid.crf --depend .\project\pid.d)
 I (..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h)(0x56029DB1)
 I (C:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cm4.h)(0x512C2C72)
 I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x5284742A)
@@ -543,8 +544,8 @@ I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h)(0x56029DB1)
 I (..\..\Working\main.h)(0x5602BCCB)
 I (C:\Keil\ARM\ARMCC\include\stdlib.h)(0x5284742A)
 I (C:\Keil\ARM\ARMCC\include\math.h)(0x52847424)
-I (..\Algorithm\pid.h)(0x5602BB44)
-F (..\Driver\pwm.c)(0x5602BD74)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I..\Driver -I..\Libraries\CMSIS\Device\ST\STM32F4xx\Include -I..\Libraries\STM32F4xx_StdPeriph_Driver\inc -I..\Algorithm -I..\..\Working -I..\Sensor-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I C:\Keil\ARM\PACK\Keil\STM32F4xx_DFP\1.0.5\Device\Include-DSTM32F40XX -DSTM32F4XX -DUSE_STDPERIPH_DRIVER -o .\project\pwm.o --omf_browse .\project\pwm.crf --depend .\project\pwm.d)
+I (..\Algorithm\pid.h)(0x5602CF85)
+F (..\Driver\quad_i2c_ctrl.c)(0x5602CA27)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I..\Driver -I..\Libraries\CMSIS\Device\ST\STM32F4xx\Include -I..\Libraries\STM32F4xx_StdPeriph_Driver\inc -I..\Algorithm -I..\..\Working -I..\Sensor-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I C:\Keil\ARM\PACK\Keil\STM32F4xx_DFP\1.0.5\Device\Include-DSTM32F40XX -DSTM32F4XX -DUSE_STDPERIPH_DRIVER -o .\project\quad_i2c_ctrl.o --omf_browse .\project\quad_i2c_ctrl.crf --depend .\project\quad_i2c_ctrl.d)
 I (..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h)(0x56029DB1)
 I (C:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cm4.h)(0x512C2C72)
 I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x5284742A)
@@ -579,8 +580,8 @@ I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_tim.h)(0x56029DB1)
 I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_usart.h)(0x56029DB1)
 I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h)(0x56029DB1)
 I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h)(0x56029DB1)
-I (..\Driver\pwm.h)(0x5602BD74)
-F (..\Driver\i2c.c)(0x5602BD74)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I..\Driver -I..\Libraries\CMSIS\Device\ST\STM32F4xx\Include -I..\Libraries\STM32F4xx_StdPeriph_Driver\inc -I..\Algorithm -I..\..\Working -I..\Sensor-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I C:\Keil\ARM\PACK\Keil\STM32F4xx_DFP\1.0.5\Device\Include-DSTM32F40XX -DSTM32F4XX -DUSE_STDPERIPH_DRIVER -o .\project\i2c.o --omf_browse .\project\i2c.crf --depend .\project\i2c.d)
+I (..\Driver\quad_i2c_ctrl.h)(0x5602C745)
+F (..\Driver\quad_pwm_ctrl.c)(0x5602D119)(-c --cpu Cortex-M4.fp -D__EVAL -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I..\Driver -I..\Libraries\CMSIS\Device\ST\STM32F4xx\Include -I..\Libraries\STM32F4xx_StdPeriph_Driver\inc -I..\Algorithm -I..\..\Working -I..\Sensor-I C:\Keil\ARM\RV31\INC-I C:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I C:\Keil\ARM\PACK\Keil\STM32F4xx_DFP\1.0.5\Device\Include-DSTM32F40XX -DSTM32F4XX -DUSE_STDPERIPH_DRIVER -o .\project\quad_pwm_ctrl.o --omf_browse .\project\quad_pwm_ctrl.crf --depend .\project\quad_pwm_ctrl.d)
 I (..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h)(0x56029DB1)
 I (C:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cm4.h)(0x512C2C72)
 I (C:\Keil\ARM\ARMCC\include\stdint.h)(0x5284742A)
@@ -615,4 +616,4 @@ I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_tim.h)(0x56029DB1)
 I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_usart.h)(0x56029DB1)
 I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h)(0x56029DB1)
 I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h)(0x56029DB1)
-I (..\Driver\i2c.h)(0x56029DB1)
+I (..\Driver\quad_pwm_ctrl.h)(0x5602D101)
