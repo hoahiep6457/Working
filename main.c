@@ -2,6 +2,7 @@
 #include <stdlib.h>
 #include <math.h>
 #include "MPU6050.h"
+#include "HMC5883L.h"
 #include "Kalman.h"
 #include "quad_pwm_ctrl.h"
 #include "quad_i2c_ctrl.h"
@@ -11,7 +12,7 @@
 #define GYRO_LSB  32.8 //Gyro FS1000
 #define ACC_LSB   2048 //Accel FS16 
 #define RAD_TO_DEG  57.2957795131
-#define DT				0.01 // T sampling
+#define DT				0.001 // T sampling
 /*	      MASTER                    SLAVE
 	 PB8 --- I2C1_SCL              	MPU6050
 	 PB9 --- I2C1_SDA
@@ -40,23 +41,23 @@ float gyroX_rate, gyroY_rate, gyroZ_rate;
 float angleX_kalman, angleY_kalman, angleZ_kalman;
 float gyroX_angle, gyroY_angle;
 extern float x_angle, y_angle;
-int32_t nowtime=0,lasttime=0;
 float lengthtime;
 /*=====================================================================================================*/
 /*=====================================================================================================*/
 int main(void)
 {
-  I2C_Configuration();  
+  I2C_Configuration(); 
+  //HMC5883L_Initialize();
+  //delay_ms(10); 
   MPU6050_Initialize();//LSB gyro = 32.8 LSB acc = 2048
   delay_ms(10);//wait for MPU to stabilize
   MPU6050_Get_Offset();//read MPU6050 to calib gyro
   Led_Config();
   MPU_Get_Start();
-  delay_ms(10);
+  delay_ms(10);//delay to avoid hating
   //TIM2_Config_Counter();
-	SysTick_Config(SystemCoreClock / 99);//start to read MPU each 10 ms
+	SysTick_Config(SystemCoreClock / 999);//start to read MPU each 1 ms
 	GPIO_SetBits(GPIOD, GPIO_Pin_12|GPIO_Pin_13|GPIO_Pin_14|GPIO_Pin_15);
-
 	//DeviceID =  MPU6050_GetDeviceID();
   while (1)
   {
@@ -80,6 +81,9 @@ void MPU6050_Get_Data(void)
 	accX_kalman = kalmanX_single(accX, 5, 0.5);
   accY_kalman = kalmanY_single(accY, 5, 0.5);
 	accZ_kalman = kalmanZ_single(accZ, 5, 0.5);
+  //accX_kalman = kalman_single(&kalman_single_X, acc, 5, 0.5);
+  //accY_kalman = kalman_single(&kalman_single_Y, acc, 5, 0.5);
+  //accZ_kalman = kalman_single(&kalman_single_Z, acc, 5, 0.5);
 	//Calculate Angle from Accel
   angleX = atan2(accY_kalman, accZ_kalman) * RAD_TO_DEG;
   angleY = -atan2(accX_kalman,accZ_kalman) * RAD_TO_DEG;
@@ -92,7 +96,8 @@ void MPU6050_Get_Data(void)
 	gyroY_angle += gyroY_rate*DT;
   angleX_kalman = kalman_filter_angleX(angleX, gyroX_rate, DT);
 	angleY_kalman = kalman_filter_angleY(angleY, gyroY_rate, DT);
-
+  //angleX_kalman = kalman_filter_angle(&kalmanX, angleX, gyroX_rate, DT);
+  //angleY_kalman = kalman_filter_angle(&kalmanY, angleY, gyroY_rate, DT);
 }
 /*=====================================================================================================*/
 /*=====================================================================================================*/
@@ -105,11 +110,14 @@ void MPU_Get_Start(void)
 	
   angleX = atan2(accY, accZ) * RAD_TO_DEG;
 	angleY = -atan2(accX, accZ) * RAD_TO_DEG;
-	
+
   x_angle = angleX;
   gyroX_angle = angleX;
+  //kalmanX->angle = angleX;
+
 	y_angle = angleY;
 	gyroY_angle = angleY;
+  //kalmanY->angle = angleY;
 }
 /*=====================================================================================================*/
 /*=====================================================================================================*/
@@ -174,7 +182,6 @@ void Led_Config(void)
   GPIO_InitStructure.GPIO_OType=GPIO_OType_PP;
   GPIO_InitStructure.GPIO_PuPd=GPIO_PuPd_NOPULL;
   GPIO_Init(GPIOD, &GPIO_InitStructure);
-
 }
 /*=====================================================================================================*/
 /*=====================================================================================================*/

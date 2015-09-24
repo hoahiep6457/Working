@@ -1,5 +1,7 @@
 #include "Kalman.h"
 #include "stm32f4xx.h"
+/*=====================================================================================================*/
+/*=====================================================================================================*/
 /* Kalman filter variables for X*/
 float Q_angle = 0.001; //0.0004 //0.005 // Process noise variance for the accelerometer
 float Q_bias = 0.003; //0.0002 //0.0003 //Process noise variance for the gyro bias
@@ -22,8 +24,16 @@ float y_rate;
 float Py[2][2]={0,0,0,0}; 
 float Ky[2]; 
 float y_y; 
-float S_y; 
+float S_y;
 
+kalman_t kalmanX;
+kalman_t kalmanY;
+
+kalman_single_t  kalman_single_X;
+kalman_single_t  kalman_single_Y;
+kalman_single_t  kalman_single_Z;
+/*=====================================================================================================*/
+/*=====================================================================================================*/
 float kalman_filter_angleX(float newAngle, float newRate, float looptime)
 {
     //calculate dt
@@ -65,7 +75,8 @@ float kalman_filter_angleX(float newAngle, float newRate, float looptime)
     return x_angle;
 
 }
-
+/*=====================================================================================================*/
+/*=====================================================================================================*/
 float kalman_filter_angleY(float newAngle, float newRate, float looptime)
 {
     //calculate dt
@@ -106,7 +117,50 @@ float kalman_filter_angleY(float newAngle, float newRate, float looptime)
           
     return y_angle;
 }
+/*=====================================================================================================*/
+/*=====================================================================================================*/
+float kalman_filter_angle(kalman_t *kalman, float newAngle, float newRate, float looptime)
+{
+    //calculate dt
+    //float dt = (float)(looptime)/1000;
+    float dt = looptime;
+    /* Step 1 
+    Discrete Kalman filter time update equations - Time Update ("Predict")*/
+    kalman->rate = newRate - kalman->bias;
+    kalman->angle += dt * kalman->rate;
 
+    /* Step 2 
+    Update estimation error covariance - Project the error covariance ahead*/
+    kalman->P[0][0] += dt * (dt*kalman->P[1][1] - kalman->P[0][1] - kalman->P[1][0] + Q_angle);
+    kalman->P[0][1] -= dt * kalman->P[1][1];
+    kalman->P[1][0] -= dt * kalman->P[1][1];
+    kalman->P[1][1] += Q_bias * dt;
+
+    /* Step 4 
+    Calculate Kalman gain - Compute the Kalman gain*/
+    kalman->S = kalman->P[0][0] + R_measure;   //(Pk-) +R
+    /* Step 5 */
+    kalman->K[0] = kalman->P[0][0] / kalman->S;        // K[0] = Kk = (Pk-)/ [(Pk-) +R]
+    kalman->K[1] = kalman->P[1][0] / kalman->S;
+          
+    /* Step 3 
+    Calculate angle and bias - Update estimate with measurement zk (newAngle)*/
+    kalman->y = newAngle - kalman->angle;      // Zk - (Xk-)  = y
+    /* Step 6 */
+    kalman->angle += kalman->K[0] * kalman->y;         // Xk = (Xk-) + Kk * [Zk - (Xk-)]
+    kalman->bias += kalman->K[1] * kalman->y;
+
+    /* Step 7 
+    Calculate estimation error covariance - Update the error covariance*/
+    kalman->P[0][0] -= kalman->K[0] * kalman->P[0][0];   // Pk.new = (Pk-) - Kk*(Pk-)
+    kalman->P[0][1] -= kalman->K[0] * kalman->P[0][1];
+    kalman->P[1][0] -= kalman->K[1] * kalman->P[0][0];
+    kalman->P[1][1] -= kalman->K[1] * kalman->P[0][1];
+          
+    return kalman->angle;
+}
+/*=====================================================================================================*/
+/*=====================================================================================================*/
 float kalmanX_single(float accx, float measure_noise_x, float process_noise_x)
 {
  const float Rx=measure_noise_x*measure_noise_x;
@@ -151,4 +205,20 @@ float kalmanZ_single(float accz, float measure_noise_z, float process_noise_z)
     P = ( 1 - K)*P_ ;               // P = ( 1 - K*H)*P_ ;
  /****************************************/ 
  return x_hat;
+}/*=====================================================================================================*/
+/*=====================================================================================================*/
+float kalman_single(kalman_single_t *kalman_single, float acc, float measure_noise, float process_noise)
+{
+  kalman_single->R=measure_noise*measure_noise;
+  kalman_single->Q=process_noise*process_noise; 
+ 
+ /********* calculate kalman ***************/
+    kalman_single->P_ = kalman_single->P + kalman_single->Q;                     // P_ = A*P*A' + Q;
+    kalman_single->K = kalman_single->P_/(kalman_single->P_ + kalman_single->R);                // K = P_*H'*inv(H*P_*H' + R);
+    kalman_single->x_hat = kalman_single->x_hat + kalman_single->K*(acc - kalman_single->x_hat);  // x_hat = x_hat + K*(z - H*x_hat);
+    kalman_single->P = ( 1 - kalman_single->K)*kalman_single->P_ ;               // P = ( 1 - K*H)*P_ ;
+ /****************************************/ 
+ return kalman_single->x_hat;
 }
+/*=====================================================================================================*/
+/*=====================================================================================================*/

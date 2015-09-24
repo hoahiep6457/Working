@@ -10,12 +10,12 @@
 #define pid_sampletime  0.01
 #define inv_pid_sampletime 100
 //variable PID
-#define   Kp  100 //value;
-#define   Ki  50
-#define   Kd  5
+#define   Kp  10 //value;
+#define   Ki  0
+#define   Kd  0
 
 #define   Outmax  800
-#define   Outmin  800
+#define   Outmin  10
 /*=====================================================================================================*/
 /*=====================================================================================================*/
 typedef struct {

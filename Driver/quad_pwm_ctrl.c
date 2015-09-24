@@ -83,7 +83,7 @@ void BLDC_Config(void)
 /*=====================================================================================================*/
 void BLDC_CtrlPWM(s16 PWM_M1, s16 PWM_M2, s16 PWM_M3, s16 PWM_M4)
 {
-  /*
+  
   if(PWM_M1 > BLDC_PWM_MAX)       PWM_M1 = BLDC_PWM_MAX;
   else if(PWM_M1 < BLDC_PWM_MIN)  PWM_M1 = BLDC_PWM_MIN;
   if(PWM_M2 > BLDC_PWM_MAX)       PWM_M2 = BLDC_PWM_MAX;
@@ -92,7 +92,7 @@ void BLDC_CtrlPWM(s16 PWM_M1, s16 PWM_M2, s16 PWM_M3, s16 PWM_M4)
   else if(PWM_M3 < BLDC_PWM_MIN)  PWM_M3 = BLDC_PWM_MIN;
   if(PWM_M4 > BLDC_PWM_MAX)       PWM_M4 = BLDC_PWM_MAX;
   else if(PWM_M4 < BLDC_PWM_MIN)  PWM_M4 = BLDC_PWM_MIN;
-  */
+
   BLDC_M1 = PWM_M1;
   BLDC_M2 = PWM_M2;
   BLDC_M3 = PWM_M3;

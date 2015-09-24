@@ -14,6 +14,7 @@ void I2C_Configuration(void)
 #define I2C_SPEED 100000
 #define I2C_DUTYCYCLE I2C_DutyCycle_2
 #endif /* FAST_I2C_MODE*/
+  
 	I2C_InitTypeDef   		     I2C_InitStructure;
 	GPIO_InitTypeDef           GPIO_InitStructure;
 	
