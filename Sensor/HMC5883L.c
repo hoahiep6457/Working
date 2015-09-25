@@ -1,6 +1,6 @@
 #include "HMC5883L.h"
 uint8_t HMC5883Lmode;
-
+float m_scale;
 /** @defgroup HMC5883L_Library
 * @{
 */
@@ -177,7 +177,36 @@ uint8_t HMC5883L_GetGain()
 void HMC5883L_SetGain(uint8_t gain) 
 {
     // use this method to guarantee that bits 4-0 are set to zero, which is a
-    // requirement specified in the datasheet; 
+    // requirement specified in the datasheet;
+    switch(gain)
+    {
+      case HMC5883L_GAIN_1370:
+          m_scale = 0.73;
+          break;
+      case HMC5883L_GAIN_1090:
+          m_scale = 0.92;
+          break;
+      case HMC5883L_GAIN_820:
+          m_scale = 1.22;
+          break;
+      case HMC5883L_GAIN_660:
+          m_scale = 1.52;
+          break;
+      case HMC5883L_GAIN_440:
+          m_scale = 2.27;
+          break;
+      case HMC5883L_GAIN_390:
+          m_scale = 2.56;
+          break;
+      case HMC5883L_GAIN_330:
+          m_scale = 3.03;
+          break;
+      case HMC5883L_GAIN_220:
+          m_scale = 4.35;
+          break;
+      case default:
+          break;    
+    } 
     uint8_t tmp = gain << (HMC5883L_CRB_GAIN_BIT - HMC5883L_CRB_GAIN_LENGTH + 1);
     HMC5883L_I2C_ByteWrite(HMC5883L_DEFAULT_ADDRESS, &tmp, HMC5883L_RA_CONFIG_B);
 }

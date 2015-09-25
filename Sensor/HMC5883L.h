@@ -77,7 +77,7 @@
 #define HMC5883L_STATUS_LOCK_BIT    1
 #define HMC5883L_STATUS_READY_BIT   0
 
-
+extern float m_scale;
 void HMC5883L_Initialize();
 bool HMC5883L_TestConnection();
 
