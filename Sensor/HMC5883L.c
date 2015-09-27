@@ -178,6 +178,9 @@ void HMC5883L_SetGain(uint8_t gain)
 {
     // use this method to guarantee that bits 4-0 are set to zero, which is a
     // requirement specified in the datasheet;
+		uint8_t tmp = gain << (HMC5883L_CRB_GAIN_BIT - HMC5883L_CRB_GAIN_LENGTH + 1);
+    HMC5883L_I2C_ByteWrite(HMC5883L_DEFAULT_ADDRESS, &tmp, HMC5883L_RA_CONFIG_B);
+	
     switch(gain)
     {
       case HMC5883L_GAIN_1370:
@@ -203,12 +206,9 @@ void HMC5883L_SetGain(uint8_t gain)
           break;
       case HMC5883L_GAIN_220:
           m_scale = 4.35;
-          break;
-      case default:
-          break;    
+          break;   
     } 
-    uint8_t tmp = gain << (HMC5883L_CRB_GAIN_BIT - HMC5883L_CRB_GAIN_LENGTH + 1);
-    HMC5883L_I2C_ByteWrite(HMC5883L_DEFAULT_ADDRESS, &tmp, HMC5883L_RA_CONFIG_B);
+    
 }
 
 // MODE register

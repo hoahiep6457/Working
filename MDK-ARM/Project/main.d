@@ -38,6 +38,7 @@
 .\project\main.o: C:\Keil\ARM\ARMCC\bin\..\include\math.h
 .\project\main.o: ..\Sensor\MPU6050.h
 .\project\main.o: C:\Keil\ARM\ARMCC\bin\..\include\stdbool.h
+.\project\main.o: ..\Sensor\HMC5883L.h
 .\project\main.o: ..\Algorithm\Kalman.h
 .\project\main.o: ..\Driver\quad_pwm_ctrl.h
 .\project\main.o: ..\Driver\quad_i2c_ctrl.h
