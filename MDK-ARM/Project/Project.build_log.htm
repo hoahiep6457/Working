@@ -43,28 +43,51 @@ compiling main.c...
   bool HMC5883L_GetReadyStatus();
 ..\Algorithm\pid.h(44): warning:  #1-D: last line of file ends without a newline
   #endif
-..\main.c(95): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\main.c(92): warning:  #1035-D: single-precision operand implicitly converted to double-precision
     gyroX_rate = (gyroX - gyroX_offset)/GYRO_LSB;
-..\main.c(96): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\main.c(93): warning:  #1035-D: single-precision operand implicitly converted to double-precision
     gyroY_rate = (gyroY - gyroY_offset)/GYRO_LSB;
-..\main.c(97): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\main.c(94): warning:  #1035-D: single-precision operand implicitly converted to double-precision
     gyroZ_rate = (gyroZ - gyroZ_offset)/GYRO_LSB;
-..\main.c(99): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\main.c(96): warning:  #1035-D: single-precision operand implicitly converted to double-precision
     gyroX_angle += gyroX_rate*DT;
-..\main.c(100): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\main.c(97): warning:  #1035-D: single-precision operand implicitly converted to double-precision
     gyroY_angle += gyroY_rate*DT;
-..\main.c(284): warning:  #177-D: variable "BLDC_M" was declared but never referenced
+..\main.c(268): warning:  #177-D: variable "BLDC_M" was declared but never referenced
     u16 BLDC_M[4] = {0};
-..\main.c(285): warning:  #550-D: variable "Pitch" was set but never used
+..\main.c(269): warning:  #550-D: variable "Pitch" was set but never used
     int16_t Pitch = 0, Roll = 0, Yaw = 0;
-..\main.c(285): warning:  #550-D: variable "Roll" was set but never used
+..\main.c(269): warning:  #550-D: variable "Roll" was set but never used
     int16_t Pitch = 0, Roll = 0, Yaw = 0;
-..\main.c(285): warning:  #177-D: variable "Yaw" was declared but never referenced
+..\main.c(269): warning:  #177-D: variable "Yaw" was declared but never referenced
     int16_t Pitch = 0, Roll = 0, Yaw = 0;
 ..\main.c: 26 warnings, 0 errors
 linking...
-Program Size: Code=6760 RO-data=584 RW-data=188 ZI-data=1052  
+Program Size: Code=6736 RO-data=584 RW-data=168 ZI-data=1216  
 ".\Project\Project.axf" - 0 Error(s), 26 Warning(s).
+Load "C:\\Users\\kael5\\Desktop\\Project_Quad\\github\\Working\\MDK-ARM\\Project\\Project.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
+Application running ...
 </pre>
 </body>
 </html>
+I-data=1216  
+".\Project\Project.axf" - 0 Error(s), 27 Warning(s).
+: Error: L6200E: Symbol Q_bias multiply defined (by kalman.o and main.o).
+.\Project\Project.axf: Error: L6200E: Symbol R_measure multiply defined (by kalman.o and main.o).
+Not enough information to list image symbols.
+Not enough information to list the image map.
+Finished: 2 information, 0 warning and 3 error messages.
+".\Project\Project.axf" - 3 Error(s), 27 Warning(s).
+Target not created
+main.c(285): warning:  #177-D: variable "Yaw" was declared but never referenced
+    int16_t Pitch = 0, Roll = 0, Yaw = 0;
+..\main.c: 26 warnings, 5 errors
+compiling Kalman.c...
+..\Algorithm\Kalman.c(225): warning:  #1-D: last line of file ends without a newline
+  /*=====================================================================================================*/
+..\Algorithm\Kalman.c: 1 warning, 0 errors
+".\Project\Project.axf" - 5 Error(s), 27 Warning(s).
+Target not created

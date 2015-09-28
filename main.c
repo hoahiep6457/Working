@@ -14,7 +14,7 @@
 #define ACC_LSB   2048 //Accel FS16 
 #define RAD_TO_DEG  57.2957795131
 #define DEG_TO_RAD  0.01745329251
-#define DT				0.01 // T sampling
+#define DT				0.001 // T sampling
 /*	      MASTER                    SLAVE
 	 PB8 --- I2C1_SCL              	MPU6050
 	 PB9 --- I2C1_SDA               HMC5883L
@@ -62,9 +62,9 @@ int main(void)
   IMU_Get_Start();
   delay_ms(10);//delay to avoid hating
   //TIM2_Config_Counter();
-	SysTick_Config(SystemCoreClock / 99);//start to read MPU each 1 ms
+	SysTick_Config(SystemCoreClock / 999);//start to read MPU each 1 ms
 	GPIO_SetBits(GPIOD, GPIO_Pin_12|GPIO_Pin_13|GPIO_Pin_14|GPIO_Pin_15);
-	//DeviceID =  MPU6050_GetDeviceID();
+
   while (1)
   {
 			
@@ -85,9 +85,6 @@ void IMU_Get_Data(void)
   gyroY = MPU6050data[5];
   gyroZ = MPU6050data[6];
 	//Kalman fiter value of Accel
-	//accX_kalman = kalmanX_single(accX, 5, 0.5);
-  //accY_kalman = kalmanY_single(accY, 5, 0.5);
-	//accZ_kalman = kalmanZ_single(accZ, 5, 0.5);
   accX_kalman = kalman_single(&kalman_single_X, accX, 5, 0.5);
   accY_kalman = kalman_single(&kalman_single_Y, accY, 5, 0.5);
   accZ_kalman = kalman_single(&kalman_single_Z, accZ, 5, 0.5);
@@ -98,10 +95,7 @@ void IMU_Get_Data(void)
   //kalman filter
   gyroX_angle += gyroX_rate*DT;
   gyroY_angle += gyroY_rate*DT;
-  //angleX_kalman = kalman_filter_angleX(angleX, gyroX_rate, DT);
-  //angleY_kalman = kalman_filter_angleY(angleY, gyroY_rate, DT);
-  //angleX_kalman = kalman_filter_angle(&kalmanX, angleX, gyroX_rate, DT);
-  //angleY_kalman = kalman_filter_angle(&kalmanY, angleY, gyroY_rate, DT);
+	
 	//Calculate Angle from Accel
   /* roll: Rotation around the longitudinal axis (the plane body, 'X axis'). -90<=roll<=90    */
     /* roll is positive and increasing when moving downward                                     */
@@ -130,39 +124,31 @@ void IMU_Get_Data(void)
     angleY = atan2(-accX_kalman, accZ_kalman) * RAD_TO_DEG;
   #endif
 
-  //angleX = atan2(accY_kalman, accZ_kalman) * RAD_TO_DEG;
-  //angleY = -atan2(accX_kalman,accZ_kalman) * RAD_TO_DEG;
 
   #ifdef RESTRICT_PITCH
   // This fixes the transition problem when the accelerometer angle jumps between -180 and 180 degrees
   if ((angleX < -90 && angleX_kalman > 90) || (angleX > 90 && angleX_kalman < -90)) {
-    //x_angle = angleX;
     kalmanX.angle = angleX;
     angleX_kalman = angleX;
   } 
   else
     angleX_kalman = kalman_filter_angle(&kalmanX, angleX, gyroX_rate, DT);
-    //angleX_kalman = kalman_filter_angleX(angleX, gyroX_rate, DT);; // Calculate the angle using a Kalman filter
 
   if (abs(angleX_kalman) > 90)
     gyroY_rate = -gyroY_rate; // Invert rate, so it fits the restriced accelerometer reading
     angleY_kalman = kalman_filter_angle(&kalmanY, angleY, gyroY_rate, DT);
-    //angleY_kalman = kalman_filter_angleY(angleY, gyroY_rate, DT);
   #else
     // This fixes the transition problem when the accelerometer angle jumps between -180 and 180 degrees
     if ((angleY < -90 && angleY_kalman > 90) || (angleY > 90 && angleY_kalman < -90)) {
-      //y_angle = angleY;
       kalmanY.angle = angleY;
       angleY_kalman = angleY;
     } 
     else
       angleY_kalman = kalman_filter_angle(&kalmanY, angleY, gyroY_rate, DT);
-      //angleY_kalman = kalman_filter_angleY(angleY, gyroY_rate, DT); // Calculate the angle using a Kalman filter
 
     if (abs(angleY_kalman) > 90)
       gyroX_rate = -gyroX_rate; // Invert rate, so it fits the restriced accelerometer reading
       angleX_kalman = kalman_filter_angle(&kalmanX, angleX, gyroX_rate, DT);
-      //angleX_kalman = kalman_filter_angleX(angleX, gyroX_rate, DT); // Calculate the angle using a Kalman filter
     #endif
  
   /*--------------------Handle HMC5883L---------------------*/
@@ -228,11 +214,9 @@ void IMU_Get_Start(void)
   angleX = atan2(accY, accZ) * RAD_TO_DEG;
 	angleY = -atan2(accX, accZ) * RAD_TO_DEG;
 
-  //x_angle = angleX;
   gyroX_angle = angleX;
   kalmanX.angle = angleX;
 
-	//y_angle = angleY;
 	gyroY_angle = angleY;
   kalmanY.angle = angleY;
   //HMC5883L get starting

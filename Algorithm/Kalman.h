@@ -10,6 +10,7 @@
 #endif 
 /*=====================================================================================================*/
 /*=====================================================================================================*/
+
 typedef struct {
 	float	angle;// The angle calculated by the Kalman filter - part of the 2x1 state matrix
 	float 	bias;// The gyro bias calculated by the Kalman filter - part of the 2x1 state matrix
@@ -33,16 +34,16 @@ typedef struct {
 	float	K;
 }kalman_single_t;
 
-extern kalman_t *kalmanX;
-extern kalman_t *kalmanY;
-extern kalman_t *kalmanZ;
+extern kalman_t kalmanX;
+extern kalman_t kalmanY;
+extern kalman_t kalmanZ;
 
-extern kalman_single_t	*kalman_single_X;
-extern kalman_single_t	*kalman_single_Y;
-extern kalman_single_t	*kalman_single_Z;
+extern kalman_single_t	kalman_single_X;
+extern kalman_single_t	kalman_single_Y;
+extern kalman_single_t	kalman_single_Z;
 /*=====================================================================================================*/
 /*=====================================================================================================*/
-//float kalman_filter_angleX(float newAngle, float newRate, float looptime);
+float kalman_filter_angleX(float newAngle, float newRate, float looptime);
 //float kalman_filter_angleY(float newAngle, float newRate, float looptime);
 float kalman_filter_angle(kalman_t *kalman, float newAngle, float newRate, float looptime);
 
