@@ -11,10 +11,6 @@ kalman_t kalmanX;
 kalman_t kalmanY;
 kalman_t kalmanZ;
 
-kalman_t kalmanX_t;
-kalman_t kalmanY_t;
-kalman_t kalmanZ_t;
-
 kalman_single_t  kalman_single_X;
 kalman_single_t  kalman_single_Y;
 kalman_single_t  kalman_single_Z;

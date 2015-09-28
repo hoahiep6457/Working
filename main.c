@@ -26,19 +26,17 @@ void Led_Config(void);
 void Delay(__IO uint32_t nCount);
 void IMU_Get_Data(void);
 void delay_ms(__IO unsigned long ms);
-void MPU6050_Get_Offset(void);
+void IMU_Get_Offset(void);
 void TIM2_Config_Counter(void);
 void PID_Handle(void);
 /*=====================================================================================================*/
 /*=====================================================================================================*/
-//int16_t DeviceID;
 int16_t accX=0,accY=0,accZ=0,gyroX=0,gyroY=0,gyroZ=0,magX=0,magY=0,magZ=0;
 int16_t Gyro_zero[7];
 int16_t temp;
 int16_t MPU6050data[7];
 int16_t HMC5883Ldata[3];
 int16_t magX_offset=0, magY_offset=0,magZ_offset=0;
-//int16_t int16_t magX_max=0, magX_min=0, magY_max=0, magY_min=0, maxZ_max=0, maxZ_min=0;
 float accX_kalman, accY_kalman, accZ_kalman;
 float Bfx, Bfy;
 float gyroX_offset=0, gyroY_offset=0, gyroZ_offset=0;
@@ -53,11 +51,11 @@ extern float x_angle, y_angle;
 int main(void)
 {
   I2C_Configuration(); 
-  //HMC5883L_Initialize();
-  //delay_ms(10); 
+  HMC5883L_Initialize();
+  delay_ms(10); 
   MPU6050_Initialize();//LSB gyro = 32.8 LSB acc = 2048
   delay_ms(10);//wait for MPU to stabilize
-  MPU6050_Get_Offset();//read MPU6050 to calib gyro
+  IMU_Get_Offset();//read MPU6050 to calib gyro
   Led_Config();
   IMU_Get_Start();
   delay_ms(10);//delay to avoid hating
@@ -72,7 +70,7 @@ int main(void)
 /*=====================================================================================================*/
 /*=====================================================================================================*/
 }
-//read MPU once 10 ms
+//read MPU once 1 ms
 void IMU_Get_Data(void)
 {
 /*--------------------------Hanle MPU6050---------------------------------------*/
@@ -124,7 +122,6 @@ void IMU_Get_Data(void)
     angleY = atan2(-accX_kalman, accZ_kalman) * RAD_TO_DEG;
   #endif
 
-
   #ifdef RESTRICT_PITCH
   // This fixes the transition problem when the accelerometer angle jumps between -180 and 180 degrees
   if ((angleX < -90 && angleX_kalman > 90) || (angleX > 90 && angleX_kalman < -90)) {
@@ -163,42 +160,32 @@ void IMU_Get_Data(void)
     //             (-1)*magn->z * sin(pitchAngle) * cos(rollAngle);
     //*yaw = to_degrees(atan2(Bfy, Bfx));
 
-    //double rollAngle = to_radians(angleX);
-    //double pitchAngle = to_radians(angleY);
-    //*yaw = to_degrees(atan2((magn->z * sin(rollAngle) - magn->y * cos(rollAngle))*(-1),
-    //                        magn->x * cos(pitchAngle) +
-    //                        magn->y * sin(pitchAngle) * sin(rollAngle) +
-  
-  //HMC5883L_GetHeading(HMC5883Ldata);
+  HMC5883L_GetHeading(HMC5883Ldata);
 
-  //magX = HMC5883Ldata[0];
-  //magY = HMC5883Ldata[1];
-  //magZ = HMC5883Ldata[2];
+  magX = m_scale*HMC5883Ldata[0];
+  magY = m_scale*HMC5883Ldata[1];
+  magZ = m_scale*HMC5883Ldata[2];
+
   //Calibration Mag sensor
-  //magX-=magX_offset;
-  //magY-=magY_offset;
-  //magZ-=magZ_offset;
+  magX-=magX_offset;
+  magY-=magY_offset;
+  magZ-=magZ_offset;
 
-  //float roll_angle = angleX_kalman*DEG_TO_RAD;
-  //float pitch_angle = angleY_kalman*DEG_TO_RAD;
-  //float cos_roll = cos(roll_angle);
-  //float sin_roll = sin(roll_angle);
-  //float cos_pitch = cos(pitch_angle);
-  //float sin_pitch = sin(pitch_angle);
+  float roll_angle = angleX_kalman*DEG_TO_RAD;
+  float pitch_angle = angleY_kalman*DEG_TO_RAD;
 
-  //Bfy = -(magZ * sin(roll_angle) - magY * cos(roll_angle));
-  //Bfx = magX * cos(pitch_angle) + magY * sin(pitch_angle) * sin(roll_angle) + magZ * sin(pitch_angle) * cos(roll_angle);
+  Bfy = -(magZ * sin(roll_angle) - magY * cos(roll_angle));
+  Bfx = magX * cos(pitch_angle) + magY * sin(pitch_angle) * sin(roll_angle) + magZ * sin(pitch_angle) * cos(roll_angle);
 
-  //angleZ = atan2(-Bfy, Bfx) * RAD_TO_DEG;
+  angleZ = atan2(-Bfy, Bfx) * RAD_TO_DEG;
   // This fixes the transition problem when the yaw angle jumps between -180 and 180 degrees
-  //if ((angleZ < -90 && angleZ_kalman > 90) || (yaw > 90 && angleZ_kalman < -90)) {
-  //z_angle = angleZ;/
-  //kalmanZ.angle = angleZ;
-    //angleZ_kalman = angleZ;
-  //} else
-    //angleZ_kalman = kalman_filter_angle(kalmanZ, angleZ, gyroZ_rate, DT);
-    //angleZ_kalman = kalman_filter_angleY(angleZ, gyroZ_rate, DT); // Calculate the angle using a Kalman filter
-
+  if ((angleZ < -90 && angleZ_kalman > 90) || (yaw > 90 && angleZ_kalman < -90)) {
+    kalmanZ.angle = angleZ;
+    angleZ_kalman = angleZ;
+  } 
+  else
+    angleZ_kalman = kalman_filter_angle(kalmanZ, angleZ, gyroZ_rate, DT);
+   
 
 }
 /*=====================================================================================================*/
@@ -219,36 +206,33 @@ void IMU_Get_Start(void)
 
 	gyroY_angle = angleY;
   kalmanY.angle = angleY;
+
   //HMC5883L get starting
-  //HMC5883L_GetHeading(HMC5883Ldata);
+  HMC5883L_GetHeading(HMC5883Ldata);
 
-  //magX = HMC5883Ldata[0];
-  //magY = HMC5883Ldata[1];
-  //magZ = HMC5883Ldata[2];
+  magX = m_scale*HMC5883Ldata[0];
+  magY = m_scale*HMC5883Ldata[1];
+  magZ = m_scale*HMC5883Ldata[2];
   //Calibration Mag sensor
-  //magX-=magX_offset;
-  //magY-=magY_offset;
-  //magZ-=magZ_offset;
+  magX-=magX_offset;
+  magY-=magY_offset;
+  magZ-=magZ_offset;
 
-  //float roll_angle = angleX_kalman*DEG_TO_RAD;
-  //float pitch_angle = angleY_kalman*DEG_TO_RAD;
-  //float cos_roll = cos(roll_angle);
-  //float sin_roll = sin(roll_angle);
-  //float cos_pitch = cos(pitch_angle);
-  //float sin_pitch = sin(pitch_angle);
+  float roll_angle = angleX_kalman*DEG_TO_RAD;
+  float pitch_angle = angleY_kalman*DEG_TO_RAD;
 
-  //Bfy = -(magZ * sin(roll_angle) - magY * cos(roll_angle));
-  //Bfx = magX * cos(pitch_angle) + magY * sin(pitch_angle) * sin(roll_angle) + magZ * sin(pitch_angle) * cos(roll_angle);
+  Bfy = -(magZ * sin(roll_angle) - magY * cos(roll_angle));
+  Bfx = magX * cos(pitch_angle) + magY * sin(pitch_angle) * sin(roll_angle) + magZ * sin(pitch_angle) * cos(roll_angle);
 
-  //angleZ = atan2(-Bfy, Bfx) * RAD_TO_DEG;
-  //z_angle = angleZ;
-  //gyroZ_angle = angleZ;
-  //kalmanZ.angle = angleZ;
+  angleZ = atan2(-Bfy, Bfx) * RAD_TO_DEG;
+  gyroZ_angle = angleZ;
+  kalmanZ.angle = angleZ;
 }
 /*=====================================================================================================*/
 /*=====================================================================================================*/
-void MPU6050_Get_Offset(void)
+void IMU_Get_Offset(void)
 {
+  /****************************Calib Gyro Sensor**********************/
   int8_t i;
   for(i=0; i<100; i++)
   {
@@ -260,6 +244,28 @@ void MPU6050_Get_Offset(void)
   gyroX_offset /= 100;
   gyroY_offset /= 100;
   gyroZ_offset /= 100;
+
+  /*****************************Calib Magnetic sensor**************/
+  static float magX_max=0, magX_min=0, magY_max=0, magY_min=0, magZ_max=0, magZ_min=0;
+  int16_t j;
+  for(j=0; j<150; j++)
+  {
+    HMC5883L_GetHeading(HMC5883Ldata);
+    magX = HMC5883Ldata[0]*m_scale;
+    magY = HMC5883Ldata[1]*m_scale;
+    magZ = HMC5883Ldata[2]*m_scale;
+    // Uses SCALED values, since scaled is the RAW adjusted for the gauss (sensitivity). 
+    if(magX < magX_min) magX_min = magX;
+    if(magY < magY_min) magY_min = magY;
+    if(magZ < magZ_min) magZ_min = magZ;
+    if(magX > magX_max) magX_max = magX;
+    if(magX > magY_max) magY_max = magY;
+    if(magX > magZ_max) magZ_max = magZ;
+    // Calculate the magX_off; magY_off; magZ_off 
+    magX_offset = magX_max - (magX_max - magX_min)/2;  
+    magY_offset = magY_max - (magY_max - magY_min)/2;  
+    magZ_offset = magZ_max - (magZ_max - magZ_min)/2; 
+  }
 }
 /*=====================================================================================================*/
 /*=====================================================================================================*/
@@ -270,14 +276,14 @@ void PID_Handle(void)
   //PID Angle
   Roll  = PID_Adjustment(&PID_Roll, 0, angleX_kalman);
   Pitch = PID_Adjustment(&PID_Pitch, 0, angleY_kalman);
-  //Yaw = PID_Adjustment(&PID_Yaw, 0, );
+  Yaw = PID_Adjustment(&PID_Yaw, 0, angleZ_kalman);
   /* Motor Ctrl */
-  //BLDC_M[0] = BasicThr + Pitch + Roll + Yaw;
-  //BLDC_M[1] = BasicThr - Pitch + Roll - Yaw;
-  //BLDC_M[2] = BasicThr - Pitch - Roll + Yaw;
-  //BLDC_M[3] = BasicThr + Pitch - Roll - Yaw;
+  BLDC_M[0] = BasicThr + Pitch + Roll + Yaw;
+  BLDC_M[1] = BasicThr - Pitch + Roll - Yaw;
+  BLDC_M[2] = BasicThr - Pitch - Roll + Yaw;
+  BLDC_M[3] = BasicThr + Pitch - Roll - Yaw;
   // Thr Ctrl
-  //BLDC_CtrlPWM(BLDC_M[0], BLDC_M[1], BLDC_M[2], BLDC_M[3]);
+  BLDC_CtrlPWM(BLDC_M[0], BLDC_M[1], BLDC_M[2], BLDC_M[3]);
 
 }
 /*=====================================================================================================*/
@@ -309,31 +315,7 @@ void Led_Config(void)
   GPIO_InitStructure.GPIO_PuPd=GPIO_PuPd_NOPULL;
   GPIO_Init(GPIOD, &GPIO_InitStructure);
 }
-/*=====================================================================================================*/
-/*=====================================================================================================*/
-void HMC5883L_Get_Offset(void)
-{
-  static float magX_max=0, magX_min=0, magY_max=0, magY_min=0, magZ_max=0, magZ_min=0;
-  int16_t i;
-  for(i=0; i<150; i++)
-  {
-    HMC5883L_GetHeading(HMC5883Ldata);
-    magX = HMC5883Ldata[0]*m_scale;
-    magY = HMC5883Ldata[1]*m_scale;
-    magZ = HMC5883Ldata[2]*m_scale;
-    // Uses SCALED values, since scaled is the RAW adjusted for the gauss (sensitivity). 
-    if(magX < magX_min) magX_min = magX;
-    if(magY < magY_min) magY_min = magY;
-    if(magZ < magZ_min) magZ_min = magZ;
-    if(magX > magX_max) magX_max = magX;
-    if(magX > magY_max) magY_max = magY;
-    if(magX > magZ_max) magZ_max = magZ;
-    // Calculate the magX_off; magY_off; magZ_off 
-    magX_offset = magX_max - (magX_max - magX_min)/2;  
-    magY_offset = magY_max - (magY_max - magY_min)/2;  
-    magZ_offset = magZ_max - (magZ_max - magZ_min)/2; 
-  }
-}
+
 /*=====================================================================================================*/
 /*=====================================================================================================*/
 void SysTick_Handler(void)
