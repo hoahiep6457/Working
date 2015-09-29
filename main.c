@@ -28,7 +28,8 @@ void IMU_Get_Data(void);
 void delay_ms(__IO unsigned long ms);
 void IMU_Get_Offset(void);
 void TIM2_Config_Counter(void);
-void PID_Handle(void);
+void PID_Update(void);
+void PID_Init_Start(void)
 /*=====================================================================================================*/
 /*=====================================================================================================*/
 int16_t accX=0,accY=0,accZ=0,gyroX=0,gyroY=0,gyroZ=0,magX=0,magY=0,magZ=0;
@@ -43,13 +44,15 @@ float gyroX_offset=0, gyroY_offset=0, gyroZ_offset=0;
 float angleX, angleY, angleZ;
 float gyroX_rate, gyroY_rate, gyroZ_rate;
 float angleX_kalman, angleY_kalman, angleZ_kalman;
-float gyroX_angle, gyroY_angle;
+float gyroX_angle, gyroY_angle, gyroZ_angle;
 extern float x_angle, y_angle;
 
 /*=====================================================================================================*/
 /*=====================================================================================================*/
 int main(void)
 {
+
+  SystemInit();
   I2C_Configuration(); 
   HMC5883L_Initialize();
   delay_ms(10); 
@@ -59,7 +62,7 @@ int main(void)
   Led_Config();
   IMU_Get_Start();
   delay_ms(10);//delay to avoid hating
-  //TIM2_Config_Counter();
+  PID_Init_Start();
 	SysTick_Config(SystemCoreClock / 999);//start to read MPU each 1 ms
 	GPIO_SetBits(GPIOD, GPIO_Pin_12|GPIO_Pin_13|GPIO_Pin_14|GPIO_Pin_15);
 
@@ -93,9 +96,9 @@ void IMU_Get_Data(void)
   //kalman filter
   gyroX_angle += gyroX_rate*DT;
   gyroY_angle += gyroY_rate*DT;
-	
+	gyroZ_angle += gyroZ_rate*DT;
 	//Calculate Angle from Accel
-  /* roll: Rotation around the longitudinal axis (the plane body, 'X axis'). -90<=roll<=90    */
+  /* roll: Rotation around the longitudinal axis (the plane body, 'X axis'). -180<=roll<=180    */
     /* roll is positive and increasing when moving downward                                     */
     /*                                                                                          */
     /*                                 y                                                        */
@@ -103,7 +106,7 @@ void IMU_Get_Data(void)
     /*                          sqrt(x^2 + z^2)                                                 */
     /* where:  x, y, z are returned value from accelerometer sensor                             */
 
-    /* pitch: Rotation around the lateral axis (the wing span, 'Y axis'). -180<=pitch<=180)     */
+    /* pitch: Rotation around the lateral axis (the wing span, 'Y axis'). -90<=pitch<=90)     */
     /* pitch is positive and increasing when moving upwards                                     */
     /*                                                                                          */
     /*                                 x                                                        */
@@ -151,14 +154,16 @@ void IMU_Get_Data(void)
   /*--------------------Handle HMC5883L---------------------*/
      /* Sensor rotates around Z-axis                                                           */
     /* yaw is the angle between the 'X axis' and magnetic north on the horizontal plane (Oxy) */
-    /* heading = atan(My / Mx)                                                                */
-    // rollAngle = to_radians(angleX);
-    // pitchAngle = to_radians(angleY);
-    // Bfy = -magn->z * sin(rollAngle) - magn->y * cos(rollAngle);
-    // Bfx = -magn->x * cos(pitchAngle) +
-    //             magn->y * sin(pitchAngle) * sin(rollAngle) +
-    //             (-1)*magn->z * sin(pitchAngle) * cos(rollAngle);
-    //*yaw = to_degrees(atan2(Bfy, Bfx));
+    /* jump between -180<=yaw<=180  
+    /* Yaw = atan(-Bfy / Bfx)                                                                */
+    /* rollAngle = to_radians(angleX);
+    /* pitchAngle = to_radians(angleY);
+    /* Bfy = -(magn->z * sin(rollAngle) - magn->y * cos(rollAngle));
+    /* Bfx = magn->x * cos(pitchAngle) +
+    /*             magn->y * sin(pitchAngle) * sin(rollAngle) +
+    /*             magn->z * sin(pitchAngle) * cos(rollAngle);
+    /* yaw = to_degrees(atan2(Bfy, Bfx));
+    */
 
   HMC5883L_GetHeading(HMC5883Ldata);
 
@@ -214,9 +219,9 @@ void IMU_Get_Start(void)
   magY = m_scale*HMC5883Ldata[1];
   magZ = m_scale*HMC5883Ldata[2];
   //Calibration Mag sensor
-  magX-=magX_offset;
-  magY-=magY_offset;
-  magZ-=magZ_offset;
+  magX -= magX_offset;
+  magY -= magY_offset;
+  magZ -= magZ_offset;
 
   float roll_angle = angleX_kalman*DEG_TO_RAD;
   float pitch_angle = angleY_kalman*DEG_TO_RAD;
@@ -261,7 +266,7 @@ void IMU_Get_Offset(void)
     if(magX > magX_max) magX_max = magX;
     if(magX > magY_max) magY_max = magY;
     if(magX > magZ_max) magZ_max = magZ;
-    // Calculate the magX_off; magY_off; magZ_off 
+    // Calculate the magX_offset; magY_offset; magZ_offset 
     magX_offset = magX_max - (magX_max - magX_min)/2;  
     magY_offset = magY_max - (magY_max - magY_min)/2;  
     magZ_offset = magZ_max - (magZ_max - magZ_min)/2; 
@@ -269,7 +274,7 @@ void IMU_Get_Offset(void)
 }
 /*=====================================================================================================*/
 /*=====================================================================================================*/
-void PID_Handle(void)
+void PID_Update(void)
 {
   u16 BLDC_M[4] = {0};
   int16_t Pitch = 0, Roll = 0, Yaw = 0;
@@ -285,6 +290,14 @@ void PID_Handle(void)
   // Thr Ctrl
   BLDC_CtrlPWM(BLDC_M[0], BLDC_M[1], BLDC_M[2], BLDC_M[3]);
 
+}
+/*=====================================================================================================*/
+/*=====================================================================================================*/
+void PID_Init_Start(void)
+{
+  PID_init(&PID_Roll, 0.002, 0, 0);
+  PID_init(&PID_Pitch, 0.001, 0, 0);
+  PID_init(&PID_Yaw, 0.001, 0, 0);
 }
 /*=====================================================================================================*/
 /*=====================================================================================================*/
@@ -321,7 +334,7 @@ void Led_Config(void)
 void SysTick_Handler(void)
 {
 	IMU_Get_Data();
-  //PID_Handle();
+  //PID_Update();
 }
 /*=====================================================================================================*/
 /*=====================================================================================================*/
