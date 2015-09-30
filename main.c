@@ -29,7 +29,7 @@ void delay_ms(__IO unsigned long ms);
 void IMU_Get_Offset(void);
 void TIM2_Config_Counter(void);
 void PID_Update(void);
-void PID_Init_Start(void)
+void PID_Init_Start(void);
 /*=====================================================================================================*/
 /*=====================================================================================================*/
 int16_t accX=0,accY=0,accZ=0,gyroX=0,gyroY=0,gyroZ=0,magX=0,magY=0,magZ=0;
@@ -39,7 +39,7 @@ int16_t MPU6050data[7];
 int16_t HMC5883Ldata[3];
 int16_t magX_offset=0, magY_offset=0,magZ_offset=0;
 float accX_kalman, accY_kalman, accZ_kalman;
-float Bfx, Bfy;
+float Bfx, Bfy, My, Mx;
 float gyroX_offset=0, gyroY_offset=0, gyroZ_offset=0;
 float angleX, angleY, angleZ;
 float gyroX_rate, gyroY_rate, gyroZ_rate;
@@ -154,16 +154,15 @@ void IMU_Get_Data(void)
   /*--------------------Handle HMC5883L---------------------*/
      /* Sensor rotates around Z-axis                                                           */
     /* yaw is the angle between the 'X axis' and magnetic north on the horizontal plane (Oxy) */
-    /* jump between -180<=yaw<=180  
+    /* jump between -180<=yaw<=180  																													*/
     /* Yaw = atan(-Bfy / Bfx)                                                                */
-    /* rollAngle = to_radians(angleX);
-    /* pitchAngle = to_radians(angleY);
-    /* Bfy = -(magn->z * sin(rollAngle) - magn->y * cos(rollAngle));
-    /* Bfx = magn->x * cos(pitchAngle) +
-    /*             magn->y * sin(pitchAngle) * sin(rollAngle) +
-    /*             magn->z * sin(pitchAngle) * cos(rollAngle);
-    /* yaw = to_degrees(atan2(Bfy, Bfx));
-    */
+    /* rollAngle = to_radians(angleX);																						*/
+    /* pitchAngle = to_radians(angleY);																						*/
+    /* Bfy = -(magn->z * sin(rollAngle) - magn->y * cos(rollAngle));							*/
+    /* Bfx = magn->x * cos(pitchAngle) +																					*/
+    /*             magn->y * sin(pitchAngle) * sin(rollAngle) +										*/
+    /*             magn->z * sin(pitchAngle) * cos(rollAngle);										*/
+    /* yaw = to_degrees(atan2(Bfy, Bfx));																					*/
 
   HMC5883L_GetHeading(HMC5883Ldata);
 
@@ -178,20 +177,21 @@ void IMU_Get_Data(void)
 
   roll_angle = angleX_kalman*DEG_TO_RAD;
   pitch_angle = angleY_kalman*DEG_TO_RAD;
-
+	
   Bfy = -(magZ * sin(roll_angle) - magY * cos(roll_angle));
   Bfx = magX * cos(pitch_angle) + magY * sin(pitch_angle) * sin(roll_angle) + magZ * sin(pitch_angle) * cos(roll_angle);
 
   angleZ = atan2(-Bfy, Bfx) * RAD_TO_DEG;
+	
   // This fixes the transition problem when the yaw angle jumps between -180 and 180 degrees
-  if ((angleZ < -90 && angleZ_kalman > 90) || (yaw > 90 && angleZ_kalman < -90)) {
+  if ((angleZ < -90 && angleZ_kalman > 90) || (angleZ > 90 && angleZ_kalman < -90)) {
     kalmanZ.angle = angleZ;
     angleZ_kalman = angleZ;
   } 
   else
     angleZ_kalman = kalman_filter_angle(&kalmanZ, angleZ, gyroZ_rate, DT);
    
-
+   
 }
 /*=====================================================================================================*/
 /*=====================================================================================================*/
@@ -225,35 +225,35 @@ void IMU_Get_Start(void)
 
   roll_angle = angleX_kalman*DEG_TO_RAD;
   pitch_angle = angleY_kalman*DEG_TO_RAD;
-
+	
   Bfy = -(magZ * sin(roll_angle) - magY * cos(roll_angle));
   Bfx = magX * cos(pitch_angle) + magY * sin(pitch_angle) * sin(roll_angle) + magZ * sin(pitch_angle) * cos(roll_angle);
 
   angleZ = atan2(-Bfy, Bfx) * RAD_TO_DEG;
+	
   gyroZ_angle = angleZ;
   kalmanZ.angle = angleZ;
 }
 /*=====================================================================================================*/
 /*=====================================================================================================*/
 void IMU_Get_Offset(void)
-{
+{ 
+	static float magX_max=0, magX_min=0, magY_max=0, magY_min=0, magZ_max=0, magZ_min=0;
+	int16_t i;
   /****************************Calib Gyro Sensor**********************/
-  int8_t i;
-  for(i=0; i<100; i++)
+  for(i=0; i<1000; i++)
   {
     MPU6050_GetRawAccelTempGyro(Gyro_zero);
     gyroX_offset += Gyro_zero[4];
     gyroY_offset += Gyro_zero[5];
     gyroZ_offset += Gyro_zero[6];
   }
-  gyroX_offset /= 100;
-  gyroY_offset /= 100;
-  gyroZ_offset /= 100;
+  gyroX_offset /= 1000;
+  gyroY_offset /= 1000;
+  gyroZ_offset /= 1000;
 
-  /*****************************Calib Magnetic sensor**************/
-  static float magX_max=0, magX_min=0, magY_max=0, magY_min=0, magZ_max=0, magZ_min=0;
-  int16_t j;
-  for(j=0; j<150; j++)
+  /*****************************Calib Magnetic sensor*****************/
+  for(i=0; i<1500; i++)
   {
     HMC5883L_GetHeading(HMC5883Ldata);
     magX = HMC5883Ldata[0]*m_scale;
@@ -283,10 +283,10 @@ void PID_Update(void)
   Pitch = PID_Adjustment(&PID_Pitch, 0, angleY_kalman);
   Yaw = PID_Adjustment(&PID_Yaw, 0, angleZ_kalman);
   /* Motor Ctrl */
-  BLDC_M[0] = BasicThr + Pitch + Roll + Yaw;
-  BLDC_M[1] = BasicThr - Pitch + Roll - Yaw;
-  BLDC_M[2] = BasicThr - Pitch - Roll + Yaw;
-  BLDC_M[3] = BasicThr + Pitch - Roll - Yaw;
+  //BLDC_M[0] = BasicThr + Pitch + Roll + Yaw;
+  //BLDC_M[1] = BasicThr - Pitch + Roll - Yaw;
+  //BLDC_M[2] = BasicThr - Pitch - Roll + Yaw;
+  //BLDC_M[3] = BasicThr + Pitch - Roll - Yaw;
   // Thr Ctrl
   BLDC_CtrlPWM(BLDC_M[0], BLDC_M[1], BLDC_M[2], BLDC_M[3]);
 
