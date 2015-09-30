@@ -45,7 +45,7 @@ float angleX, angleY, angleZ;
 float gyroX_rate, gyroY_rate, gyroZ_rate;
 float angleX_kalman, angleY_kalman, angleZ_kalman;
 float gyroX_angle, gyroY_angle, gyroZ_angle;
-extern float x_angle, y_angle;
+float roll_angle, pitch_angle;
 
 /*=====================================================================================================*/
 /*=====================================================================================================*/
@@ -176,8 +176,8 @@ void IMU_Get_Data(void)
   magY-=magY_offset;
   magZ-=magZ_offset;
 
-  float roll_angle = angleX_kalman*DEG_TO_RAD;
-  float pitch_angle = angleY_kalman*DEG_TO_RAD;
+  roll_angle = angleX_kalman*DEG_TO_RAD;
+  pitch_angle = angleY_kalman*DEG_TO_RAD;
 
   Bfy = -(magZ * sin(roll_angle) - magY * cos(roll_angle));
   Bfx = magX * cos(pitch_angle) + magY * sin(pitch_angle) * sin(roll_angle) + magZ * sin(pitch_angle) * cos(roll_angle);
@@ -189,7 +189,7 @@ void IMU_Get_Data(void)
     angleZ_kalman = angleZ;
   } 
   else
-    angleZ_kalman = kalman_filter_angle(kalmanZ, angleZ, gyroZ_rate, DT);
+    angleZ_kalman = kalman_filter_angle(&kalmanZ, angleZ, gyroZ_rate, DT);
    
 
 }
@@ -223,8 +223,8 @@ void IMU_Get_Start(void)
   magY -= magY_offset;
   magZ -= magZ_offset;
 
-  float roll_angle = angleX_kalman*DEG_TO_RAD;
-  float pitch_angle = angleY_kalman*DEG_TO_RAD;
+  roll_angle = angleX_kalman*DEG_TO_RAD;
+  pitch_angle = angleY_kalman*DEG_TO_RAD;
 
   Bfy = -(magZ * sin(roll_angle) - magY * cos(roll_angle));
   Bfx = magX * cos(pitch_angle) + magY * sin(pitch_angle) * sin(roll_angle) + magZ * sin(pitch_angle) * cos(roll_angle);
