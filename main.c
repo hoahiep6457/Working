@@ -46,7 +46,7 @@ float gyroX_rate, gyroY_rate, gyroZ_rate;
 float angleX_kalman, angleY_kalman, angleZ_kalman;
 float gyroX_angle, gyroY_angle, gyroZ_angle;
 float roll_angle, pitch_angle;
-
+int16_t BasicThr;
 /*=====================================================================================================*/
 /*=====================================================================================================*/
 int main(void)
@@ -65,7 +65,8 @@ int main(void)
   PID_Init_Start();
 	SysTick_Config(SystemCoreClock / 999);//start to read MPU each 1 ms
 	GPIO_SetBits(GPIOD, GPIO_Pin_12|GPIO_Pin_13|GPIO_Pin_14|GPIO_Pin_15);
-
+  //start PWM to test
+  BasicThr = 800;
   while (1)
   {
 			
@@ -178,7 +179,7 @@ void IMU_Get_Data(void)
   roll_angle = angleX_kalman*DEG_TO_RAD;
   pitch_angle = angleY_kalman*DEG_TO_RAD;
 	
-  Bfy = -(magZ * sin(roll_angle) - magY * cos(roll_angle));
+  Bfy = magY * cos(roll_angle) - magZ * sin(roll_angle);
   Bfx = magX * cos(pitch_angle) + magY * sin(pitch_angle) * sin(roll_angle) + magZ * sin(pitch_angle) * cos(roll_angle);
 
   angleZ = atan2(-Bfy, Bfx) * RAD_TO_DEG;
@@ -226,7 +227,7 @@ void IMU_Get_Start(void)
   roll_angle = angleX_kalman*DEG_TO_RAD;
   pitch_angle = angleY_kalman*DEG_TO_RAD;
 	
-  Bfy = -(magZ * sin(roll_angle) - magY * cos(roll_angle));
+  Bfy = magY * cos(roll_angle) - magZ * sin(roll_angle);
   Bfx = magX * cos(pitch_angle) + magY * sin(pitch_angle) * sin(roll_angle) + magZ * sin(pitch_angle) * cos(roll_angle);
 
   angleZ = atan2(-Bfy, Bfx) * RAD_TO_DEG;
@@ -283,10 +284,10 @@ void PID_Update(void)
   Pitch = PID_Adjustment(&PID_Pitch, 0, angleY_kalman);
   Yaw = PID_Adjustment(&PID_Yaw, 0, angleZ_kalman);
   /* Motor Ctrl */
-  //BLDC_M[0] = BasicThr + Pitch + Roll + Yaw;
-  //BLDC_M[1] = BasicThr - Pitch + Roll - Yaw;
-  //BLDC_M[2] = BasicThr - Pitch - Roll + Yaw;
-  //BLDC_M[3] = BasicThr + Pitch - Roll - Yaw;
+  BLDC_M[0] = BasicThr + Pitch + Roll + Yaw;
+  BLDC_M[1] = BasicThr - Pitch + Roll - Yaw;
+  BLDC_M[2] = BasicThr - Pitch - Roll + Yaw;
+  BLDC_M[3] = BasicThr + Pitch - Roll - Yaw;
   // Thr Ctrl
   BLDC_CtrlPWM(BLDC_M[0], BLDC_M[1], BLDC_M[2], BLDC_M[3]);
 
