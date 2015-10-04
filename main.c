@@ -7,6 +7,7 @@
 #include "quad_pwm_ctrl.h"
 #include "quad_i2c_ctrl.h"
 #include "pid.h"
+#include "delay_ctrl.h"
 /*=====================================================================================================*/
 /*=====================================================================================================*/
 #define RESTRICT_PITCH // Comment out to restrict roll to ±90deg instead
@@ -23,9 +24,7 @@
 /*=====================================================================================================*/
 void IMU_Get_Start(void);
 void Led_Config(void);
-void Delay(__IO uint32_t nCount);
 void IMU_Get_Data(void);
-void delay_ms(__IO unsigned long ms);
 void IMU_Get_Offset(void);
 void TIM2_Config_Counter(void);
 void PID_Update(void);
@@ -53,17 +52,18 @@ int main(void)
 {
 
   SystemInit();
-  I2C_Configuration(); 
-  HMC5883L_Initialize();
+	BLDC_Config();
+  //I2C_Configuration(); 
+  //HMC5883L_Initialize();
   delay_ms(10); 
-  MPU6050_Initialize();//LSB gyro = 32.8 LSB acc = 2048
+  //MPU6050_Initialize();//LSB gyro = 32.8 LSB acc = 2048
   delay_ms(10);//wait for MPU to stabilize
-  IMU_Get_Offset();//read MPU6050 to calib gyro
+  //IMU_Get_Offset();//read MPU6050 to calib gyro
   Led_Config();
-  IMU_Get_Start();
+  //IMU_Get_Start();
   delay_ms(10);//delay to avoid hating
-  PID_Init_Start();
-	SysTick_Config(SystemCoreClock / 999);//start to read MPU each 1 ms
+  //PID_Init_Start();
+	//SysTick_Config(SystemCoreClock / 999);//start to read MPU each 1 ms
 	GPIO_SetBits(GPIOD, GPIO_Pin_12|GPIO_Pin_13|GPIO_Pin_14|GPIO_Pin_15);
 
   while (1)
@@ -178,7 +178,7 @@ void IMU_Get_Data(void)
   roll_angle = angleX_kalman*DEG_TO_RAD;
   pitch_angle = angleY_kalman*DEG_TO_RAD;
 	
-  Bfy = -(magZ * sin(roll_angle) - magY * cos(roll_angle));
+  Bfy = magY * cos(roll_angle) - magZ * sin(roll_angle);
   Bfx = magX * cos(pitch_angle) + magY * sin(pitch_angle) * sin(roll_angle) + magZ * sin(pitch_angle) * cos(roll_angle);
 
   angleZ = atan2(-Bfy, Bfx) * RAD_TO_DEG;
@@ -226,7 +226,7 @@ void IMU_Get_Start(void)
   roll_angle = angleX_kalman*DEG_TO_RAD;
   pitch_angle = angleY_kalman*DEG_TO_RAD;
 	
-  Bfy = -(magZ * sin(roll_angle) - magY * cos(roll_angle));
+  Bfy = magY * cos(roll_angle) - magZ * sin(roll_angle);
   Bfx = magX * cos(pitch_angle) + magY * sin(pitch_angle) * sin(roll_angle) + magZ * sin(pitch_angle) * cos(roll_angle);
 
   angleZ = atan2(-Bfy, Bfx) * RAD_TO_DEG;
@@ -299,20 +299,7 @@ void PID_Init_Start(void)
   PID_init(&PID_Pitch, 0.001, 0, 0);
   PID_init(&PID_Yaw, 0.001, 0, 0);
 }
-/*=====================================================================================================*/
-/*=====================================================================================================*/
-void Delay(__IO uint32_t nCount)
-{
-  while(nCount--)
-  {
-  }
-}
-void delay_ms(__IO unsigned long ms)
-{
-   volatile unsigned long i,j;
-	for (i = 0; i < ms; i++ )
-	for (j = 0; j < 3442; j++ );
-}
+
 /*=====================================================================================================*/
 /*=====================================================================================================*/
 void Led_Config(void)

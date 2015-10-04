@@ -2,15 +2,15 @@
 #define _PWM_CTRL_H_
 /*=====================================================================================================*/
 /*=====================================================================================================*/
-#define BLDC_PWM_MIN      800
-#define BLDC_PWM_MED      1400    // Duty Cycle 60%
-#define BLDC_PWM_MAX      2000    // Duty Cycle 80%
+#define BLDC_PWM_MIN      1000
+#define BLDC_PWM_MED      1500    // Duty Cycle 50%
+#define BLDC_PWM_MAX      2000    // Duty Cycle 100%
 
 
-#define BLDC_M1   TIM3->CCR1    // MOTOR M1
-#define BLDC_M2   TIM3->CCR2    // MOTOR M2
-#define BLDC_M3   TIM3->CCR3    // MOTOR M3
-#define BLDC_M4   TIM3->CCR4    // MOTOR M4
+#define BLDC_M1   TIM2->CCR1    // MOTOR M1
+#define BLDC_M2   TIM2->CCR2    // MOTOR M2
+#define BLDC_M3   TIM3->CCR1    // MOTOR M3
+#define BLDC_M4   TIM3->CCR2    // MOTOR M4
 /*=====================================================================================================*/
 /*=====================================================================================================*/
 #ifdef __cplusplus

@@ -3,8 +3,8 @@
 <pre>
 <h1>µVision Build Log</h1>
 <h2>Project:</h2>
-C:\Users\kael5\Desktop\Project_Quad\github\quadcopter\MDK-ARM\Project.uvproj
-Project File Date:  09/30/2015
+C:\Users\kael5\Desktop\Project_Quad\github\Working\MDK-ARM\Project.uvproj
+Project File Date:  10/01/2015
 
 <h2>Output:</h2>
 Build target 'Project'
@@ -43,142 +43,51 @@ compiling main.c...
   bool HMC5883L_GetReadyStatus();
 ..\Algorithm\pid.h(43): warning:  #1-D: last line of file ends without a newline
   #endif
-..\main.c(93): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-    gyroX_rate = (gyroX - gyroX_offset)/GYRO_LSB;
 ..\main.c(94): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-    gyroY_rate = (gyroY - gyroY_offset)/GYRO_LSB;
+    gyroX_rate = (gyroX - gyroX_offset)/GYRO_LSB;
 ..\main.c(95): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+    gyroY_rate = (gyroY - gyroY_offset)/GYRO_LSB;
+..\main.c(96): warning:  #1035-D: single-precision operand implicitly converted to double-precision
     gyroZ_rate = (gyroZ - gyroZ_offset)/GYRO_LSB;
-..\main.c(97): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-    gyroX_angle += gyroX_rate*DT;
 ..\main.c(98): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-    gyroY_angle += gyroY_rate*DT;
+    gyroX_angle += gyroX_rate*DT;
 ..\main.c(99): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+    gyroY_angle += gyroY_rate*DT;
+..\main.c(100): warning:  #1035-D: single-precision operand implicitly converted to double-precision
         gyroZ_angle += gyroZ_rate*DT;
-..\main.c(178): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-    roll_angle = angleX_kalman*DEG_TO_RAD;
 ..\main.c(179): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-    pitch_angle = angleY_kalman*DEG_TO_RAD;
-..\main.c(226): warning:  #1035-D: single-precision operand implicitly converted to double-precision
     roll_angle = angleX_kalman*DEG_TO_RAD;
-..\main.c(227): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\main.c(180): warning:  #1035-D: single-precision operand implicitly converted to double-precision
     pitch_angle = angleY_kalman*DEG_TO_RAD;
-..\main.c(280): warning:  #550-D: variable "Pitch" was set but never used
+..\main.c(227): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+    roll_angle = angleX_kalman*DEG_TO_RAD;
+..\main.c(228): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+    pitch_angle = angleY_kalman*DEG_TO_RAD;
+..\main.c(281): warning:  #550-D: variable "Pitch" was set but never used
     int16_t Pitch = 0, Roll = 0, Yaw = 0;
-..\main.c(280): warning:  #550-D: variable "Roll" was set but never used
+..\main.c(281): warning:  #550-D: variable "Roll" was set but never used
     int16_t Pitch = 0, Roll = 0, Yaw = 0;
-..\main.c(280): warning:  #550-D: variable "Yaw" was set but never used
+..\main.c(281): warning:  #550-D: variable "Yaw" was set but never used
     int16_t Pitch = 0, Roll = 0, Yaw = 0;
 ..\main.c: 30 warnings, 0 errors
-compiling Kalman.c...
-..\Algorithm\Kalman.c(77): warning:  #1-D: last line of file ends without a newline
-  /*=====================================================================================================*/
-..\Algorithm\Kalman.c: 1 warning, 0 errors
 linking...
-Program Size: Code=11400 RO-data=872 RW-data=204 ZI-data=1356  
-".\Project\Project.axf" - 0 Error(s), 31 Warning(s).
-oject_Quad\\github\\quadcopter\\MDK-ARM\\Project\\Project.axf" 
+Program Size: Code=9800 RO-data=872 RW-data=168 ZI-data=1256  
+".\Project\Project.axf" - 0 Error(s), 30 Warning(s).
+Load "C:\\Users\\kael5\\Desktop\\Project_Quad\\github\\Working\\MDK-ARM\\Project\\Project.axf" 
 Erase Done.
 Programming Done.
 Verify OK.
 Application running ...
-arget DLL has been cancelled
-Load "C:\\Users\\kael5\\Desktop\\Project_Quad\\github\\quadcopter\\MDK-ARM\\Project\\Project.axf" 
+</pre>
+</body>
+</html>
+esktop\\Project_Quad\\github\\Working\\MDK-ARM\\Project\\Project.axf" 
 Erase Done.
 Programming Done.
 Verify OK.
 Application running ...
-block
-    static float magX_max=0, magX_min=0, magY_max=0, magY_min=0, magZ_max=0, magZ_min=0;
-..\main.c(255): error:  #268: declaration may not appear after executable statement in block
-    int16_t j;
-..\main.c(280): warning:  #550-D: variable "Pitch" was set but never used
-    int16_t Pitch = 0, Roll = 0, Yaw = 0;
-..\main.c(280): warning:  #550-D: variable "Roll" was set but never used
-    int16_t Pitch = 0, Roll = 0, Yaw = 0;
-..\main.c(280): warning:  #550-D: variable "Yaw" was set but never used
-    int16_t Pitch = 0, Roll = 0, Yaw = 0;
-..\main.c: 37 warnings, 3 errors
-".\Project\Project.axf" - 3 Error(s), 37 Warning(s).
-Target not created
-& angleZ_kalman < -90)) {
-..\main.c(226): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-    roll_angle = angleX_kalman*DEG_TO_RAD;
-..\main.c(227): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-    pitch_angle = angleY_kalman*DEG_TO_RAD;
-..\main.c(254): error:  #268: declaration may not appear after executable statement in block
-    static float magX_max=0, magX_min=0, magY_max=0, magY_min=0, magZ_max=0, magZ_min=0;
-..\main.c(255): error:  #268: declaration may not appear after executable statement in block
-    int16_t j;
-..\main.c(286): error:  #20: identifier "BasicThr" is undefined
-    BLDC_M[0] = BasicThr + Pitch + Roll + Yaw;
-..\main.c: 34 warnings, 4 errors
-compiling system_stm32f4xx.c...
-compiling misc.c...
-compiling stm32f4xx_gpio.c...
-compiling stm32f4xx_rcc.c...
-compiling stm32f4xx_i2c.c...
-compiling stm32f4xx_adc.c...
-compiling stm32f4xx_can.c...
-compiling stm32f4xx_tim.c...
-compiling stm32f4xx_usart.c...
-compiling MPU6050.c...
-..\sensor\MPU6050.h(370): warning:  #1295-D: Deprecated declaration MPU6050_Initialize - give arg types
-  void MPU6050_Initialize();
-..\sensor\MPU6050.h(371): warning:  #1295-D: Deprecated declaration MPU6050_TestConnection - give arg types
-  bool MPU6050_TestConnection();
-..\sensor\MPU6050.h(374): warning:  #1295-D: Deprecated declaration MPU6050_GetFullScaleGyroRange - give arg types
-  uint8_t MPU6050_GetFullScaleGyroRange();
-..\sensor\MPU6050.h(377): warning:  #1295-D: Deprecated declaration MPU6050_GetFullScaleAccelRange - give arg types
-  uint8_t MPU6050_GetFullScaleAccelRange();
-..\sensor\MPU6050.h(381): warning:  #1295-D: Deprecated declaration MPU6050_GetSleepModeStatus - give arg types
-  bool MPU6050_GetSleepModeStatus();
-..\sensor\MPU6050.h(385): warning:  #1295-D: Deprecated declaration MPU6050_GetDeviceID - give arg types
-  uint8_t MPU6050_GetDeviceID();
-..\sensor\MPU6050.h(398): warning:  #1-D: last line of file ends without a newline
-  #endif /* __MPU6050_H */
-..\sensor\MPU6050.c: 7 warnings, 0 errors
-compiling HMC5883L.c...
-..\Sensor\HMC5883L.h(81): warning:  #1295-D: Deprecated declaration HMC5883L_Initialize - give arg types
-  void HMC5883L_Initialize();
-..\Sensor\HMC5883L.h(82): warning:  #1295-D: Deprecated declaration HMC5883L_TestConnection - give arg types
-  bool HMC5883L_TestConnection();
-..\Sensor\HMC5883L.h(85): warning:  #1295-D: Deprecated declaration HMC5883L_GetSampleAveraging - give arg types
-  uint8_t HMC5883L_GetSampleAveraging();
-..\Sensor\HMC5883L.h(87): warning:  #1295-D: Deprecated declaration HMC5883L_GetDataRate - give arg types
-  uint8_t HMC5883L_GetDataRate();
-..\Sensor\HMC5883L.h(89): warning:  #1295-D: Deprecated declaration HMC5883L_GetMeasurementBias - give arg types
-  uint8_t HMC5883L_GetMeasurementBias();
-..\Sensor\HMC5883L.h(93): warning:  #1295-D: Deprecated declaration HMC5883L_GetGain - give arg types
-  uint8_t HMC5883L_GetGain();
-..\Sensor\HMC5883L.h(97): warning:  #1295-D: Deprecated declaration HMC5883L_GetMode - give arg types
-  uint8_t HMC5883L_GetMode();
-..\Sensor\HMC5883L.h(103): warning:  #1295-D: Deprecated declaration HMC5883L_GetLockStatus - give arg types
-  bool HMC5883L_GetLockStatus();
-..\Sensor\HMC5883L.h(104): warning:  #1295-D: Deprecated declaration HMC5883L_GetReadyStatus - give arg types
-  bool HMC5883L_GetReadyStatus();
-..\Sensor\HMC5883L.c: 9 warnings, 0 errors
-compiling Kalman.c...
-..\Algorithm\Kalman.c(77): warning:  #1-D: last line of file ends without a newline
-  /*=====================================================================================================*/
-..\Algorithm\Kalman.c: 1 warning, 0 errors
-compiling pid.c...
-..\..\Working\main.h(7): warning:  #1-D: last line of file ends without a newline
-  #endif 
-..\Algorithm\pid.h(43): warning:  #1-D: last line of file ends without a newline
-  #endif
-..\Algorithm\pid.c(20): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-        pid->Ki_Value += pid->KI*error*pid_sampletime;
-..\Algorithm\pid.c(41): warning:  #1-D: last line of file ends without a newline
-  /*=====================================================================================================*/
-..\Algorithm\pid.c: 4 warnings, 0 errors
-compiling quad_i2c_ctrl.c...
-..\Driver\quad_i2c_ctrl.c(49): warning:  #1-D: last line of file ends without a newline
-  /*=====================================================================================================*/
-..\Driver\quad_i2c_ctrl.c: 1 warning, 0 errors
-compiling quad_pwm_ctrl.c...
-..\Driver\quad_pwm_ctrl.c(102): warning:  #1-D: last line of file ends without a newline
-  /*=====================================================================================================*/
-..\Driver\quad_pwm_ctrl.c: 1 warning, 0 errors
-".\Project\Project.axf" - 4 Error(s), 64 Warning(s).
-Target not created
+Working\\MDK-ARM\\Project\\Project.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
+Application running ...
