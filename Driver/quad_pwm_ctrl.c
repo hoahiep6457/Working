@@ -11,14 +11,15 @@ void BLDC_Config(void)
 	GPIO_InitTypeDef           GPIO_InitStructure;
 	
 	 /* TIM3 clock enable */
-  RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2 | RCC_APB1Periph_TIM3 , ENABLE);
-    /* GPIOC and GPIOB clock enable */
-  RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA | RCC_AHB1Periph_GPIOC | RCC_AHB1Periph_GPIOB, ENABLE);
+  RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM3 , ENABLE);
+    /* GPIOB and GPIOC clock enable */
+  RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB | RCC_AHB1Periph_GPIOC, ENABLE);
 
   /************************** PWM GPIO Configuration **************************************/
-  /* GPIOC Configuration: TIM3 CH1 (PC6) and TIM3 CH2 (PC7) */
+	
+	/* GPIOC Configuration: TIM3 CH1 (PC6) and TIM3 CH2 (PC7) */
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_6 | GPIO_Pin_7 ;
-  GPIO_InitStructure.GPIO_Mode = RCC_AHB1Periph_GPIOA | GPIO_Mode_AF;
+  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
   GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
   GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP ;
@@ -32,21 +33,8 @@ void BLDC_Config(void)
   GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP ;
   GPIO_Init(GPIOB, &GPIO_InitStructure); 
 
- /* TIM2 PWM1 PA0  */ /* TIM2 PWM2 PA1  */ /* TIM2 PWM3 PA2  */ /* TIM2 PWM6 PA3 */
-  GPIO_InitStruct.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_3 ;
-  GPIO_InitStruct.GPIO_Mode = GPIO_Mode_AF;
-  GPIO_InitStruct.GPIO_Speed = GPIO_Speed_100MHz;
-  GPIO_InitStruct.GPIO_OType = GPIO_OType_PP;
-  GPIO_InitStruct.GPIO_PuPd = GPIO_PuPd_UP;
-  GPIO_Init(GPIOA, &GPIO_InitStruct);
 
-  /* connect TIM2 pins to AF2 */
-  GPIO_PinAFConfig(GPIOA, GPIO_PinSource0, GPIO_AF_TIM2);
-  GPIO_PinAFConfig(GPIOA, GPIO_PinSource1, GPIO_AF_TIM2);
-  GPIO_PinAFConfig(GPIOA, GPIO_PinSource2, GPIO_AF_TIM2);
-  GPIO_PinAFConfig(GPIOA, GPIO_PinSource3, GPIO_AF_TIM2);
-
-  /* Connect TIM3 pins to AF2 */ 
+  /* Connect TIM3 pins to AF3 */ 
   GPIO_PinAFConfig(GPIOC, GPIO_PinSource6, GPIO_AF_TIM3);
   GPIO_PinAFConfig(GPIOC, GPIO_PinSource7, GPIO_AF_TIM3); 
   GPIO_PinAFConfig(GPIOB, GPIO_PinSource0, GPIO_AF_TIM3);
@@ -59,7 +47,7 @@ void BLDC_Config(void)
   TIM_TimeBaseStructure.TIM_Period = 20000-1;//20 ms
   TIM_TimeBaseStructure.TIM_ClockDivision = 0;
 
-  TIM_TimeBaseInit(TIM2, &TIM_TimeBaseStructure);
+  //TIM_TimeBaseInit(TIM2, &TIM_TimeBaseStructure);
   TIM_TimeBaseInit(TIM3, &TIM_TimeBaseStructure);
 
   /* Channel 1, 2,3 and 4 Configuration in PWM mode */
@@ -68,37 +56,26 @@ void BLDC_Config(void)
   TIM_OCInitStructure.TIM_Pulse = BLDC_PWM_MIN;
 	TIM_OCInitStructure.TIM_OCPolarity=TIM_OCPolarity_High;
 
-  TIM_OC1Init(TIM2, &TIM_OCInitStructure); 
   TIM_OC1Init(TIM3, &TIM_OCInitStructure);
-
 	TIM_OC1PreloadConfig(TIM3, TIM_OCPreload_Enable);
-  TIM_OC1PreloadConfig(TIM2, TIM_OCPreload_Enable);
 
   TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable;
   TIM_OCInitStructure.TIM_Pulse = BLDC_PWM_MIN;
-  TIM_OC2Init(TIM2, &TIM_OCInitStructure); 
   TIM_OC2Init(TIM3, &TIM_OCInitStructure);
-  TIM_OC2PreloadConfig(TIM2, TIM_OCPreload_Enable);
 	TIM_OC2PreloadConfig(TIM3, TIM_OCPreload_Enable);
 	
 	TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable;
-  TIM_OCInitStructure.TIM_Pulse = BLDC_PWM_MIN;
-  TIM_OC3Init(TIM2, &TIM_OCInitStructure);   
+  TIM_OCInitStructure.TIM_Pulse = BLDC_PWM_MIN; 
   TIM_OC3Init(TIM3, &TIM_OCInitStructure);
-  TIM_OC3PreloadConfig(TIM2, TIM_OCPreload_Enable);  
 	TIM_OC3PreloadConfig(TIM3, TIM_OCPreload_Enable);
 
 	TIM_OCInitStructure.TIM_OutputState = TIM_OutputState_Enable;
   TIM_OCInitStructure.TIM_Pulse = BLDC_PWM_MIN;
   TIM_OC4Init(TIM3, &TIM_OCInitStructure);
-  TIM_OC4Init(TIM3, &TIM_OCInitStructure);
-  TIM_OC4PreloadConfig(TIM2, TIM_OCPreload_Enable); 
 	TIM_OC4PreloadConfig(TIM3, TIM_OCPreload_Enable);
 
-	TIM_ARRPreloadConfig(TIM2, ENABLE);  
 	TIM_ARRPreloadConfig(TIM3, ENABLE);
   /* TIM counter enable */
-  TIM_Cmd(TIM2, ENABLE);
   TIM_Cmd(TIM3, ENABLE);
 
   BLDC_M1 = BLDC_PWM_MIN;

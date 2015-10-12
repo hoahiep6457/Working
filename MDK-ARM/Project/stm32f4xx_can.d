@@ -1,11 +1,11 @@
 .\project\stm32f4xx_can.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\src\stm32f4xx_can.c
 .\project\stm32f4xx_can.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_can.h
 .\project\stm32f4xx_can.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
-.\project\stm32f4xx_can.o: C:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cm4.h
-.\project\stm32f4xx_can.o: C:\Keil\ARM\ARMCC\bin\..\include\stdint.h
-.\project\stm32f4xx_can.o: C:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cmInstr.h
-.\project\stm32f4xx_can.o: C:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cmFunc.h
-.\project\stm32f4xx_can.o: C:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cm4_simd.h
+.\project\stm32f4xx_can.o: G:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cm4.h
+.\project\stm32f4xx_can.o: G:\Keil\ARM\ARMCC\bin\..\include\stdint.h
+.\project\stm32f4xx_can.o: G:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cmInstr.h
+.\project\stm32f4xx_can.o: G:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cmFunc.h
+.\project\stm32f4xx_can.o: G:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cm4_simd.h
 .\project\stm32f4xx_can.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h
 .\project\stm32f4xx_can.o: ..\..\Working\stm32f4xx_conf.h
 .\project\stm32f4xx_can.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_adc.h

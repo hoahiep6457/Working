@@ -4,22 +4,30 @@
 <h1>µVision Build Log</h1>
 <h2>Project:</h2>
 C:\Users\kael5\Desktop\Project_Quad\github\Working\MDK-ARM\Project.uvproj
-Project File Date:  10/01/2015
+Project File Date:  10/10/2015
 
 <h2>Output:</h2>
 Build target 'Project'
-compiling main.c...
-..\Sensor\MPU6050.h(370): warning:  #1295-D: Deprecated declaration MPU6050_Initialize - give arg types
-  void MPU6050_Initialize();
-..\Sensor\MPU6050.h(371): warning:  #1295-D: Deprecated declaration MPU6050_TestConnection - give arg types
-  bool MPU6050_TestConnection();
-..\Sensor\MPU6050.h(374): warning:  #1295-D: Deprecated declaration MPU6050_GetFullScaleGyroRange - give arg types
-  uint8_t MPU6050_GetFullScaleGyroRange();
-..\Sensor\MPU6050.h(377): warning:  #1295-D: Deprecated declaration MPU6050_GetFullScaleAccelRange - give arg types
-  uint8_t MPU6050_GetFullScaleAccelRange();
-..\Sensor\MPU6050.h(381): warning:  #1295-D: Deprecated declaration MPU6050_GetSleepModeStatus - give arg types
-  bool MPU6050_GetSleepModeStatus();
-..\Sensor\MPU6050.h(385): warning:  #1295-D: Deprecated declaration MPU6050_GetDeviceID - give arg types
+compiling Rx.c...
+..\Driver\Rx.h(18): warning:  #1-D: last line of file ends without a newline
+  /*=====================================================================================================*/
+..\Driver\Rx.c(136): warning:  #1-D: last line of file ends without a newline
+  }
+..\Driver\Rx.c: 2 warnings, 0 errors
+linking...
+Program Size: Code=11128 RO-data=872 RW-data=220 ZI-data=1260  
+".\Project\Project.axf" - 0 Error(s), 2 Warning(s).
+Load "C:\\Users\\kael5\\Desktop\\Project_Quad\\github\\Working\\MDK-ARM\\Project\\Project.axf" 
+Error: Flash Download failed  -  Target DLL has been cancelled
+Load "C:\\Users\\kael5\\Desktop\\Project_Quad\\github\\Working\\MDK-ARM\\Project\\Project.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
+Application running ...
+</pre>
+</body>
+</html>
+95-D: Deprecated declaration MPU6050_GetDeviceID - give arg types
   uint8_t MPU6050_GetDeviceID();
 ..\Sensor\MPU6050.h(398): warning:  #1-D: last line of file ends without a newline
   #endif /* __MPU6050_H */
@@ -43,51 +51,72 @@ compiling main.c...
   bool HMC5883L_GetReadyStatus();
 ..\Algorithm\pid.h(43): warning:  #1-D: last line of file ends without a newline
   #endif
-..\main.c(94): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-    gyroX_rate = (gyroX - gyroX_offset)/GYRO_LSB;
-..\main.c(95): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-    gyroY_rate = (gyroY - gyroY_offset)/GYRO_LSB;
+..\Driver\delay_ctrl.h(22): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Driver\Rx.h(18): warning:  #1-D: last line of file ends without a newline
+  /*=====================================================================================================*/
 ..\main.c(96): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-    gyroZ_rate = (gyroZ - gyroZ_offset)/GYRO_LSB;
+    gyroX_rate = (gyroX - gyroX_offset)/GYRO_LSB;
+..\main.c(97): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+    gyroY_rate = (gyroY - gyroY_offset)/GYRO_LSB;
 ..\main.c(98): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-    gyroX_angle += gyroX_rate*DT;
-..\main.c(99): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-    gyroY_angle += gyroY_rate*DT;
+    gyroZ_rate = (gyroZ - gyroZ_offset)/GYRO_LSB;
 ..\main.c(100): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+    gyroX_angle += gyroX_rate*DT;
+..\main.c(101): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+    gyroY_angle += gyroY_rate*DT;
+..\main.c(102): warning:  #1035-D: single-precision operand implicitly converted to double-precision
         gyroZ_angle += gyroZ_rate*DT;
-..\main.c(179): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\main.c(181): warning:  #1035-D: single-precision operand implicitly converted to double-precision
     roll_angle = angleX_kalman*DEG_TO_RAD;
-..\main.c(180): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\main.c(182): warning:  #1035-D: single-precision operand implicitly converted to double-precision
     pitch_angle = angleY_kalman*DEG_TO_RAD;
-..\main.c(227): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\main.c(230): warning:  #1035-D: single-precision operand implicitly converted to double-precision
     roll_angle = angleX_kalman*DEG_TO_RAD;
-..\main.c(228): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\main.c(231): warning:  #1035-D: single-precision operand implicitly converted to double-precision
     pitch_angle = angleY_kalman*DEG_TO_RAD;
-..\main.c(281): warning:  #550-D: variable "Pitch" was set but never used
+..\main.c(283): warning:  #177-D: variable "BLDC_M" was declared but never referenced
+    u16 BLDC_M[4] = {0};
+..\main.c(284): warning:  #550-D: variable "Pitch" was set but never used
     int16_t Pitch = 0, Roll = 0, Yaw = 0;
-..\main.c(281): warning:  #550-D: variable "Roll" was set but never used
+..\main.c(284): warning:  #550-D: variable "Roll" was set but never used
     int16_t Pitch = 0, Roll = 0, Yaw = 0;
-..\main.c(281): warning:  #550-D: variable "Yaw" was set but never used
+..\main.c(284): warning:  #550-D: variable "Yaw" was set but never used
     int16_t Pitch = 0, Roll = 0, Yaw = 0;
-..\main.c: 30 warnings, 0 errors
+..\main.c: 33 warnings, 0 errors
 linking...
-Program Size: Code=9800 RO-data=872 RW-data=168 ZI-data=1256  
-".\Project\Project.axf" - 0 Error(s), 30 Warning(s).
+Program Size: Code=11112 RO-data=872 RW-data=220 ZI-data=1260  
+".\Project\Project.axf" - 0 Error(s), 33 Warning(s).
 Load "C:\\Users\\kael5\\Desktop\\Project_Quad\\github\\Working\\MDK-ARM\\Project\\Project.axf" 
 Erase Done.
 Programming Done.
 Verify OK.
 Application running ...
-</pre>
-</body>
-</html>
-esktop\\Project_Quad\\github\\Working\\MDK-ARM\\Project\\Project.axf" 
-Erase Done.
-Programming Done.
-Verify OK.
-Application running ...
-Working\\MDK-ARM\\Project\\Project.axf" 
-Erase Done.
-Programming Done.
-Verify OK.
-Application running ...
+t)TIM_GetCapture1(TIM2);
+..\Driver\Rx.c(98): error:  #20: identifier "IC1Value" is undefined
+        IC1Value = (float)TIM_GetCapture2(TIM2);
+..\Driver\Rx.c(100): error:  #20: identifier "DutyCycle" is undefined
+        DutyCycle = (IC1Value * 100) / IC2Value;
+..\Driver\Rx.c(101): error:  #20: identifier "Frequency" is undefined
+        Frequency = (SystemCoreClock/2) / IC2Value;
+..\Driver\Rx.c(105): error:  #20: identifier "DutyCycle" is undefined
+        DutyCycle = 0;
+..\Driver\Rx.c(106): error:  #20: identifier "Frequency" is undefined
+        Frequency = 0;
+..\Driver\Rx.c(116): error:  #20: identifier "IC2Value" is undefined
+      IC2Value = (float)TIM_GetCapture2(TIM2);
+..\Driver\Rx.c(120): error:  #20: identifier "IC1Value" is undefined
+        IC1Value = (float)TIM_GetCapture1(TIM2);
+..\Driver\Rx.c(121): error:  #20: identifier "DutyCycle" is undefined
+        DutyCycle = (IC1Value * 100) / IC2Value;
+..\Driver\Rx.c(122): error:  #20: identifier "Frequency" is undefined
+        Frequency = (SystemCoreClock/2) / IC2Value;
+..\Driver\Rx.c(125): error:  #20: identifier "DutyCycle" is undefined
+        DutyCycle = 0;
+..\Driver\Rx.c(126): error:  #20: identifier "Frequency" is undefined
+        Frequency = 0;
+..\Driver\Rx.c(130): warning:  #1-D: last line of file ends without a newline
+  }
+..\Driver\Rx.c: 2 warnings, 12 errors
+".\Project\Project.axf" - 12 Error(s), 35 Warning(s).
+Target not created

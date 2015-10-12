@@ -8,6 +8,7 @@
 #include "quad_i2c_ctrl.h"
 #include "pid.h"
 #include "delay_ctrl.h"
+#include "Rx.h"
 /*=====================================================================================================*/
 /*=====================================================================================================*/
 #define RESTRICT_PITCH // Comment out to restrict roll to ±90deg instead
@@ -20,6 +21,7 @@
 	 PB8 --- I2C1_SCL              	MPU6050
 	 PB9 --- I2C1_SDA               HMC5883L
 	*/
+
 /*=====================================================================================================*/
 /*=====================================================================================================*/
 void IMU_Get_Start(void);
@@ -37,6 +39,7 @@ int16_t temp;
 int16_t MPU6050data[7];
 int16_t HMC5883Ldata[3];
 int16_t magX_offset=0, magY_offset=0,magZ_offset=0;
+float DutyCycle, Frequency;
 float accX_kalman, accY_kalman, accZ_kalman;
 float Bfx, Bfy, My, Mx;
 float gyroX_offset=0, gyroY_offset=0, gyroZ_offset=0;
@@ -53,9 +56,10 @@ int main(void)
 
   SystemInit();
 	BLDC_Config();
+  Rx_Configuration();//config interrupt to calculate dutycycle received from Rx
   //I2C_Configuration(); 
   //HMC5883L_Initialize();
-  delay_ms(10); 
+  delay_ms(10000); 
   //MPU6050_Initialize();//LSB gyro = 32.8 LSB acc = 2048
   delay_ms(10);//wait for MPU to stabilize
   //IMU_Get_Offset();//read MPU6050 to calib gyro
@@ -65,10 +69,9 @@ int main(void)
   //PID_Init_Start();
 	//SysTick_Config(SystemCoreClock / 999);//start to read MPU each 1 ms
 	GPIO_SetBits(GPIOD, GPIO_Pin_12|GPIO_Pin_13|GPIO_Pin_14|GPIO_Pin_15);
-
   while (1)
   {
-			
+		
   }
 /*=====================================================================================================*/
 /*=====================================================================================================*/
@@ -218,6 +221,7 @@ void IMU_Get_Start(void)
   magX = m_scale*HMC5883Ldata[0];
   magY = m_scale*HMC5883Ldata[1];
   magZ = m_scale*HMC5883Ldata[2];
+  
   //Calibration Mag sensor
   magX -= magX_offset;
   magY -= magY_offset;
@@ -288,7 +292,7 @@ void PID_Update(void)
   //BLDC_M[2] = BasicThr - Pitch - Roll + Yaw;
   //BLDC_M[3] = BasicThr + Pitch - Roll - Yaw;
   // Thr Ctrl
-  BLDC_CtrlPWM(BLDC_M[0], BLDC_M[1], BLDC_M[2], BLDC_M[3]);
+  //BLDC_CtrlPWM(BLDC_M[0], BLDC_M[1], BLDC_M[2], BLDC_M[3]);
 
 }
 /*=====================================================================================================*/
@@ -323,6 +327,9 @@ void SysTick_Handler(void)
 	IMU_Get_Data();
   //PID_Update();
 }
+/*=====================================================================================================*/
+/*=====================================================================================================*/
+
 /*=====================================================================================================*/
 /*=====================================================================================================*/
 #ifdef  USE_FULL_ASSERT

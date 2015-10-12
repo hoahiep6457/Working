@@ -518,6 +518,16 @@
               <FileType>1</FileType>
               <FilePath>..\Driver\quad_pwm_ctrl.c</FilePath>
             </File>
+            <File>
+              <FileName>Rx.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Driver\Rx.c</FilePath>
+            </File>
+            <File>
+              <FileName>delay_ctrl.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Driver\delay_ctrl.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>

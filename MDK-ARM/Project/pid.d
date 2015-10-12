@@ -1,10 +1,10 @@
 .\project\pid.o: ..\Algorithm\pid.c
 .\project\pid.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
-.\project\pid.o: C:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cm4.h
-.\project\pid.o: C:\Keil\ARM\ARMCC\bin\..\include\stdint.h
-.\project\pid.o: C:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cmInstr.h
-.\project\pid.o: C:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cmFunc.h
-.\project\pid.o: C:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cm4_simd.h
+.\project\pid.o: G:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cm4.h
+.\project\pid.o: G:\Keil\ARM\ARMCC\bin\..\include\stdint.h
+.\project\pid.o: G:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cmInstr.h
+.\project\pid.o: G:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cmFunc.h
+.\project\pid.o: G:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cm4_simd.h
 .\project\pid.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h
 .\project\pid.o: ..\..\Working\stm32f4xx_conf.h
 .\project\pid.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_adc.h
@@ -35,6 +35,6 @@
 .\project\pid.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h
 .\project\pid.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h
 .\project\pid.o: ..\..\Working\main.h
-.\project\pid.o: C:\Keil\ARM\ARMCC\bin\..\include\stdlib.h
-.\project\pid.o: C:\Keil\ARM\ARMCC\bin\..\include\math.h
+.\project\pid.o: G:\Keil\ARM\ARMCC\bin\..\include\stdlib.h
+.\project\pid.o: G:\Keil\ARM\ARMCC\bin\..\include\math.h
 .\project\pid.o: ..\Algorithm\pid.h
