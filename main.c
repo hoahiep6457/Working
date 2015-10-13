@@ -39,7 +39,8 @@ int16_t temp;
 int16_t MPU6050data[7];
 int16_t HMC5883Ldata[3];
 int16_t magX_offset=0, magY_offset=0,magZ_offset=0;
-float DutyCycle, Frequency;
+float DutyTIM2_ch1, FreqTIM2_ch1, DutyTIM2_ch2, FreqTIM2_ch2;
+float DutyTIM5_ch1, FreqTIM5_ch1, DutyTIM5_ch2, FreqTIM5_ch2;
 float accX_kalman, accY_kalman, accZ_kalman;
 float Bfx, Bfy, My, Mx;
 float gyroX_offset=0, gyroY_offset=0, gyroZ_offset=0;
@@ -56,7 +57,7 @@ int main(void)
 
   SystemInit();
 	BLDC_Config();
-  Rx_Configuration();//config interrupt to calculate dutycycle received from Rx
+  Rx_Configuration();//Configuration interrupt to calculate dutycycle received from Rx
   //I2C_Configuration(); 
   //HMC5883L_Initialize();
   delay_ms(10000); 
@@ -69,11 +70,8 @@ int main(void)
   //PID_Init_Start();
 	//SysTick_Config(SystemCoreClock / 999);//start to read MPU each 1 ms
 	GPIO_SetBits(GPIOD, GPIO_Pin_12|GPIO_Pin_13|GPIO_Pin_14|GPIO_Pin_15);
-<<<<<<< HEAD
-=======
   //start PWM to test
   BasicThr = 800;
->>>>>>> origin
   while (1)
   {
 		
