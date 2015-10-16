@@ -3,63 +3,37 @@
 #include "Rx.h"
 /*=====================================================================================================*/
 /*=====================================================================================================*/
-extern float DutyTIM2_ch1, FreqTIM2_ch1, DutyTIM2_ch2, FreqTIM2_ch2;
-extern float DutyTIM5_ch1, FreqTIM5_ch1, DutyTIM5_ch2, FreqTIM5_ch2;
-float IC1Value, IC2Value;
+Rx_t   Rx_Throttle;
+Rx_t   Rx_Pitch;
+Rx_t   Rx_Roll;
+Rx_t   Rx_Yaw;
 /*=====================================================================================================*/
 /*=====================================================================================================*/
 void Rx_Configuration(void)
 {
-	TIM_TimeBaseInitTypeDef    TIM_TimeBaseStructure;
 	TIM_ICInitTypeDef				   TIM_ICInitStructure;
 	GPIO_InitTypeDef           GPIO_InitStructure;
 	NVIC_InitTypeDef					 NVIC_InitStructure;
-  RCC_ClocksTypeDef          RCC_ClocksStruct;
   
- 	/* TIM2 and TIM5 clock enable */
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2 | RCC_APB1Periph_TIM5, ENABLE);
+ 	/* TIM2 clock enable */
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
 
-  /* GPIOA and GPIOB clock enable */
-  RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA | RCC_AHB1Periph_GPIOB, ENABLE);
-	
-  /* Get clocks */
-  RCC_GetClocksFreq(&RCC_ClocksStruct);
-	
-	/**************************************************************************/
-  /* Compute the prescaler value                                            */
-  /* PrescalerValue = (uint16_t) ((SystemCoreClock /2) / 28000000) - 1 = 3  */
-	/**************************************************************************/
+  /* GPIOA clock enable */
+  RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);
 
-  /* GPIOC Configuration: TIM2 CH1 (PA5), CH2 (PB3) and TIM5 CH1 (PA0), CH2 (PA1)*/
-  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_5;
+  /* GPIOC Configuration: TIM2 CH1 (PA0), CH2 (PA1), CH3 (PA2), CH4 (PA4)*/
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_3;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
   GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
   GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL ;
   GPIO_Init(GPIOA, &GPIO_InitStructure); 
 
-  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_3;
-  GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
-  GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
-  GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
-  GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL ;
-  GPIO_Init(GPIOB, &GPIO_InitStructure); 
-
   /* connect TIM2 pins to AF2*/
-  GPIO_PinAFConfig(GPIOA, GPIO_PinSource5, GPIO_AF_TIM2);
-  GPIO_PinAFConfig(GPIOB, GPIO_PinSource3, GPIO_AF_TIM2);
-
-  /* connect TIM5 pins to AF5*/
-  GPIO_PinAFConfig(GPIOA, GPIO_PinSource0, GPIO_AF_TIM5);
-  GPIO_PinAFConfig(GPIOA, GPIO_PinSource1, GPIO_AF_TIM5);
-
-  /* Time base configuration */
-  TIM_TimeBaseStructure.TIM_Prescaler = 1680-1; 
-  TIM_TimeBaseStructure.TIM_Period = 0xFFFF;
-  TIM_TimeBaseStructure.TIM_ClockDivision = 0;
-  TIM_TimeBaseStructure.TIM_CounterMode = TIM_CounterMode_Up;
-  TIM_TimeBaseInit(TIM2, &TIM_TimeBaseStructure);
-  TIM_TimeBaseInit(TIM5, &TIM_TimeBaseStructure);
+  GPIO_PinAFConfig(GPIOA, GPIO_PinSource0, GPIO_AF_TIM2);
+  GPIO_PinAFConfig(GPIOA, GPIO_PinSource1, GPIO_AF_TIM2);
+  GPIO_PinAFConfig(GPIOA, GPIO_PinSource2, GPIO_AF_TIM2);
+  GPIO_PinAFConfig(GPIOA, GPIO_PinSource3, GPIO_AF_TIM2);
 
   /* Enable the TIM2 global Interrupt */
   NVIC_InitStructure.NVIC_IRQChannel = TIM2_IRQn;
@@ -68,145 +42,120 @@ void Rx_Configuration(void)
   NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
   NVIC_Init(&NVIC_InitStructure);
 
-  /* Enable the TIM5 global Interrupt */
-  NVIC_InitStructure.NVIC_IRQChannel = TIM5_IRQn;
-  NVIC_InitStructure.NVIC_IRQChannelPreemptionPriority = 0;
-  NVIC_InitStructure.NVIC_IRQChannelSubPriority = 2;
-  NVIC_InitStructure.NVIC_IRQChannelCmd = ENABLE;
-  NVIC_Init(&NVIC_InitStructure);
-
   /* TIM configuration: Input Capture mode --------------------------------------
-     The external signal is connected to TIM2 CH1 pin PA5 and TIM2 CH2 PB3
-                                         TIM5 CH1 pin PA0 and TIM5 CH2 PA1
-     The Rising edge is used as active edge,
-     The TIM CCR1 and CCR2 is used to compute the duty cycle and frequency value 
+     The external signal is connected to TIM2 CH1 pin PA0 and TIM2 CH2 PA1
+                                         TIM2 CH3 pin PA2 and TIM2 CH4 PA3
+     The Bothedge is used as active edge,
+     The TIM CCR1, CCR2, CCR3 and CCR4 is used to compute the duty cycle and frequency value 
   ------------------------------------------------------------ */
 
-  TIM_ICInitStructure.TIM_Channel = TIM_Channel_1 | TIM_Channel_2;
-  TIM_ICInitStructure.TIM_ICPolarity = TIM_ICPolarity_Rising;
+  TIM_ICInitStructure.TIM_Channel = TIM_Channel_1 | TIM_Channel_2 | TIM_Channel_3 | TIM_Channel_4;
+  TIM_ICInitStructure.TIM_ICPolarity = TIM_ICPolarity_BothEdge;
   TIM_ICInitStructure.TIM_ICSelection = TIM_ICSelection_DirectTI;
   TIM_ICInitStructure.TIM_ICPrescaler = TIM_ICPSC_DIV1;
   TIM_ICInitStructure.TIM_ICFilter = 0x0;
   TIM_ICInit(TIM2, &TIM_ICInitStructure);
-  TIM_ICInit(TIM5, &TIM_ICInitStructure);
 
-  /* Initialize PWM Input config */
-  TIM_PWMIConfig(TIM2, &TIM_ICInitStructure);
-  TIM_PWMIConfig(TIM5, &TIM_ICInitStructure);
-
-  /* Select input trigger */
-  TIM_SelectInputTrigger(TIM2, TIM_TS_TI1FP1 | TIM_TS_TI1FP2);
-  TIM_SelectInputTrigger(TIM5, TIM_TS_TI1FP1 | TIM_TS_TI1FP2);
-
-  /* Select the slave Mode: Reset Mode */
-  TIM_SelectSlaveMode(TIM2, TIM_SlaveMode_Reset);
-  TIM_SelectMasterSlaveMode(TIM2, TIM_MasterSlaveMode_Enable);
-
-  TIM_SelectSlaveMode(TIM5, TIM_SlaveMode_Reset);
-  TIM_SelectMasterSlaveMode(TIM5, TIM_MasterSlaveMode_Enable);
-
-  TIM_ICInit(TIM2, &TIM_ICInitStructure);
-  TIM_ICInit(TIM5, &TIM_ICInitStructure);
-  
-  /* TIM enable counter */
+  /* Prepare before Calculating Interrupt */
+  Rx_Throttle.Number = 0;
+  Rx_Pitch.Number = 0;
+  Rx_Roll.Number = 0;
+  Rx_Yaw.Number = 0;
+  /* TIM 2 enable counter */
   TIM_Cmd(TIM2, ENABLE);
-  TIM_Cmd(TIM5, ENABLE);
-
-  /* Enable the CC1 and CC2 Interrupt Request */
-  TIM_ITConfig(TIM2, TIM_IT_CC1 | TIM_IT_CC2, ENABLE);
-  TIM_ITConfig(TIM5, TIM_IT_CC1 | TIM_IT_CC2, ENABLE);
-}
+ 
+  /* Enable the CC1, CC2, CC3 and CC4 Interrupt Request */
+  TIM_ITConfig(TIM2, TIM_IT_CC1 | TIM_IT_CC2 | TIM_IT_CC3 | TIM_IT_CC4, ENABLE);
+ }
 /*=====================================================================================================*/
 /*=====================================================================================================*/
 void TIM2_IRQHandler(void)
 {
-    /* Interrupt handler for PWM Capture */
-  if (TIM_GetITStatus(TIM2, TIM_IT_CC1)) {
-		
+  /* Interrupt handler for PWM Capture */
+  //Calculate Throttle from Tx
+  if (TIM_GetITStatus(TIM2, TIM_IT_CC1)) 
+  {
     /* Clear pending bit */
     TIM_ClearITPendingBit(TIM2, TIM_IT_CC1);
-    
-    /* Get the Input Capture value */
-    IC2Value = (float)TIM_GetCapture1(TIM2);
-
-    if (IC2Value != 0) {
-      /* Duty cycle and frequency */
-      IC1Value = (float)TIM_GetCapture2(TIM2);
-      DutyTIM2_ch1 = (IC1Value * 100) / IC2Value;
-      FreqTIM2_ch1 = (SystemCoreClock/2) / (IC2Value*1680);
-
-    } else {
-      /* Reset data */
-      DutyTIM2_ch1 = 0;
-      FreqTIM2_ch1 = 0;
-    }
+    Calculate_Rx(Rx_Throttle, TIM2->CCR1, GPIO_Pin_0);
   }
-  if (TIM_GetITStatus(TIM2, TIM_IT_CC2)) {
-    /* Read data */
-    
+  if (TIM_GetITStatus(TIM2, TIM_IT_CC2)) 
+  {
     /* Clear pending bit */
     TIM_ClearITPendingBit(TIM2, TIM_IT_CC2);
-    
-    /* Get the Input Capture value */
-    IC2Value = (float)TIM_GetCapture2(TIM2);
-
-    if (IC2Value != 0) {
-      /* Duty cycle and frequency */
-      IC1Value = (float)TIM_GetCapture1(TIM2);
-      DutyTIM2_ch2 = (IC1Value * 100) / IC2Value;
-      FreqTIM2_ch2 = (SystemCoreClock/2) / IC2Value;
-    } else {
-      /* Reset data */
-      DutyTIM2_ch2 = 0;
-      FreqTIM2_ch2 = 0;
-    }
+    Calculate_Rx(Rx_Pitch, TIM->CCR2, GPIO_Pin_1);
+  }
+  if (TIM_GetITStatus(TIM2, TIM_IT_CC3)) 
+  {
+    /* Clear pending bit */
+    TIM_ClearITPendingBit(TIM2, TIM_IT_CC3);
+    Calculate_Rx(Rx_Roll, TIM2->CCR3, GPIO_Pin_2);
+  }
+  if (TIM_GetITStatus(TIM2, TIM_IT_CC4)) 
+  {
+    /* Clear pending bit */
+    TIM_ClearITPendingBit(TIM2, TIM_IT_CC4);
+    Calculate_Rx(Rx_Yaw, TIM2->CCR4, GPIO_Pin_3);
   }
   
 }
 /*=====================================================================================================*/
 /*=====================================================================================================*/
-void TIM5_IRQHandler(void)
+void Calculate_Rx(Rx_t Rx, uint32_t *CCRx, uint16_t GPIO_Pin_x,)
 {
-   /* Interrupt handler for PWM Capture */
-  if (TIM_GetITStatus(TIM5, TIM_IT_CC1)) {
-    
-    /* Clear pending bit */
-    TIM_ClearITPendingBit(TIM5, TIM_IT_CC1);
-    
-    /* Get the Input Capture value */
-    IC2Value = (float)TIM_GetCapture1(TIM5);
-
-    if (IC2Value != 0) {
-      /* Duty cycle and frequency */
-      IC1Value = (float)TIM_GetCapture2(TIM5);
-      DutyTIM5_ch1 = (IC1Value * 100) / IC2Value;
-      FreqTIM5_ch1 = (SystemCoreClock/2) / (IC2Value*1680);
-
-    } else {
-      /* Reset data */
-      DutyTIM5_ch1 = 0;
-      FreqTIM5_ch1 = 0;
+  if ((GPIOA->IDR & GPIO_Pin_x) != 0)
+    {
+      //Rising
+      if (Rx.Number == 0)
+      {
+        /* Capture Timer */
+        Rx.Rising = *CCRx;
+        Rx.Number++;
+      }
     }
-  }
-  if (TIM_GetITStatus(TIM5, TIM_IT_CC2)) {
-    /* Read data */
-    
-    /* Clear pending bit */
-    TIM_ClearITPendingBit(TIM5, TIM_IT_CC2);
-    
-    /* Get the Input Capture value */
-    IC2Value = (float)TIM_GetCapture2(TIM5);
+    if ((GPIOA->IDR & GPIO_Pin_x) == 0)
+    {
+      //Falling 
+      if (Rx.Number == 1)
+      {
+        /* Capture Timer */
+        Rx.Falling = *CCRx;
+        //Calculate DutyCycle
+        if (Rx.Falling > Rx.Rising)
+        {
+          Rx.Highmeasure = Rx.Falling - Rx.Rising;
+        }
+        else if (Rx.Falling < Rx.Rising)
+        {
+          Rx.Highmeasure = 0xFFFFFFFF + Rx.Falling - Rx.Rising;
+        }
+        else Rx.Highmeasure = 0;
 
-    if (IC2Value != 0) {
-      /* Duty cycle and frequency */
-      IC1Value = (float)TIM_GetCapture1(TIM5);
-      DutyTIM5_ch2 = (IC1Value * 100) / IC2Value;
-      FreqTIM5_ch2 = (SystemCoreClock/2) / IC2Value;
-    } else {
-      /* Reset data */
-      DutyTIM5_ch2 = 0;
-      FreqTIM5_ch2 = 0;
+        Rx.NumCCR = TIME_TIM2 / (CLOCK_TIM2 / Rx.Highmeasure);
+        Rx.Number++;
+      } 
     }
-  }
-
+    if ((GPIOA->IDR & GPIO_Pin_x) != 0)
+    {
+      //Rising
+      if (Rx.Number == 2)
+      {
+        /* Capture Timer */
+        Rx.PreRising = *CCRx;
+        //Calculate Freqcency
+        if (Rx.PreRising > Rx.Rising)
+        {
+          Rx.Periodmeasure = Rx.PreRising - Rx.Rising;
+        }
+        else if (Rx.PreRising < Rx.Rising)
+        {
+          Rx.Periodmeasure = 0xFFFFFFFF + Rx.PreRising - Rx.Rising;
+        }
+        else Rx.Periodmeasure = 0;
+        Rx.Freqcency = CLOCK_TIM2 / Rx.Periodmeasure;
+        Rx.Number = 0;
+      }
+    }
 }
+/*=====================================================================================================*/
+/*=====================================================================================================*/

@@ -39,8 +39,7 @@ int16_t temp;
 int16_t MPU6050data[7];
 int16_t HMC5883Ldata[3];
 int16_t magX_offset=0, magY_offset=0,magZ_offset=0;
-float DutyTIM2_ch1, FreqTIM2_ch1, DutyTIM2_ch2, FreqTIM2_ch2;
-float DutyTIM5_ch1, FreqTIM5_ch1, DutyTIM5_ch2, FreqTIM5_ch2;
+
 float accX_kalman, accY_kalman, accZ_kalman;
 float Bfx, Bfy, My, Mx;
 float gyroX_offset=0, gyroY_offset=0, gyroZ_offset=0;
