@@ -101,7 +101,7 @@ void TIM2_IRQHandler(void)
 }
 /*=====================================================================================================*/
 /*=====================================================================================================*/
-void Calculate_Rx(Rx_t Rx, uint32_t *CCRx, uint16_t GPIO_Pin_x,)
+void Calculate_Rx(Rx_t Rx, uint32_t *CCRx, uint16_t GPIO_Pin_x)
 {
   if ((GPIOA->IDR & GPIO_Pin_x) != 0)
     {
