@@ -21,7 +21,7 @@ void Rx_Configuration(void)
   /* GPIOA clock enable */
   RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);
 
-  /* GPIOC Configuration: TIM2 CH1 (PA0), CH2 (PA1), CH3 (PA2), CH4 (PA4)*/
+  /* GPIOC Configuration: TIM2 CH1 (PA0), CH2 (PA1), CH3 (PA2), CH4 (PA3)*/
   GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_3;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
@@ -180,7 +180,5 @@ void Calculate_Rx(Rx_t *Rx, uint32_t CCRx, uint16_t GPIO_Pin_x)
       }
     }
 }
-/*=====================================================================================================*/
-/*=====================================================================================================*/
 /*=====================================================================================================*/
 /*=====================================================================================================*/

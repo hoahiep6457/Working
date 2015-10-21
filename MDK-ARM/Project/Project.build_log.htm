@@ -8,23 +8,22 @@ Project File Date:  10/10/2015
 
 <h2>Output:</h2>
 Build target 'Project'
-compiling quad_pwm_ctrl.c...
-..\Driver\delay_ctrl.h(22): warning:  #1-D: last line of file ends without a newline
-  #endif
-..\Driver\quad_pwm_ctrl.c(106): warning:  #1-D: last line of file ends without a newline
-  /*=====================================================================================================*/
-..\Driver\quad_pwm_ctrl.c: 2 warnings, 0 errors
+compiling Rx.c...
 linking...
 Program Size: Code=10904 RO-data=872 RW-data=172 ZI-data=1372  
-".\Project\Project.axf" - 0 Error(s), 2 Warning(s).
-Load "C:\\Users\\kael5\\Desktop\\Project_Quad\\github\\Working\\MDK-ARM\\Project\\Project.axf" 
-Error: Flash Download failed  -  Target DLL has been cancelled
-Load "C:\\Users\\kael5\\Desktop\\Project_Quad\\github\\Working\\MDK-ARM\\Project\\Project.axf" 
-Erase Done.
-Programming Done.
-Verify OK.
-Application running ...
-laration MPU6050_GetDeviceID - give arg types
+".\Project\Project.axf" - 0 Error(s), 0 Warning(s).
+</pre>
+</body>
+</html>
+(371): warning:  #1295-D: Deprecated declaration MPU6050_TestConnection - give arg types
+  bool MPU6050_TestConnection();
+..\Sensor\MPU6050.h(374): warning:  #1295-D: Deprecated declaration MPU6050_GetFullScaleGyroRange - give arg types
+  uint8_t MPU6050_GetFullScaleGyroRange();
+..\Sensor\MPU6050.h(377): warning:  #1295-D: Deprecated declaration MPU6050_GetFullScaleAccelRange - give arg types
+  uint8_t MPU6050_GetFullScaleAccelRange();
+..\Sensor\MPU6050.h(381): warning:  #1295-D: Deprecated declaration MPU6050_GetSleepModeStatus - give arg types
+  bool MPU6050_GetSleepModeStatus();
+..\Sensor\MPU6050.h(385): warning:  #1295-D: Deprecated declaration MPU6050_GetDeviceID - give arg types
   uint8_t MPU6050_GetDeviceID();
 ..\Sensor\MPU6050.h(398): warning:  #1-D: last line of file ends without a newline
   #endif /* __MPU6050_H */
@@ -50,61 +49,30 @@ laration MPU6050_GetDeviceID - give arg types
   #endif
 ..\Driver\delay_ctrl.h(22): warning:  #1-D: last line of file ends without a newline
   #endif
-..\main.c(97): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\main.c(96): warning:  #1035-D: single-precision operand implicitly converted to double-precision
     gyroX_rate = (gyroX - gyroX_offset)/GYRO_LSB;
-..\main.c(98): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\main.c(97): warning:  #1035-D: single-precision operand implicitly converted to double-precision
     gyroY_rate = (gyroY - gyroY_offset)/GYRO_LSB;
-..\main.c(99): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\main.c(98): warning:  #1035-D: single-precision operand implicitly converted to double-precision
     gyroZ_rate = (gyroZ - gyroZ_offset)/GYRO_LSB;
-..\main.c(101): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\main.c(100): warning:  #1035-D: single-precision operand implicitly converted to double-precision
     gyroX_angle += gyroX_rate*DT;
-..\main.c(102): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\main.c(101): warning:  #1035-D: single-precision operand implicitly converted to double-precision
     gyroY_angle += gyroY_rate*DT;
-..\main.c(103): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\main.c(102): warning:  #1035-D: single-precision operand implicitly converted to double-precision
         gyroZ_angle += gyroZ_rate*DT;
+..\main.c(181): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+    roll_angle = angleX_kalman*DEG_TO_RAD;
 ..\main.c(182): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-    roll_angle = angleX_kalman*DEG_TO_RAD;
-..\main.c(183): warning:  #1035-D: single-precision operand implicitly converted to double-precision
     pitch_angle = angleY_kalman*DEG_TO_RAD;
+..\main.c(230): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+    roll_angle = angleX_kalman*DEG_TO_RAD;
 ..\main.c(231): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-    roll_angle = angleX_kalman*DEG_TO_RAD;
-..\main.c(232): warning:  #1035-D: single-precision operand implicitly converted to double-precision
     pitch_angle = angleY_kalman*DEG_TO_RAD;
-..\main.c(284): warning:  #550-D: variable "BLDC_M" was set but never used
+..\main.c(283): warning:  #550-D: variable "BLDC_M" was set but never used
     u16 BLDC_M[4] = {0};
 ..\main.c: 29 warnings, 0 errors
 compiling Rx.c...
-..\Driver\Rx.c(186): warning:  #1-D: last line of file ends without a newline
-  /*=====================================================================================================*/
-..\Driver\Rx.c: 1 warning, 0 errors
 linking...
-Program Size: Code=10920 RO-data=872 RW-data=172 ZI-data=1372  
-".\Project\Project.axf" - 0 Error(s), 30 Warning(s).
-Load "C:\\Users\\kael5\\Desktop\\Project_Quad\\github\\Working\\MDK-ARM\\Project\\Project.axf" 
-Erase Done.
-Programming Done.
-Verify OK.
-Application running ...
-expected a ";"
-          Rx->NumCCR = TIME_TIM2 / (CLOCK_TIM2 / Rx->Highmeasure);
-..\main.c(398): error:  #77-D: this declaration has no storage class or type specifier
-          Rx->Number++;
-..\main.c(398): error:  #65: expected a ";"
-          Rx->Number++;
-..\main.c(399): error:  #169: expected a declaration
-        } 
-..\main.c(439): warning: At end of source:  #12-D: parsing restarts here after previous syntax error
-..\main.c: 32 warnings, 7 errors
-".\Project\Project.axf" - 7 Error(s), 32 Warning(s).
-Target not created
-Load "C:\\Users\\kael5\\Desktop\\Project_Quad\\github\\Working\\MDK-ARM\\Project\\Project.axf" 
-Erase Done.
-Programming Done.
-Verify OK.
-Application running ...
-e_Rx(Rx_t Rx, uint32_t CCRx, uint16_t GPIO_Pin_x)
-..\Driver\Rx.c(161): warning:  #1-D: last line of file ends without a newline
-  /*=====================================================================================================*/
-..\Driver\Rx.c: 2 warnings, 5 errors
-".\Project\Project.axf" - 5 Error(s), 32 Warning(s).
-Target not created
+Program Size: Code=10904 RO-data=872 RW-data=172 ZI-data=1372  
+".\Project\Project.axf" - 0 Error(s), 29 Warning(s).
