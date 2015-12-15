@@ -73,6 +73,7 @@ int main(void)
   //start PWM to test
   BasicThr = 800;
 	USARTx_SendString(USART1, (uint8_t *)"Hello world\r\n");
+  printf("Welcome Quadcopter Project\n");
   while (1)
   {
   }

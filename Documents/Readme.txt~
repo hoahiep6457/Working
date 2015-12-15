@@ -26,6 +26,6 @@ Using TIM1 PWM
  	+ SCL:	PB8
 	+ SDA:	PB9
 	+ INT:	PB12
-5. UART1:
+5. UART:
 	+ Tx: 	PB6
 	+ Rx:	PB7
