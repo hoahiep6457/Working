@@ -9,6 +9,7 @@
 #include "pid.h"
 #include "delay_ctrl.h"
 #include "Rx.h"
+#include "usart.h"
 /*=====================================================================================================*/
 /*=====================================================================================================*/
 #define RESTRICT_PITCH // Comment out to restrict roll to ±90deg instead
@@ -66,10 +67,12 @@ int main(void)
   delay_ms(10);//delay to avoid hating
   //PID_Init_Start();
 	//SysTick_Config(SystemCoreClock / 999);//start to read MPU each 1 ms
-	GPIO_SetBits(GPIOD, GPIO_Pin_12|GPIO_Pin_13|GPIO_Pin_14|GPIO_Pin_15);
+
+  USART_Configuration(38400);
+	GPIO_ResetBits(GPIOC, GPIO_Pin_11|GPIO_Pin_12);
   //start PWM to test
   BasicThr = 800;
-	
+	USARTx_SendString(USART1, (uint8_t *)"Hello world\r\n");
   while (1)
   {
   }
@@ -310,14 +313,14 @@ void Led_Config(void)
 {
 	GPIO_InitTypeDef           GPIO_InitStructure;
 	
-  RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOD, ENABLE);
+  RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOC, ENABLE);
 	
-  GPIO_InitStructure.GPIO_Pin=GPIO_Pin_12|GPIO_Pin_13|GPIO_Pin_14|GPIO_Pin_15;
+  GPIO_InitStructure.GPIO_Pin=GPIO_Pin_11|GPIO_Pin_12;
   GPIO_InitStructure.GPIO_Mode=GPIO_Mode_OUT;
   GPIO_InitStructure.GPIO_Speed=GPIO_Speed_100MHz;
   GPIO_InitStructure.GPIO_OType=GPIO_OType_PP;
   GPIO_InitStructure.GPIO_PuPd=GPIO_PuPd_NOPULL;
-  GPIO_Init(GPIOD, &GPIO_InitStructure);
+  GPIO_Init(GPIOC, &GPIO_InitStructure);
 }
 
 /*=====================================================================================================*/
