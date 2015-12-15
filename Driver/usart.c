@@ -34,8 +34,14 @@ int fgetc(FILE *f){
 /*=====================================================================================================*/
 void USART_Configuration(unsigned int BaudRate)
 {
+	GPIO_InitTypeDef           GPIO_InitStructure;
+	USART_InitTypeDef 				 USART_InitStructure;
+	
   RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART1, ENABLE); 
   RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOB, ENABLE);
+	
+
+	
   /* Configure USART Tx as alternate function  */
   GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
   GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_UP;

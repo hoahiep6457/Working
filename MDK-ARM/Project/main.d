@@ -45,3 +45,4 @@
 .\project\main.o: ..\Algorithm\pid.h
 .\project\main.o: ..\Driver\delay_ctrl.h
 .\project\main.o: ..\Driver\Rx.h
+.\project\main.o: ..\Driver\usart.h

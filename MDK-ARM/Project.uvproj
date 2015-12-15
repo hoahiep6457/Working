@@ -528,6 +528,11 @@
               <FileType>1</FileType>
               <FilePath>..\Driver\delay_ctrl.c</FilePath>
             </File>
+            <File>
+              <FileName>usart.c</FileName>
+              <FileType>1</FileType>
+              <FilePath>..\Driver\usart.c</FilePath>
+            </File>
           </Files>
         </Group>
       </Groups>
