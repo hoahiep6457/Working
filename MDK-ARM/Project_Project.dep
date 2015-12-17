@@ -35,7 +35,7 @@ I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_tim.h)(0x560D51BB)
 I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_usart.h)(0x560D51BB)
 I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h)(0x560D51BB)
 I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h)(0x560D51BB)
-F (..\main.c)(0x56701B89)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I..\Driver -I..\Libraries\CMSIS\Device\ST\STM32F4xx\Include -I..\Libraries\STM32F4xx_StdPeriph_Driver\inc -I..\Algorithm -I..\..\Working -I..\Sensor-I G:\Keil\ARM\RV31\INC-I G:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I G:\Keil\ARM\PACK\Keil\STM32F4xx_DFP\1.0.5\Device\Include-DSTM32F40XX -DSTM32F4XX -DUSE_STDPERIPH_DRIVER -o .\project\main.o --omf_browse .\project\main.crf --depend .\project\main.d)
+F (..\main.c)(0x56718F8F)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I..\Driver -I..\Libraries\CMSIS\Device\ST\STM32F4xx\Include -I..\Libraries\STM32F4xx_StdPeriph_Driver\inc -I..\Algorithm -I..\..\Working -I..\Sensor-I G:\Keil\ARM\RV31\INC-I G:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I G:\Keil\ARM\PACK\Keil\STM32F4xx_DFP\1.0.5\Device\Include-DSTM32F40XX -DSTM32F4XX -DUSE_STDPERIPH_DRIVER -o .\project\main.o --omf_browse .\project\main.crf --depend .\project\main.d)
 I (..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h)(0x560D51BB)
 I (G:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cm4.h)(0x512C2C72)
 I (G:\Keil\ARM\ARMCC\include\stdint.h)(0x5284742A)
@@ -398,7 +398,7 @@ I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_syscfg.h)(0x560D51BB)
 I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_tim.h)(0x560D51BB)
 I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h)(0x560D51BB)
 I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h)(0x560D51BB)
-F (..\sensor\MPU6050.c)(0x560D51BC)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I..\Driver -I..\Libraries\CMSIS\Device\ST\STM32F4xx\Include -I..\Libraries\STM32F4xx_StdPeriph_Driver\inc -I..\Algorithm -I..\..\Working -I..\Sensor-I G:\Keil\ARM\RV31\INC-I G:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I G:\Keil\ARM\PACK\Keil\STM32F4xx_DFP\1.0.5\Device\Include-DSTM32F40XX -DSTM32F4XX -DUSE_STDPERIPH_DRIVER -o .\project\mpu6050.o --omf_browse .\project\mpu6050.crf --depend .\project\mpu6050.d)
+F (..\sensor\MPU6050.c)(0x56718A9A)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I..\Driver -I..\Libraries\CMSIS\Device\ST\STM32F4xx\Include -I..\Libraries\STM32F4xx_StdPeriph_Driver\inc -I..\Algorithm -I..\..\Working -I..\Sensor-I G:\Keil\ARM\RV31\INC-I G:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I G:\Keil\ARM\PACK\Keil\STM32F4xx_DFP\1.0.5\Device\Include-DSTM32F40XX -DSTM32F4XX -DUSE_STDPERIPH_DRIVER -o .\project\mpu6050.o --omf_browse .\project\mpu6050.crf --depend .\project\mpu6050.d)
 I (..\sensor\MPU6050.h)(0x560D51BC)
 I (G:\Keil\ARM\ARMCC\include\stdbool.h)(0x5284742A)
 I (G:\Keil\ARM\ARMCC\include\stdint.h)(0x5284742A)
@@ -435,6 +435,8 @@ I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_tim.h)(0x560D51BB)
 I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_usart.h)(0x560D51BB)
 I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h)(0x560D51BB)
 I (..\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h)(0x560D51BB)
+I (G:\Keil\ARM\ARMCC\include\stdlib.h)(0x5284742A)
+I (G:\Keil\ARM\ARMCC\include\math.h)(0x52847424)
 F (..\Sensor\HMC5883L.c)(0x560D51BC)(-c --cpu Cortex-M4.fp -D__MICROLIB -g -O3 --apcs=interwork --split_sections -I..\Driver -I..\Libraries\CMSIS\Device\ST\STM32F4xx\Include -I..\Libraries\STM32F4xx_StdPeriph_Driver\inc -I..\Algorithm -I..\..\Working -I..\Sensor-I G:\Keil\ARM\RV31\INC-I G:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include-I G:\Keil\ARM\PACK\Keil\STM32F4xx_DFP\1.0.5\Device\Include-DSTM32F40XX -DSTM32F4XX -DUSE_STDPERIPH_DRIVER -o .\project\hmc5883l.o --omf_browse .\project\hmc5883l.crf --depend .\project\hmc5883l.d)
 I (..\Sensor\HMC5883L.h)(0x560D51BC)
 I (G:\Keil\ARM\ARMCC\include\stdbool.h)(0x5284742A)

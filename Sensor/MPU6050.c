@@ -1,5 +1,9 @@
 /* Includes */
 #include "MPU6050.h"
+#include "stm32f4xx.h"
+#include <stdlib.h>
+#include <math.h>
+
 //#include "stm32f10x_i2c.h"
 
 /** @defgroup MPU6050_Library
@@ -15,7 +19,9 @@
  */
 void MPU6050_Initialize() 
 {
+		printf("debug 5 \r");
     MPU6050_SetClockSource(MPU6050_CLOCK_PLL_XGYRO);
+		printf("debug 6 \r");
     MPU6050_SetFullScaleGyroRange(MPU6050_GYRO_FS_1000);
     MPU6050_SetFullScaleAccelRange(MPU6050_ACCEL_FS_16);
     MPU6050_SetSleepModeStatus(DISABLE); 
@@ -79,7 +85,9 @@ uint8_t MPU6050_GetDeviceID()
  */
 void MPU6050_SetClockSource(uint8_t source) 
 {
+		printf("fjdfjd\r");
     MPU6050_WriteBits(MPU6050_DEFAULT_ADDRESS, MPU6050_RA_PWR_MGMT_1, MPU6050_PWR1_CLKSEL_BIT, MPU6050_PWR1_CLKSEL_LENGTH, source);
+		printf("dfdfdfd\r");
 }
 
 /** Set full-scale gyroscope range.

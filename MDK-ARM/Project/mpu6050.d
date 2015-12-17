@@ -36,3 +36,5 @@
 .\project\mpu6050.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_usart.h
 .\project\mpu6050.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h
 .\project\mpu6050.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h
+.\project\mpu6050.o: G:\Keil\ARM\ARMCC\bin\..\include\stdlib.h
+.\project\mpu6050.o: G:\Keil\ARM\ARMCC\bin\..\include\math.h
