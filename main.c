@@ -1,3 +1,9 @@
+/********************************************************************************************************
+*    Project: Quadcopter                                                                                *
+*    Version: 1.0                                                                                       *
+*    Designed by: Kael                                                                                  *
+*    Date: 01/2016                                                                                      *
+********************************************************************************************************/
 #include "stm32f4xx.h"
 #include <stdlib.h>
 #include <math.h>
@@ -10,6 +16,7 @@
 #include "delay_ctrl.h"
 #include "Rx.h"
 #include "usart.h"
+#include "nRF24L01.h"
 /*=====================================================================================================*/
 /*=====================================================================================================*/
 #define RESTRICT_PITCH // Comment out to restrict roll to ±90deg instead
@@ -18,10 +25,7 @@
 #define RAD_TO_DEG  57.2957795131
 #define DEG_TO_RAD  0.01745329251
 #define DT				0.001 // T sampling
-/*	      MASTER                    SLAVE
-	 PB8 --- I2C1_SCL              	MPU6050
-	 PB9 --- I2C1_SDA               HMC5883L
-*/
+
 /*=====================================================================================================*/
 /*=====================================================================================================*/
 void IMU_Get_Start(void);
@@ -61,16 +65,16 @@ int main(void)
   //Rx_Configuration();//Configuration interrupt to calculate dutycycle received from Rx
   I2C_Configuration();
   printf("Debug 2\r\n");
-	delay_ms(10000); 
+	delay_ms(1000); 
   //HMC5883L_Initialize();
-  delay_ms(10000); 
+  delay_ms(1000); 
   MPU6050_Initialize();//LSB gyro = 32.8 LSB acc = 2048
-	delay_ms(10000); 
+	delay_ms(1000); 
 	printf("Debug 3\r\n");
   //IMU_Get_Offset();//read MPU6050 to calib gyro
-	delay_ms(10000);//wait for MPU to stabilize
+	delay_ms(1000);//wait for MPU to stabilize
   //IMU_Get_Start();
-  delay_ms(10000);//delay to avoid hating
+  delay_ms(1000);//delay to avoid hating
   //PID_Init_Start();
 	//SysTick_Config(SystemCoreClock / 999);//start to read MPU each 1 ms
   //start PWM to test
