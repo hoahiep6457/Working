@@ -84,13 +84,13 @@
 /*=====================================================================================================*/
 // define  GPIO for SPI
 #define SPI                   			SPI1
-#define GPIO_CS_CE                  	GPIOA
-#define GPIO_Pin_CE              		GPIO_Pin_3
-#define GPIO_Pin_CS              		GPIO_Pin_4
-#define RCC_AHB1Periph_GPIO_CS_CE   	RCC_AHB1Periph_GPIOA
+#define GPIO_CE                  		GPIOB
+#define GPIO_Pin_CE              		GPIO_Pin_2
+#define RCC_AHB1Periph_GPIO_CE   		RCC_AHB1Periph_GPIOB
 
 
 #define GPIO_SPI              			GPIOA
+#define GPIO_Pin_CS              		GPIO_Pin_4
 #define GPIO_Pin_SPI_SCK      			GPIO_Pin_5
 #define GPIO_Pin_SPI_MISO     			GPIO_Pin_6
 #define GPIO_Pin_SPI_MOSI     			GPIO_Pin_7
@@ -101,7 +101,7 @@
 #define GPIO_Pin_SPI_MOSI_SOURCE     	GPIO_PinSource7
 #define RCC_AHB1Periph_GPIO_SPI       	RCC_AHB1Periph_GPIOA
 
-#define nRF24l01_IRQ    GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_2); 
+//#define nRF24l01_IRQ    GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_12); 
 /*=====================================================================================================*/
 /*=====================================================================================================*/
 void nRF24L01_HW_Init(void);

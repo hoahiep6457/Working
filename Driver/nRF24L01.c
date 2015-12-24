@@ -36,7 +36,7 @@ void nRF24L01_HW_Init(void)
 	GPIO_PinAFConfig(GPIO_SPI, GPIO_Pin_SPI_MISO_SOURCE,GPIO_AF_SPI1);
 	
 	/* Configure SPI pins:  SCK ,MOSI, MISO*/
-	GPIO_InitStructure.GPIO_Pin =   GPIO_Pin_SPI_SCK | GPIO_Pin_SPI_MOSI | GPIO_Pin_SPI_MISO;
+	GPIO_InitStructure.GPIO_Pin =    GPIO_Pin_CS | GPIO_Pin_SPI_SCK | GPIO_Pin_SPI_MOSI | GPIO_Pin_SPI_MISO;
 	GPIO_InitStructure.GPIO_Mode =  GPIO_Mode_AF;
   	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
   	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
@@ -45,21 +45,21 @@ void nRF24L01_HW_Init(void)
   	GPIO_Init(GPIO_SPI, &GPIO_InitStructure);
 
 	/* Enable GPIO of CHIP SELECT */
-	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIO_CS_CE, ENABLE);
+	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIO_CE, ENABLE);
 	/* Configure CS pin */
 	SPI_SSOutputCmd(SPI, ENABLE);
-	GPIO_InitStructure.GPIO_Pin =   GPIO_Pin_CS|GPIO_Pin_CE;
+	GPIO_InitStructure.GPIO_Pin =  GPIO_Pin_CE;
  	GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_OUT;
   	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
  	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
   	GPIO_InitStructure.GPIO_PuPd =  GPIO_PuPd_UP;
 
-	GPIO_Init(GPIO_CS_CE, &GPIO_InitStructure);
+	GPIO_Init(GPIO_CE, &GPIO_InitStructure);
 	
 	/* Enable GPIO of IRQ */
 	RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);
-	/* Configure CS pin */
-	GPIO_InitStructure.GPIO_Pin =   GPIO_Pin_2;
+	/* Configure CE pin */
+	GPIO_InitStructure.GPIO_Pin =   GPIO_Pin_12;
   	GPIO_InitStructure.GPIO_Mode  = GPIO_Mode_IN;
   	GPIO_InitStructure.GPIO_Speed = GPIO_Speed_50MHz;
   	GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
@@ -147,22 +147,22 @@ void nRF24L01_TX_Mode(void)
 /*=====================================================================================================*/
 void nRF24L01_SPI_NSS_H(void)
 {
-	GPIO_SetBits(GPIO_CS_CE, GPIO_Pin_CS);
+	GPIO_SetBits(GPIO_CE, GPIO_Pin_CS);
 }
 
 void nRF24L01_SPI_NSS_L(void)
 {
-	GPIO_ResetBits(GPIO_CS_CE, GPIO_Pin_CS);
+	GPIO_ResetBits(GPIO_CE, GPIO_Pin_CS);
 }
 
 void nRF24L01_CE_H(void)
 {
-	GPIO_SetBits(GPIO_CS_CE, GPIO_Pin_CE);
+	GPIO_SetBits(GPIO_CE, GPIO_Pin_CE);
 }
 
 void nRF24L01_CE_L(void)
 {
-	GPIO_ResetBits(GPIO_CS_CE, GPIO_Pin_CE);
+	GPIO_ResetBits(GPIO_CE, GPIO_Pin_CE);
 }
 /*=====================================================================================================*/
 /*=====================================================================================================*/
