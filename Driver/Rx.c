@@ -16,24 +16,24 @@ void Rx_Configuration(void)
 	NVIC_InitTypeDef					 NVIC_InitStructure;
   
  	/* TIM2 clock enable */
-	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM2, ENABLE);
+	RCC_APB1PeriphClockCmd(RCC_APB1Periph_TIM_RX, ENABLE);
 
   /* GPIOA clock enable */
-  RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIOA, ENABLE);
+  RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIO_RX, ENABLE);
 
   /* GPIOC Configuration: TIM2 CH1 (PA0), CH2 (PA1), CH3 (PA2), CH4 (PA3)*/
-  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_0 | GPIO_Pin_1 | GPIO_Pin_2 | GPIO_Pin_3;
+  GPIO_InitStructure.GPIO_Pin = GPIO_Pin_INT0 | GPIO_Pin_INT1 | GPIO_Pin_INT2 | GPIO_Pin_INT3;
   GPIO_InitStructure.GPIO_Mode = GPIO_Mode_AF;
   GPIO_InitStructure.GPIO_Speed = GPIO_Speed_100MHz;
   GPIO_InitStructure.GPIO_OType = GPIO_OType_PP;
   GPIO_InitStructure.GPIO_PuPd = GPIO_PuPd_NOPULL ;
-  GPIO_Init(GPIOA, &GPIO_InitStructure); 
+  GPIO_Init(GPIO_CAPTURE, &GPIO_InitStructure); 
 
   /* connect TIM2 pins to AF2*/
-  GPIO_PinAFConfig(GPIOA, GPIO_PinSource0, GPIO_AF_TIM2);
-  GPIO_PinAFConfig(GPIOA, GPIO_PinSource1, GPIO_AF_TIM2);
-  GPIO_PinAFConfig(GPIOA, GPIO_PinSource2, GPIO_AF_TIM2);
-  GPIO_PinAFConfig(GPIOA, GPIO_PinSource3, GPIO_AF_TIM2);
+  GPIO_PinAFConfig(GPIO_CAPTURE, GPIO_Pin_INT0_SOURCE, GPIO_AF_TIM2);
+  GPIO_PinAFConfig(GPIO_CAPTURE, GPIO_Pin_INT1_SOURCE, GPIO_AF_TIM2);
+  GPIO_PinAFConfig(GPIO_CAPTURE, GPIO_Pin_INT2_SOURCE, GPIO_AF_TIM2);
+  GPIO_PinAFConfig(GPIO_CAPTURE, GPIO_Pin_INT3_SOURCE, GPIO_AF_TIM2);
 
   /* Enable the TIM2 global Interrupt */
   NVIC_InitStructure.NVIC_IRQChannel = TIM2_IRQn;
@@ -54,7 +54,7 @@ void Rx_Configuration(void)
   TIM_ICInitStructure.TIM_ICSelection = TIM_ICSelection_DirectTI;
   TIM_ICInitStructure.TIM_ICPrescaler = TIM_ICPSC_DIV1;
   TIM_ICInitStructure.TIM_ICFilter = 0x0;
-  TIM_ICInit(TIM2, &TIM_ICInitStructure);
+  TIM_ICInit(TIM_RX, &TIM_ICInitStructure);
 
 	/* TIM-CH2 Input capture mode */
 	TIM_ICInitStructure.TIM_Channel = TIM_Channel_2;
@@ -62,7 +62,7 @@ void Rx_Configuration(void)
 	TIM_ICInitStructure.TIM_ICSelection = TIM_ICSelection_DirectTI;
   TIM_ICInitStructure.TIM_ICPrescaler = TIM_ICPSC_DIV1;
   TIM_ICInitStructure.TIM_ICFilter = 0x0;
-  TIM_ICInit(TIM2, &TIM_ICInitStructure);
+  TIM_ICInit(TIM_RX, &TIM_ICInitStructure);
 
 	/* TIM-CH3 Input capture mode */
 	TIM_ICInitStructure.TIM_Channel = TIM_Channel_3;
@@ -70,7 +70,7 @@ void Rx_Configuration(void)
   TIM_ICInitStructure.TIM_ICSelection = TIM_ICSelection_DirectTI;
   TIM_ICInitStructure.TIM_ICPrescaler = TIM_ICPSC_DIV1;
   TIM_ICInitStructure.TIM_ICFilter = 0x0;
-  TIM_ICInit(TIM2, &TIM_ICInitStructure);
+  TIM_ICInit(TIM_RX, &TIM_ICInitStructure);
 
 	/* TIM-CH4 Input capture mode */
 	TIM_ICInitStructure.TIM_Channel = TIM_Channel_4;
@@ -78,17 +78,17 @@ void Rx_Configuration(void)
 	TIM_ICInitStructure.TIM_ICSelection = TIM_ICSelection_DirectTI;
   TIM_ICInitStructure.TIM_ICPrescaler = TIM_ICPSC_DIV1;
   TIM_ICInitStructure.TIM_ICFilter = 0x0;
-  TIM_ICInit(TIM2, &TIM_ICInitStructure);
+  TIM_ICInit(TIM_RX, &TIM_ICInitStructure);
   /* Prepare before Calculating Interrupt */
   Rx_Throttle.Number = 0;
   Rx_Pitch.Number = 0;
   Rx_Roll.Number = 0;
   Rx_Yaw.Number = 0;
   /* TIM 2 enable counter */
-  TIM_Cmd(TIM2, ENABLE);
+  TIM_Cmd(TIM_RX, ENABLE);
  
   /* Enable the CC1, CC2, CC3 and CC4 Interrupt Request */
-  TIM_ITConfig(TIM2, TIM_IT_CC1 | TIM_IT_CC2 | TIM_IT_CC3 | TIM_IT_CC4 , ENABLE);
+  TIM_ITConfig(TIM_RX, TIM_IT_CC1 | TIM_IT_CC2 | TIM_IT_CC3 | TIM_IT_CC4 , ENABLE);
  }
 /*=====================================================================================================*/
 /*=====================================================================================================*/
@@ -96,29 +96,29 @@ void TIM2_IRQHandler(void)
 {
   /* Interrupt handler for PWM Capture */
   //Calculate Throttle from Tx
-  if (TIM_GetITStatus(TIM2, TIM_IT_CC1) == SET) 
+  if (TIM_GetITStatus(TIM_RX, TIM_IT_CC1) == SET) 
   {
     /* Clear pending bit */
-    TIM_ClearITPendingBit(TIM2, TIM_IT_CC1);
-    Calculate_Rx(&Rx_Throttle, TIM2->CCR1, GPIO_Pin_0);
+    TIM_ClearITPendingBit(TIM_RX, TIM_IT_CC1);
+    Calculate_Rx(&Rx_Throttle, TIM_RX->CCR1, GPIO_Pin_0);
   }
-  if (TIM_GetITStatus(TIM2, TIM_IT_CC2) == SET) 
+  if (TIM_GetITStatus(TIM_RX, TIM_IT_CC2) == SET) 
   {
     /* Clear pending bit */
-    TIM_ClearITPendingBit(TIM2, TIM_IT_CC2);
-    Calculate_Rx(&Rx_Pitch, TIM2->CCR2, GPIO_Pin_1);
+    TIM_ClearITPendingBit(TIM_RX, TIM_IT_CC2);
+    Calculate_Rx(&Rx_Pitch, TIM_RX->CCR2, GPIO_Pin_1);
   }
-  if (TIM_GetITStatus(TIM2, TIM_IT_CC3) == SET) 
+  if (TIM_GetITStatus(TIM_RX, TIM_IT_CC3) == SET) 
   {
     /* Clear pending bit */
-    TIM_ClearITPendingBit(TIM2, TIM_IT_CC3);
-    Calculate_Rx(&Rx_Roll, TIM2->CCR3, GPIO_Pin_2);
+    TIM_ClearITPendingBit(TIM_RX, TIM_IT_CC3);
+    Calculate_Rx(&Rx_Roll, TIM_RX->CCR3, GPIO_Pin_2);
   }
-  if (TIM_GetITStatus(TIM2, TIM_IT_CC4) == SET) 
+  if (TIM_GetITStatus(TIM_RX, TIM_IT_CC4) == SET) 
   {
     /* Clear pending bit */
-    TIM_ClearITPendingBit(TIM2, TIM_IT_CC4);
-    Calculate_Rx(&Rx_Yaw, TIM2->CCR4, GPIO_Pin_3);
+    TIM_ClearITPendingBit(TIM_RX, TIM_IT_CC4);
+    Calculate_Rx(&Rx_Yaw, TIM_RX->CCR4, GPIO_Pin_3);
   }
   
 }
@@ -126,7 +126,7 @@ void TIM2_IRQHandler(void)
 /*=====================================================================================================*/
 void Calculate_Rx(Rx_t *Rx, uint32_t CCRx, uint16_t GPIO_Pin_x)
 {
-  if ((GPIOA->IDR & GPIO_Pin_x) != 0)
+  if ((GPIO_CAPTURE->IDR & GPIO_Pin_x) != 0)
     {
       //Rising
       if (Rx->Number == 0)
@@ -136,7 +136,7 @@ void Calculate_Rx(Rx_t *Rx, uint32_t CCRx, uint16_t GPIO_Pin_x)
         Rx->Number++;
       }
     }
-    if ((GPIOA->IDR & GPIO_Pin_x) == 0)
+    if ((GPIO_CAPTURE->IDR & GPIO_Pin_x) == 0)
     {
       //Falling 
       if (Rx->Number == 1)
@@ -154,11 +154,11 @@ void Calculate_Rx(Rx_t *Rx, uint32_t CCRx, uint16_t GPIO_Pin_x)
         }
         else Rx->Highmeasure = 0;
 
-        Rx->NumCCR = TIME_TIM2 / (CLOCK_TIM2 / Rx->Highmeasure);
+        Rx->NumCCR = TIMRX_TIME / (TIMRX_CLOCK / Rx->Highmeasure);
         Rx->Number++;
       } 
     }
-    if ((GPIOA->IDR & GPIO_Pin_x) != 0)
+    if ((GPIO_CAPTURE->IDR & GPIO_Pin_x) != 0)
     {
       //Rising
       if (Rx->Number == 2)
@@ -175,7 +175,7 @@ void Calculate_Rx(Rx_t *Rx, uint32_t CCRx, uint16_t GPIO_Pin_x)
           Rx->Periodmeasure = 0xFFFFFFFF + Rx->PreRising - Rx->Rising;
         }
         else Rx->Periodmeasure = 0;
-        Rx->Frequency = CLOCK_TIM2 / Rx->Periodmeasure;
+        Rx->Frequency = TIMRX_CLOCK / Rx->Periodmeasure;
         Rx->Number = 0;
       }
     }
