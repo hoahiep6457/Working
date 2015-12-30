@@ -1,9 +1,13 @@
+/*=====================================================================================================*/
+/*=====================================================================================================*/
 /********************************************************************************************************
 *    Project: Quadcopter                                                                                *
 *    Version: 1.0                                                                                       *
 *    Designed by: Kael                                                                                  *
 *    Date: 01/2016                                                                                      *
 ********************************************************************************************************/
+/*=====================================================================================================*/
+/*=====================================================================================================*/
 #include "stm32f4xx.h"
 #include <stdlib.h>
 #include <math.h>
@@ -60,17 +64,14 @@ int main(void)
   SystemInit();
 	USART_Configuration(38400);
 	Led_Config();
-  printf("Debug 1 \r\n");
 	//BLDC_Config();
   //Rx_Configuration();//Configuration interrupt to calculate dutycycle received from Rx
   I2C_Configuration();
-  printf("Debug 2\r\n");
 	delay_ms(1000); 
-  //HMC5883L_Initialize();
+  HMC5883L_Initialize();
   delay_ms(1000); 
   MPU6050_Initialize();//LSB gyro = 32.8 LSB acc = 2048
 	delay_ms(1000); 
-	printf("Debug 3\r\n");
   //IMU_Get_Offset();//read MPU6050 to calib gyro
 	delay_ms(1000);//wait for MPU to stabilize
   //IMU_Get_Start();
@@ -284,7 +285,7 @@ void IMU_Get_Offset(void)
   gyroY_offset /= 1000;
   gyroZ_offset /= 1000;
 
-  /*****************************Calib Magnetic sensor*****************/
+  /***************************** Calib Magnetic sensor *****************************/
   for(i=0; i<1500; i++)
   {
     HMC5883L_GetHeading(HMC5883Ldata);
