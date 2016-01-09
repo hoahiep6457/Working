@@ -4,25 +4,102 @@
 <h1>µVision Build Log</h1>
 <h2>Project:</h2>
 C:\Users\kael5\Desktop\Project_Quad\github\Working\MDK-ARM\Project.uvproj
-Project File Date:  12/15/2015
+Project File Date:  01/01/2016
 
 <h2>Output:</h2>
 Build target 'Project'
-compiling main.c...
-..\Sensor\MPU6050.h(370): warning:  #1295-D: Deprecated declaration MPU6050_Initialize - give arg types
-  void MPU6050_Initialize();
-..\Sensor\MPU6050.h(371): warning:  #1295-D: Deprecated declaration MPU6050_TestConnection - give arg types
-  bool MPU6050_TestConnection();
-..\Sensor\MPU6050.h(374): warning:  #1295-D: Deprecated declaration MPU6050_GetFullScaleGyroRange - give arg types
-  uint8_t MPU6050_GetFullScaleGyroRange();
-..\Sensor\MPU6050.h(377): warning:  #1295-D: Deprecated declaration MPU6050_GetFullScaleAccelRange - give arg types
-  uint8_t MPU6050_GetFullScaleAccelRange();
-..\Sensor\MPU6050.h(381): warning:  #1295-D: Deprecated declaration MPU6050_GetSleepModeStatus - give arg types
-  bool MPU6050_GetSleepModeStatus();
-..\Sensor\MPU6050.h(385): warning:  #1295-D: Deprecated declaration MPU6050_GetDeviceID - give arg types
+compiling stm32f4xx_spi.c...
+linking...
+Program Size: Code=11256 RO-data=872 RW-data=192 ZI-data=1368  
+".\Project\Project.axf" - 0 Error(s), 0 Warning(s).
+-D: last line of file ends without a newline
+  #endif
+..\Driver\nRF24L01.c(306): warning:  #1-D: last line of file ends without a newline
+  /*=====================================================================================================*/
+..\Driver\nRF24L01.c: 3 warnings, 0 errors
+linking...
+.\Project\Project.axf: Error: L6218E: Undefined symbol SPI_CalculateCRC (referred from nrf24l01.o).
+.\Project\Project.axf: Error: L6218E: Undefined symbol SPI_Cmd (referred from nrf24l01.o).
+.\Project\Project.axf: Error: L6218E: Undefined symbol SPI_I2S_GetFlagStatus (referred from nrf24l01.o).
+.\Project\Project.axf: Error: L6218E: Undefined symbol SPI_I2S_ReceiveData (referred from nrf24l01.o).
+.\Project\Project.axf: Error: L6218E: Undefined symbol SPI_I2S_SendData (referred from nrf24l01.o).
+.\Project\Project.axf: Error: L6218E: Undefined symbol SPI_Init (referred from nrf24l01.o).
+.\Project\Project.axf: Error: L6218E: Undefined symbol SPI_SSOutputCmd (referred from nrf24l01.o).
+Not enough information to list image symbols.
+Finished: 1 information, 0 warning and 7 error messages.
+".\Project\Project.axf" - 7 Error(s), 3 Warning(s).
+Target not created
+ #1295-D: Deprecated declaration HMC5883L_GetSampleAveraging - give arg types
+  uint8_t HMC5883L_GetSampleAveraging();
+..\Sensor\HMC5883L.h(87): warning:  #1295-D: Deprecated declaration HMC5883L_GetDataRate - give arg types
+  uint8_t HMC5883L_GetDataRate();
+..\Sensor\HMC5883L.h(89): warning:  #1295-D: Deprecated declaration HMC5883L_GetMeasurementBias - give arg types
+  uint8_t HMC5883L_GetMeasurementBias();
+..\Sensor\HMC5883L.h(93): warning:  #1295-D: Deprecated declaration HMC5883L_GetGain - give arg types
+  uint8_t HMC5883L_GetGain();
+..\Sensor\HMC5883L.h(97): warning:  #1295-D: Deprecated declaration HMC5883L_GetMode - give arg types
+  uint8_t HMC5883L_GetMode();
+..\Sensor\HMC5883L.h(103): warning:  #1295-D: Deprecated declaration HMC5883L_GetLockStatus - give arg types
+  bool HMC5883L_GetLockStatus();
+..\Sensor\HMC5883L.h(104): warning:  #1295-D: Deprecated declaration HMC5883L_GetReadyStatus - give arg types
+  bool HMC5883L_GetReadyStatus();
+..\Algorithm\pid.h(43): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Driver\delay_ctrl.h(23): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Driver\nRF24L01.h(123): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\main.c(83): warning:  #223-D: function "printf" declared implicitly
+    printf("Welcome Quadcopter Project\r\n");
+..\main.c(125): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+    gyroX_rate = (gyroX - gyroX_offset)/GYRO_LSB;
+..\main.c(126): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+    gyroY_rate = (gyroY - gyroY_offset)/GYRO_LSB;
+..\main.c(127): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+    gyroZ_rate = (gyroZ - gyroZ_offset)/GYRO_LSB;
+..\main.c(129): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+    gyroX_angle += gyroX_rate*DT;
+..\main.c(130): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+    gyroY_angle += gyroY_rate*DT;
+..\main.c(131): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+        gyroZ_angle += gyroZ_rate*DT;
+..\main.c(210): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+    roll_angle = angleX_kalman*DEG_TO_RAD;
+..\main.c(211): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+    pitch_angle = angleY_kalman*DEG_TO_RAD;
+..\main.c(259): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+    roll_angle = angleX_kalman*DEG_TO_RAD;
+..\main.c(260): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+    pitch_angle = angleY_kalman*DEG_TO_RAD;
+..\main.c(312): warning:  #550-D: variable "BLDC_M" was set but never used
+    u16 BLDC_M[4] = {0};
+..\main.c: 31 warnings, 0 errors
+compiling nRF24L01.c...
+..\Driver\nRF24L01.h(123): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Driver\delay_ctrl.h(23): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Driver\nRF24L01.c(305): warning:  #1-D: last line of file ends without a newline
+  /*=====================================================================================================*/
+..\Driver\nRF24L01.c: 3 warnings, 0 errors
+linking...
+.\Project\Project.axf: Error: L6218E: Undefined symbol SPI_CalculateCRC (referred from nrf24l01.o).
+.\Project\Project.axf: Error: L6218E: Undefined symbol SPI_Cmd (referred from nrf24l01.o).
+.\Project\Project.axf: Error: L6218E: Undefined symbol SPI_I2S_GetFlagStatus (referred from nrf24l01.o).
+.\Project\Project.axf: Error: L6218E: Undefined symbol SPI_I2S_ReceiveData (referred from nrf24l01.o).
+.\Project\Project.axf: Error: L6218E: Undefined symbol SPI_I2S_SendData (referred from nrf24l01.o).
+.\Project\Project.axf: Error: L6218E: Undefined symbol SPI_Init (referred from nrf24l01.o).
+.\Project\Project.axf: Error: L6218E: Undefined symbol SPI_SSOutputCmd (referred from nrf24l01.o).
+Not enough information to list image symbols.
+Finished: 1 information, 0 warning and 7 error messages.
+".\Project\Project.axf" - 7 Error(s), 34 Warning(s).
+Target not created
+ Deprecated declaration MPU6050_GetDeviceID - give arg types
   uint8_t MPU6050_GetDeviceID();
-..\Sensor\MPU6050.h(398): warning:  #1-D: last line of file ends without a newline
+..\sensor\MPU6050.h(398): warning:  #1-D: last line of file ends without a newline
   #endif /* __MPU6050_H */
+..\sensor\MPU6050.c: 7 warnings, 0 errors
+compiling HMC5883L.c...
 ..\Sensor\HMC5883L.h(81): warning:  #1295-D: Deprecated declaration HMC5883L_Initialize - give arg types
   void HMC5883L_Initialize();
 ..\Sensor\HMC5883L.h(82): warning:  #1295-D: Deprecated declaration HMC5883L_TestConnection - give arg types
@@ -41,62 +118,95 @@ compiling main.c...
   bool HMC5883L_GetLockStatus();
 ..\Sensor\HMC5883L.h(104): warning:  #1295-D: Deprecated declaration HMC5883L_GetReadyStatus - give arg types
   bool HMC5883L_GetReadyStatus();
+..\Sensor\HMC5883L.c: 9 warnings, 0 errors
+compiling Kalman.c...
+..\Algorithm\Kalman.c(77): warning:  #1-D: last line of file ends without a newline
+  /*=====================================================================================================*/
+..\Algorithm\Kalman.c: 1 warning, 0 errors
+compiling pid.c...
+..\..\Working\main.h(7): warning:  #1-D: last line of file ends without a newline
+  #endif 
 ..\Algorithm\pid.h(43): warning:  #1-D: last line of file ends without a newline
   #endif
-..\Driver\delay_ctrl.h(22): warning:  #1-D: last line of file ends without a newline
+..\Algorithm\pid.c(20): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+        pid->Ki_Value += pid->KI*error*pid_sampletime;
+..\Algorithm\pid.c(41): warning:  #1-D: last line of file ends without a newline
+  /*=====================================================================================================*/
+..\Algorithm\pid.c: 4 warnings, 0 errors
+compiling quad_i2c_ctrl.c...
+..\Driver\quad_i2c_ctrl.c(51): warning:  #1-D: last line of file ends without a newline
+  /*=====================================================================================================*/
+..\Driver\quad_i2c_ctrl.c: 1 warning, 0 errors
+compiling quad_pwm_ctrl.c...
+..\Driver\delay_ctrl.h(23): warning:  #1-D: last line of file ends without a newline
   #endif
-..\Driver\usart.h(23): warning:  #1-D: last line of file ends without a newline
+..\Driver\quad_pwm_ctrl.c(97): warning:  #1-D: last line of file ends without a newline
+  /*=====================================================================================================*/
+..\Driver\quad_pwm_ctrl.c: 2 warnings, 0 errors
+compiling Rx.c...
+compiling delay_ctrl.c...
+..\Driver\delay_ctrl.c(32): warning:  #1-D: last line of file ends without a newline
+  /*=====================================================================================================*/
+..\Driver\delay_ctrl.c: 1 warning, 0 errors
+compiling usart.c...
+..\Driver\usart.h(26): error:  #20: identifier "FILE" is undefined
+  int fputc(int ch, FILE *f);
+..\Driver\usart.h(27): error:  #20: identifier "FILE" is undefined
+  int fgetc(FILE *f);
+..\Driver\usart.c(100): warning:  #1-D: last line of file ends without a newline
+  /*=====================================================================================================*/
+..\Driver\usart.c: 1 warning, 2 errors
+compiling nRF24L01.c...
+..\Driver\nRF24L01.h(126): warning:  #1-D: last line of file ends without a newline
   #endif
-..\main.c(57): warning:  #223-D: function "USART_Configuration" declared implicitly
-        USART_Configuration(38400);
-..\main.c(59): warning:  #223-D: function "printf" declared implicitly
-    printf("Debug 1 \r\n");
-..\main.c(120): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-    gyroX_rate = (gyroX - gyroX_offset)/GYRO_LSB;
-..\main.c(121): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-    gyroY_rate = (gyroY - gyroY_offset)/GYRO_LSB;
-..\main.c(122): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-    gyroZ_rate = (gyroZ - gyroZ_offset)/GYRO_LSB;
-..\main.c(124): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-    gyroX_angle += gyroX_rate*DT;
-..\main.c(125): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-    gyroY_angle += gyroY_rate*DT;
-..\main.c(126): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-        gyroZ_angle += gyroZ_rate*DT;
-..\main.c(205): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-    roll_angle = angleX_kalman*DEG_TO_RAD;
-..\main.c(206): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-    pitch_angle = angleY_kalman*DEG_TO_RAD;
-..\main.c(254): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-    roll_angle = angleX_kalman*DEG_TO_RAD;
-..\main.c(255): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-    pitch_angle = angleY_kalman*DEG_TO_RAD;
-..\main.c(307): warning:  #550-D: variable "BLDC_M" was set but never used
-    u16 BLDC_M[4] = {0};
-..\main.c: 32 warnings, 0 errors
-linking...
-Program Size: Code=11176 RO-data=896 RW-data=192 ZI-data=1368  
-".\Project\Project.axf" - 0 Error(s), 32 Warning(s).
-Load "C:\\Users\\kael5\\Desktop\\Project_Quad\\github\\Working\\MDK-ARM\\Project\\Project.axf" 
-Erase Done.
-Programming Done.
-Verify OK.
-Application running ...
-</pre>
-</body>
-</html>
-sktop\\Project_Quad\\github\\Working\\MDK-ARM\\Project\\Project.axf" 
-Erase Done.
-Programming Done.
-Verify OK.
-Application running ...
-Load "C:\\Users\\kael5\\Desktop\\Project_Quad\\github\\Working\\MDK-ARM\\Project\\Project.axf" 
-Erase Done.
-Programming Done.
-Verify OK.
-Application running ...
-Load "C:\\Users\\kael5\\Desktop\\Project_Quad\\github\\Working\\MDK-ARM\\Project\\Project.axf" 
-Erase Done.
-Programming Done.
-Verify OK.
-Application running ...
+..\Driver\delay_ctrl.h(23): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Driver\nRF24L01.c(300): warning:  #1-D: last line of file ends without a newline
+  /*=====================================================================================================*/
+..\Driver\nRF24L01.c: 3 warnings, 0 errors
+".\Project\Project.axf" - 4 Error(s), 60 Warning(s).
+Target not created
+ GPIO_Pin_USART_TX_SOURCE, GPIO_AF_USART1); 
+..\Driver\usart.c(65): error:  #20: identifier "GPIO_Pin_USART_RX_SOURCE" is undefined
+    GPIO_PinAFConfig(GPIO_USART, GPIO_Pin_USART_RX_SOURCE, GPIO_AF_USART1); 
+..\Driver\usart.c(99): warning:  #1-D: last line of file ends without a newline
+  /*=====================================================================================================*/
+..\Driver\usart.c: 2 warnings, 7 errors
+compiling nRF24L01.c...
+..\Driver\nRF24L01.h(119): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Driver\delay_ctrl.h(23): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Driver\nRF24L01.c(107): error:  #20: identifier "TX_ADDRESS" is undefined
+        SPI_Write(WRITE_nRF_REG + TX_ADDR, TX_ADDRESS, ADR_WIDTH); // write address into tx_add
+..\Driver\nRF24L01.c(107): error:  #20: identifier "ADR_WIDTH" is undefined
+        SPI_Write(WRITE_nRF_REG + TX_ADDR, TX_ADDRESS, ADR_WIDTH); // write address into tx_add
+..\Driver\nRF24L01.c(109): error:  #20: identifier "RX_ADDRESS" is undefined
+        SPI_Write(WRITE_nRF_REG + RX_ADDR_P0, RX_ADDRESS, ADR_WIDTH); // write address into rx_add_p0
+..\Driver\nRF24L01.c(137): error:  #20: identifier "TX_ADDRESS" is undefined
+        SPI_Write(WRITE_nRF_REG + TX_ADDR, TX_ADDRESS, ADR_WIDTH); // write address into tx_add
+..\Driver\nRF24L01.c(137): error:  #20: identifier "ADR_WIDTH" is undefined
+        SPI_Write(WRITE_nRF_REG + TX_ADDR, TX_ADDRESS, ADR_WIDTH); // write address into tx_add
+..\Driver\nRF24L01.c(139): error:  #20: identifier "RX_ADDRESS" is undefined
+        SPI_Write(WRITE_nRF_REG + RX_ADDR_P0, RX_ADDRESS, ADR_WIDTH); // write address into rx_add_p0
+..\Driver\nRF24L01.c(221): warning:  #174-D: expression has no effect
+        for(i=0; i<len, i++)
+..\Driver\nRF24L01.c(221): error:  #65: expected a ";"
+        for(i=0; i<len, i++)
+..\Driver\nRF24L01.c(241): warning:  #174-D: expression has no effect
+        for(i=0; i<len, i++)
+..\Driver\nRF24L01.c(241): error:  #65: expected a ";"
+        for(i=0; i<len, i++)
+..\Driver\nRF24L01.c(263): error:  #20: identifier "RX_PLOAD_WIDTH" is undefined
+                SPI_Read(RD_RX_PLOAD, rx_buffer, RX_PLOAD_WIDTH);
+..\Driver\nRF24L01.c(263): error:  #167: argument of type "unsigned char *" is incompatible with parameter of type "unsigned int *"
+                SPI_Read(RD_RX_PLOAD, rx_buffer, RX_PLOAD_WIDTH);
+..\Driver\nRF24L01.c(274): error:  #65: expected a ";"
+        nRF24L01_CE_H();
+..\Driver\nRF24L01.c(293): error:  #20: identifier "TX_PLOAD_WIDTH" is undefined
+        SPI_Write(WR_TX_PLOAD, tx_buffer, TX_PLOAD_WIDTH);
+..\Driver\nRF24L01.c(300): warning:  #1-D: last line of file ends without a newline
+  /*=====================================================================================================*/
+..\Driver\nRF24L01.c: 5 warnings, 12 errors
+".\Project\Project.axf" - 19 Error(s), 65 Warning(s).
+Target not created

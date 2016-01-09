@@ -101,7 +101,11 @@
 #define GPIO_Pin_SPI_MOSI_SOURCE     	GPIO_PinSource7
 #define RCC_AHB1Periph_GPIO_SPI       	RCC_AHB1Periph_GPIOA
 
+#define	ADR_WIDTH				5
+#define RX_PLOAD_WIDTH  5
+#define TX_PLOAD_WIDTH	5
 //#define nRF24l01_IRQ    GPIO_ReadInputDataBit(GPIOA, GPIO_Pin_12); 
+
 /*=====================================================================================================*/
 /*=====================================================================================================*/
 void nRF24L01_HW_Init(void);

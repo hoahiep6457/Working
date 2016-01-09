@@ -1,10 +1,11 @@
 .\project\usart.o: ..\Driver\usart.c
+.\project\usart.o: ..\Driver\usart.h
 .\project\usart.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
-.\project\usart.o: G:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cm4.h
-.\project\usart.o: G:\Keil\ARM\ARMCC\bin\..\include\stdint.h
-.\project\usart.o: G:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cmInstr.h
-.\project\usart.o: G:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cmFunc.h
-.\project\usart.o: G:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cm4_simd.h
+.\project\usart.o: C:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cm4.h
+.\project\usart.o: C:\Keil\ARM\ARMCC\bin\..\include\stdint.h
+.\project\usart.o: C:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cmInstr.h
+.\project\usart.o: C:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cmFunc.h
+.\project\usart.o: C:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cm4_simd.h
 .\project\usart.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h
 .\project\usart.o: ..\..\Working\stm32f4xx_conf.h
 .\project\usart.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_adc.h
@@ -34,6 +35,5 @@
 .\project\usart.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_usart.h
 .\project\usart.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h
 .\project\usart.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h
-.\project\usart.o: ..\Driver\usart.h
-.\project\usart.o: G:\Keil\ARM\ARMCC\bin\..\include\stdio.h
-.\project\usart.o: G:\Keil\ARM\ARMCC\bin\..\include\rt_misc.h
+.\project\usart.o: C:\Keil\ARM\ARMCC\bin\..\include\stdio.h
+.\project\usart.o: C:\Keil\ARM\ARMCC\bin\..\include\rt_misc.h

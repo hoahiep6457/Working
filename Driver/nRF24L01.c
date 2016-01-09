@@ -1,8 +1,14 @@
 #include "stm32f4xx.h"
 #include "nRF24L01.h"
 #include "delay_ctrl.h"
+#include "stm32f4xx_spi.h"
 /*=====================================================================================================*/
 /*=====================================================================================================*/
+unsigned char  TX_ADDRESS[ADR_WIDTH]= {0xE7,0xE7,0xE7,0xE7,0xE7};
+unsigned char  RX_ADDRESS[ADR_WIDTH]= {0xE7,0xE7,0xE7,0xE7,0xE7};
+/*=====================================================================================================*/
+/*=====================================================================================================*/
+
 void nRF24L01_HW_Init(void);
 void nRF24L01_RX_Mode(void);
 void nRF24L01_TX_Mode(void);
@@ -10,7 +16,7 @@ unsigned char nRF24L01_SPI_Write_Byte(unsigned char data);
 unsigned char SPI_Write_Reg(unsigned char reg, unsigned char value);
 unsigned char SPI_Read_Reg(unsigned char reg);
 unsigned char SPI_Write(unsigned char reg, unsigned char *wbuf, unsigned char len);
-unsigned char SPI_Read(unsigned char reg, unsigned *rbuf, unsigned char len);
+unsigned char SPI_Read(unsigned char reg, unsigned char *rbuf, unsigned char len);
 unsigned char nRF24L01_Rx_Packet(unsigned char* rx_buffer);
 void nRF24L01_Tx_Packet(unsigned char* tx_buffer);
 void nRF24L01_SPI_NSS_H(void);
@@ -19,6 +25,7 @@ void nRF24L01_CE_H(void);
 void nRF24L01_CE_L(void);
 /*=====================================================================================================*/
 /*=====================================================================================================*/
+
 void nRF24L01_HW_Init(void)
 {
 	SPI_InitTypeDef  SPI_InitStructure;
@@ -217,8 +224,7 @@ unsigned char SPI_Write(unsigned char reg, unsigned char *wbuf, unsigned char le
 	nRF24L01_SPI_NSS_L(); //CSN Low, start SPI transaction
 	nRF24L01_Delay_us(20);
 	status = nRF24L01_SPI_Write_Byte(reg);
-
-	for(i=0; i<len, i++)
+	for(i=0; i<len; i++)
 	{
 		nRF24L01_SPI_Write_Byte(*wbuf);
 		wbuf++;
@@ -230,7 +236,7 @@ unsigned char SPI_Write(unsigned char reg, unsigned char *wbuf, unsigned char le
 }
 /*=====================================================================================================*/
 /*=====================================================================================================*/
-unsigned char SPI_Read(unsigned char reg, unsigned *rbuf, unsigned char len)
+unsigned char SPI_Read(unsigned char reg, unsigned char *rbuf, unsigned char len)
 {
 	unsigned int status, i;
 
@@ -238,7 +244,7 @@ unsigned char SPI_Read(unsigned char reg, unsigned *rbuf, unsigned char len)
 	nRF24L01_Delay_us(20);
 	status = nRF24L01_SPI_Write_Byte(reg);
 
-	for(i=0; i<len, i++)
+	for(i=0; i<len; i++)
 	{
 		*rbuf = nRF24L01_SPI_Write_Byte(0);
 		rbuf++;
@@ -270,7 +276,7 @@ unsigned char nRF24L01_Rx_Packet(unsigned char* rx_buffer)
 	nRF24L01_SPI_Write_Byte(0xE2); //Flush RX FIFO
 	nRF24L01_SPI_NSS_H();
 	nRF24L01_Delay_us(20);
-	SPI_Write_Reg(WRITE_nRF_REG + CONFIG, 0x33) // enable power up and prx
+	SPI_Write_Reg(WRITE_nRF_REG + CONFIG, 0x33); // enable power up and prx
 	nRF24L01_CE_H();
 	nRF24L01_Delay_us(20);
 

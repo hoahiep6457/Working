@@ -1,4 +1,3 @@
-#include "stm32f4xx.h"
 #include "usart.h"
 #include <stdio.h>
 #include <rt_misc.h>
@@ -37,7 +36,7 @@ void USART_Configuration(unsigned int BaudRate)
 	GPIO_InitTypeDef           GPIO_InitStructure;
 	USART_InitTypeDef 				 USART_InitStructure;
 	
-  RCC_APB2PeriphClockCmd(RCC_APBPeriph_USART, ENABLE); 
+  RCC_APB2PeriphClockCmd(RCC_APB2Periph_USART, ENABLE); 
   RCC_AHB1PeriphClockCmd(RCC_AHB1Periph_GPIO_USART, ENABLE);
 	
   /* Configure USART Tx as alternate function  */

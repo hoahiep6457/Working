@@ -1,10 +1,10 @@
 .\project\delay_ctrl.o: ..\Driver\delay_ctrl.c
 .\project\delay_ctrl.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
-.\project\delay_ctrl.o: G:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cm4.h
-.\project\delay_ctrl.o: G:\Keil\ARM\ARMCC\bin\..\include\stdint.h
-.\project\delay_ctrl.o: G:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cmInstr.h
-.\project\delay_ctrl.o: G:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cmFunc.h
-.\project\delay_ctrl.o: G:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cm4_simd.h
+.\project\delay_ctrl.o: C:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cm4.h
+.\project\delay_ctrl.o: C:\Keil\ARM\ARMCC\bin\..\include\stdint.h
+.\project\delay_ctrl.o: C:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cmInstr.h
+.\project\delay_ctrl.o: C:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cmFunc.h
+.\project\delay_ctrl.o: C:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cm4_simd.h
 .\project\delay_ctrl.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h
 .\project\delay_ctrl.o: ..\..\Working\stm32f4xx_conf.h
 .\project\delay_ctrl.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_adc.h
@@ -34,4 +34,4 @@
 .\project\delay_ctrl.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_usart.h
 .\project\delay_ctrl.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h
 .\project\delay_ctrl.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h
-.\project\delay_ctrl.o: G:\Keil\ARM\ARMCC\bin\..\include\stdlib.h
+.\project\delay_ctrl.o: C:\Keil\ARM\ARMCC\bin\..\include\stdlib.h

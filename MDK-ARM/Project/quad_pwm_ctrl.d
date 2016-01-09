@@ -1,10 +1,10 @@
 .\project\quad_pwm_ctrl.o: ..\Driver\quad_pwm_ctrl.c
 .\project\quad_pwm_ctrl.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\stm32f4xx.h
-.\project\quad_pwm_ctrl.o: G:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cm4.h
-.\project\quad_pwm_ctrl.o: G:\Keil\ARM\ARMCC\bin\..\include\stdint.h
-.\project\quad_pwm_ctrl.o: G:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cmInstr.h
-.\project\quad_pwm_ctrl.o: G:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cmFunc.h
-.\project\quad_pwm_ctrl.o: G:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cm4_simd.h
+.\project\quad_pwm_ctrl.o: C:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cm4.h
+.\project\quad_pwm_ctrl.o: C:\Keil\ARM\ARMCC\bin\..\include\stdint.h
+.\project\quad_pwm_ctrl.o: C:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cmInstr.h
+.\project\quad_pwm_ctrl.o: C:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cmFunc.h
+.\project\quad_pwm_ctrl.o: C:\Keil\ARM\PACK\ARM\CMSIS\3.20.4\CMSIS\Include\core_cm4_simd.h
 .\project\quad_pwm_ctrl.o: ..\Libraries\CMSIS\Device\ST\STM32F4xx\Include\system_stm32f4xx.h
 .\project\quad_pwm_ctrl.o: ..\..\Working\stm32f4xx_conf.h
 .\project\quad_pwm_ctrl.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_adc.h
@@ -36,4 +36,4 @@
 .\project\quad_pwm_ctrl.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h
 .\project\quad_pwm_ctrl.o: ..\Driver\quad_pwm_ctrl.h
 .\project\quad_pwm_ctrl.o: ..\Driver\delay_ctrl.h
-.\project\quad_pwm_ctrl.o: G:\Keil\ARM\ARMCC\bin\..\include\stdlib.h
+.\project\quad_pwm_ctrl.o: C:\Keil\ARM\ARMCC\bin\..\include\stdlib.h

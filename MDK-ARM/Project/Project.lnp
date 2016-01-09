@@ -11,6 +11,7 @@
 ".\project\stm32f4xx_can.o"
 ".\project\stm32f4xx_tim.o"
 ".\project\stm32f4xx_usart.o"
+".\project\stm32f4xx_spi.o"
 ".\project\mpu6050.o"
 ".\project\hmc5883l.o"
 ".\project\kalman.o"
@@ -20,6 +21,7 @@
 ".\project\rx.o"
 ".\project\delay_ctrl.o"
 ".\project\usart.o"
+".\project\nrf24l01.o"
 --library_type=microlib --strict --scatter ".\Project\Project.sct"
 --summary_stderr --info summarysizes --map --xref --callgraph --symbols
 --info sizes --info totals --info unused --info veneers
