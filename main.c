@@ -62,45 +62,28 @@ int main(void)
 {
 
   SystemInit();
-	USART_Configuration(38400);
+	//USART_Configuration(38400);
 	Led_Config();
-	//BLDC_Config();
-  //Rx_Configuration();//Configuration interrupt to calculate dutycycle received from Rx
+	BLDC_Config();
+	delay_ms(1000);
   I2C_Configuration();
 	delay_ms(1000); 
   HMC5883L_Initialize();
   delay_ms(1000); 
   MPU6050_Initialize();//LSB gyro = 32.8 LSB acc = 2048
 	delay_ms(1000); 
-  //IMU_Get_Offset();//read MPU6050 to calib gyro
+  IMU_Get_Offset();//read MPU6050 to calib gyro
 	delay_ms(1000);//wait for MPU to stabilize
-  //IMU_Get_Start();
+  IMU_Get_Start();
   delay_ms(1000);//delay to avoid hating
+	Rx_Configuration();//Configuration interrupt to calculate dutycycle received from Rx
   //PID_Init_Start();
-	//SysTick_Config(SystemCoreClock / 999);//start to read MPU each 1 ms
+	SysTick_Config(SystemCoreClock / 999);//start to read MPU each 1 ms
   //start PWM to test
   //BasicThr = 800;
-  printf("Welcome Quadcopter Project\r\n");
+  //printf("Welcome Quadcopter Project\r\n");
   while (1)
   {
-		MPU6050_GetRawAccelTempGyro(MPU6050data);
-		accX = MPU6050data[0];
-		accY = MPU6050data[1];
-		accZ = MPU6050data[2];
-		//temp = MPU6050data[3];
-		gyroX = MPU6050data[4];
-		gyroY = MPU6050data[5];
-		gyroZ = MPU6050data[6];
-		printf("angleX=%d\r", accX);
-		printf("angleY=%d\r", accY);
-		printf("angleZ=%d\r", accZ);
-		//HMC5883L_GetHeading(HMC5883Ldata);
-   // magX = HMC5883Ldata[0];
-    //magY = HMC5883Ldata[1];
-    //magZ = HMC5883Ldata[2];
-		//printf("angleX=%d\r", magX);
-		//printf("angleY=%d\r", magY);
-		//printf("angleZ=%d\r", magZ);
   }
 /*=====================================================================================================*/
 /*=====================================================================================================*/
