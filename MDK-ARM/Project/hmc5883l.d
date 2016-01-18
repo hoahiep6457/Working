@@ -36,3 +36,5 @@
 .\project\hmc5883l.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_usart.h
 .\project\hmc5883l.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\stm32f4xx_wwdg.h
 .\project\hmc5883l.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h
+.\project\hmc5883l.o: ..\Driver\delay_ctrl.h
+.\project\hmc5883l.o: C:\Keil\ARM\ARMCC\bin\..\include\stdlib.h

@@ -8,29 +8,40 @@ Project File Date:  01/16/2016
 
 <h2>Output:</h2>
 Build target 'Project'
-compiling main.c...
-..\Sensor\MPU6050.h(370): warning:  #1295-D: Deprecated declaration MPU6050_Initialize - give arg types
-  void MPU6050_Initialize();
-..\Sensor\MPU6050.h(371): warning:  #1295-D: Deprecated declaration MPU6050_TestConnection - give arg types
-  bool MPU6050_TestConnection();
-..\Sensor\MPU6050.h(374): warning:  #1295-D: Deprecated declaration MPU6050_GetFullScaleGyroRange - give arg types
+linking...
+Program Size: Code=11480 RO-data=872 RW-data=208 ZI-data=1368  
+".\Project\Project.axf" - 0 Error(s), 0 Warning(s).
+Load "C:\\Users\\kael5\\Desktop\\Project_Quad\\github\\Working\\MDK-ARM\\Project\\Project.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
+Application running ...
+</pre>
+</body>
+</html>
+374): warning:  #1295-D: Deprecated declaration MPU6050_GetFullScaleGyroRange - give arg types
   uint8_t MPU6050_GetFullScaleGyroRange();
-..\Sensor\MPU6050.h(377): warning:  #1295-D: Deprecated declaration MPU6050_GetFullScaleAccelRange - give arg types
+..\sensor\MPU6050.h(377): warning:  #1295-D: Deprecated declaration MPU6050_GetFullScaleAccelRange - give arg types
   uint8_t MPU6050_GetFullScaleAccelRange();
-..\Sensor\MPU6050.h(381): warning:  #1295-D: Deprecated declaration MPU6050_GetSleepModeStatus - give arg types
+..\sensor\MPU6050.h(381): warning:  #1295-D: Deprecated declaration MPU6050_GetSleepModeStatus - give arg types
   bool MPU6050_GetSleepModeStatus();
-..\Sensor\MPU6050.h(385): warning:  #1295-D: Deprecated declaration MPU6050_GetDeviceID - give arg types
+..\sensor\MPU6050.h(385): warning:  #1295-D: Deprecated declaration MPU6050_GetDeviceID - give arg types
   uint8_t MPU6050_GetDeviceID();
-..\Sensor\MPU6050.h(398): warning:  #1-D: last line of file ends without a newline
+..\sensor\MPU6050.h(398): warning:  #1-D: last line of file ends without a newline
   #endif /* __MPU6050_H */
-..\Sensor\HMC5883L.h(81): warning:  #1295-D: Deprecated declaration HMC5883L_Initialize - give arg types
-  void HMC5883L_Initialize();
-..\Sensor\HMC5883L.h(82): warning:  #1295-D: Deprecated declaration HMC5883L_TestConnection - give arg types
-  bool HMC5883L_TestConnection();
-..\Sensor\HMC5883L.h(85): warning:  #1295-D: Deprecated declaration HMC5883L_GetSampleAveraging - give arg types
-  uint8_t HMC5883L_GetSampleAveraging();
-..\Sensor\HMC5883L.h(87): warning:  #1295-D: Deprecated declaration HMC5883L_GetDataRate - give arg types
-  uint8_t HMC5883L_GetDataRate();
+..\Driver\delay_ctrl.h(23): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\sensor\MPU6050.c: 8 warnings, 0 errors
+linking...
+Program Size: Code=11480 RO-data=872 RW-data=208 ZI-data=1368  
+".\Project\Project.axf" - 0 Error(s), 8 Warning(s).
+Load "C:\\Users\\kael5\\Desktop\\Project_Quad\\github\\Working\\MDK-ARM\\Project\\Project.axf" 
+Error: Flash Download failed  -  Target DLL has been cancelled
+s
+linking...
+Program Size: Code=11456 RO-data=872 RW-data=208 ZI-data=1368  
+".\Project\Project.axf" - 0 Error(s), 10 Warning(s).
+DataRate();
 ..\Sensor\HMC5883L.h(89): warning:  #1295-D: Deprecated declaration HMC5883L_GetMeasurementBias - give arg types
   uint8_t HMC5883L_GetMeasurementBias();
 ..\Sensor\HMC5883L.h(93): warning:  #1295-D: Deprecated declaration HMC5883L_GetGain - give arg types
@@ -59,31 +70,91 @@ compiling main.c...
     gyroY_angle += gyroY_rate*DT;
 ..\main.c(114): warning:  #1035-D: single-precision operand implicitly converted to double-precision
         gyroZ_angle += gyroZ_rate*DT;
-..\main.c(193): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\main.c(297): warning:  #1035-D: single-precision operand implicitly converted to double-precision
     roll_angle = angleX_kalman*DEG_TO_RAD;
-..\main.c(194): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+..\main.c(298): warning:  #1035-D: single-precision operand implicitly converted to double-precision
     pitch_angle = angleY_kalman*DEG_TO_RAD;
-..\main.c(242): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-    roll_angle = angleX_kalman*DEG_TO_RAD;
-..\main.c(243): warning:  #1035-D: single-precision operand implicitly converted to double-precision
-    pitch_angle = angleY_kalman*DEG_TO_RAD;
-..\main.c(295): warning:  #550-D: variable "BLDC_M" was set but never used
+..\main.c(312): warning:  #550-D: variable "BLDC_M" was set but never used
     u16 BLDC_M[4] = {0};
-..\main.c: 30 warnings, 0 errors
+..\main.c: 28 warnings, 0 errors
 linking...
-Program Size: Code=13392 RO-data=872 RW-data=208 ZI-data=1368  
-".\Project\Project.axf" - 0 Error(s), 30 Warning(s).
-Load "C:\\Users\\kael5\\Desktop\\Project_Quad\\github\\Working\\MDK-ARM\\Project\\Project.axf" 
-Error: Flash Download failed  -  Target DLL has been cancelled
+Program Size: Code=11448 RO-data=872 RW-data=208 ZI-data=1368  
+".\Project\Project.axf" - 0 Error(s), 28 Warning(s).
 Load "C:\\Users\\kael5\\Desktop\\Project_Quad\\github\\Working\\MDK-ARM\\Project\\Project.axf" 
 Erase Done.
 Programming Done.
 Verify OK.
 Application running ...
-ta=1368  
-".\Project\Project.axf" - 0 Error(s), 32 Warning(s).
 Load "C:\\Users\\kael5\\Desktop\\Project_Quad\\github\\Working\\MDK-ARM\\Project\\Project.axf" 
-Error: Flash Download failed  -  Target DLL has been cancelled
+Erase Done.
+Programming Done.
+Verify OK.
+Application running ...
+ated declaration HMC5883L_GetSampleAveraging - give arg types
+  uint8_t HMC5883L_GetSampleAveraging();
+..\Sensor\HMC5883L.h(87): warning:  #1295-D: Deprecated declaration HMC5883L_GetDataRate - give arg types
+  uint8_t HMC5883L_GetDataRate();
+..\Sensor\HMC5883L.h(89): warning:  #1295-D: Deprecated declaration HMC5883L_GetMeasurementBias - give arg types
+  uint8_t HMC5883L_GetMeasurementBias();
+..\Sensor\HMC5883L.h(93): warning:  #1295-D: Deprecated declaration HMC5883L_GetGain - give arg types
+  uint8_t HMC5883L_GetGain();
+..\Sensor\HMC5883L.h(97): warning:  #1295-D: Deprecated declaration HMC5883L_GetMode - give arg types
+  uint8_t HMC5883L_GetMode();
+..\Sensor\HMC5883L.h(103): warning:  #1295-D: Deprecated declaration HMC5883L_GetLockStatus - give arg types
+  bool HMC5883L_GetLockStatus();
+..\Sensor\HMC5883L.h(104): warning:  #1295-D: Deprecated declaration HMC5883L_GetReadyStatus - give arg types
+  bool HMC5883L_GetReadyStatus();
+..\Sensor\HMC5883L.c: 9 warnings, 0 errors
+".\Project\Project.axf" - 1 Error(s), 37 Warning(s).
+Target not created
+oject\Project.axf" - 0 Error(s), 38 Warning(s).
+Load "C:\\Users\\kael5\\Desktop\\Project_Quad\\github\\Working\\MDK-ARM\\Project\\Project.axf" 
+Erase Done.
+Programming Done.
+Verify OK.
+Application running ...
+ive arg types
+  bool HMC5883L_TestConnection();
+..\Sensor\HMC5883L.h(85): warning:  #1295-D: Deprecated declaration HMC5883L_GetSampleAveraging - give arg types
+  uint8_t HMC5883L_GetSampleAveraging();
+..\Sensor\HMC5883L.h(87): warning:  #1295-D: Deprecated declaration HMC5883L_GetDataRate - give arg types
+  uint8_t HMC5883L_GetDataRate();
+..\Sensor\HMC5883L.h(89): warning:  #1295-D: Deprecated declaration HMC5883L_GetMeasurementBias - give arg types
+  uint8_t HMC5883L_GetMeasurementBias();
+..\Sensor\HMC5883L.h(93): warning:  #1295-D: Deprecated declaration HMC5883L_GetGain - give arg types
+  uint8_t HMC5883L_GetGain();
+..\Sensor\HMC5883L.h(97): warning:  #1295-D: Deprecated declaration HMC5883L_GetMode - give arg types
+  uint8_t HMC5883L_GetMode();
+..\Sensor\HMC5883L.h(103): warning:  #1295-D: Deprecated declaration HMC5883L_GetLockStatus - give arg types
+  bool HMC5883L_GetLockStatus();
+..\Sensor\HMC5883L.h(104): warning:  #1295-D: Deprecated declaration HMC5883L_GetReadyStatus - give arg types
+  bool HMC5883L_GetReadyStatus();
+..\Algorithm\pid.h(43): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Driver\delay_ctrl.h(23): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\Driver\nRF24L01.h(123): warning:  #1-D: last line of file ends without a newline
+  #endif
+..\main.c(112): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+    gyroX_rate = (gyroX - gyroX_offset)/GYRO_LSB;
+..\main.c(113): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+    gyroY_rate = (gyroY - gyroY_offset)/GYRO_LSB;
+..\main.c(114): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+    gyroZ_rate = (gyroZ - gyroZ_offset)/GYRO_LSB;
+..\main.c(116): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+    gyroX_angle += gyroX_rate*DT;
+..\main.c(117): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+    gyroY_angle += gyroY_rate*DT;
+..\main.c(118): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+        gyroZ_angle += gyroZ_rate*DT;
+..\main.c(296): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+    roll_angle = angleX_kalman*DEG_TO_RAD;
+..\main.c(297): warning:  #1035-D: single-precision operand implicitly converted to double-precision
+    pitch_angle = angleY_kalman*DEG_TO_RAD;
+..\main.c(344): warning:  #550-D: variable "BLDC_M" was set but never used
+    u16 BLDC_M[4] = {0};
+..\main.c: 28 warnings, 0 errors
+"..\main.c" - 0 Error(s), 28 Warning(s).
 Load "C:\\Users\\kael5\\Desktop\\Project_Quad\\github\\Working\\MDK-ARM\\Project\\Project.axf" 
 Erase Done.
 Programming Done.

@@ -3,7 +3,7 @@
 #include "stm32f4xx.h"
 #include <stdlib.h>
 #include <math.h>
-
+#include "delay_ctrl.h"
 //#include "stm32f10x_i2c.h"
 
 /** @defgroup MPU6050_Library
@@ -20,8 +20,11 @@
 void MPU6050_Initialize() 
 {
     MPU6050_SetClockSource(MPU6050_CLOCK_PLL_XGYRO);
+		delay_ms(100);
     MPU6050_SetFullScaleGyroRange(MPU6050_GYRO_FS_1000);
+		delay_ms(100);
     MPU6050_SetFullScaleAccelRange(MPU6050_ACCEL_FS_16);
+		delay_ms(100);
     MPU6050_SetSleepModeStatus(DISABLE); 
 }
 

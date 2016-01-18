@@ -1,4 +1,5 @@
 #include "HMC5883L.h"
+#include "delay_ctrl.h"
 uint8_t HMC5883Lmode;
 float m_scale;
 /** @defgroup HMC5883L_Library
@@ -21,10 +22,10 @@ void HMC5883L_Initialize()
                   (HMC5883L_RATE_15     << (HMC5883L_CRA_RATE_BIT - HMC5883L_CRA_RATE_LENGTH + 1)) |
                   (HMC5883L_BIAS_NORMAL << (HMC5883L_CRA_BIAS_BIT - HMC5883L_CRA_BIAS_LENGTH + 1)) ;
     HMC5883L_I2C_ByteWrite(HMC5883L_DEFAULT_ADDRESS, &tmp ,HMC5883L_RA_CONFIG_A);
-    
+    delay_ms(100);
     // write CONFIG_B register
     HMC5883L_SetGain(HMC5883L_GAIN_1090);
-    
+    delay_ms(100);
     // write MODE register
     HMC5883L_SetMode(HMC5883L_MODE_SINGLE);
 }
@@ -207,7 +208,7 @@ void HMC5883L_SetGain(uint8_t gain)
       case HMC5883L_GAIN_220:
           m_scale = 4.35;
           break;   
-    } 
+   } 
     
 }
 

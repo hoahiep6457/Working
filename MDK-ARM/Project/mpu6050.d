@@ -38,3 +38,4 @@
 .\project\mpu6050.o: ..\Libraries\STM32F4xx_StdPeriph_Driver\inc\misc.h
 .\project\mpu6050.o: C:\Keil\ARM\ARMCC\bin\..\include\stdlib.h
 .\project\mpu6050.o: C:\Keil\ARM\ARMCC\bin\..\include\math.h
+.\project\mpu6050.o: ..\Driver\delay_ctrl.h
