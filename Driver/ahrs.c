@@ -1,5 +1,31 @@
+/*=====================================================================================================*/
+/*=====================================================================================================*/
+#include "stm32f4x_system.h"
 #include "ahrs.h"
-void AHRS_setup(void)
+#include "quaternion.h"
+/*=====================================================================================================*/
+/*=====================================================================================================*/
+//#define Kp 2.0f         // proportional gain governs rate of convergence to accelerometer/magnetometer
+//#define Ki 0.005f       // integral gain governs rate of convergence of gyroscope biases
+// #define Kp 10.0f
+// #define Ki 0.008f
+#define Kp 3.5f
+#define Ki 0.006f
+// float Kp = 10.0f;
+// float Ki = 0.008f;
+
+#define dt    0.0025f
+#define halfT 0.00125f
+
+#define CF_A 0.985f
+#define CF_B 0.015f
+
+
+float exInt, eyInt, ezInt, q0, q1, q2, q3, y, p, r; 
+EulerAngle AngE = {0};
+/*=====================================================================================================*/
+/*=====================================================================================================*/
+void AHRS_Init(void)
 {
     exInt=0;
     eyInt=0;
@@ -7,14 +33,14 @@ void AHRS_setup(void)
     q0=1.0;
     q1=q2=q3=0;
 }
-void updateMARG(float gx, float gy, float gz, float ax, float ay, float az, float mx, float my, float mz) {
+
+void AHRS_Update(float gx, float gy, float gz, float ax, float ay, float az, float mx, float my, float mz) {
 
     float norm,halfT;
     float hx, hy, hz, bx, bz;
     float vx, vy, vz, wx, wy, wz;
     float ex, ey, ez;
-
-    halfT=dt/2.0;
+    static float AngZ_Temp = 0.0f;
 
     // auxiliary variables to reduce number of repeated operations
     float q0q0 = q0*q0;
@@ -85,56 +111,69 @@ void updateMARG(float gx, float gy, float gz, float ax, float ay, float az, floa
     q3 = q3 / norm;
 
     toEuler();
-  }
+    /* Complementary Filter */
+    AngZ_Temp += gz*dt;
+    AngZ_Temp = AngZ_Temp*CF_A + CF_B*y;
+    if(AngZ_Temp>360.0f)
+        y = AngZ_Temp - 360.0f;
+    else if(AngZ_Temp<0.0f)
+        y = AngZ_Temp + 360.0f;
+    else
+        y = AngZ_Temp;
 
-void AHRS_UpdateIMU(float gx, float gy, float gz, float ax, float ay, float az) {
-    float norm,halfT;
-    float vx, vy, vz;
-    float ex, ey, ez;         
+    AngE.Pitch = p;
+    AngE.Roll = r;
+    AngE.Yaw = y;
+}
 
-    halfT=dt/2.0;
+// void AHRS_UpdateIMU(float gx, float gy, float gz, float ax, float ay, float az) {
+//     float norm,halfT;
+//     float vx, vy, vz;
+//     float ex, ey, ez;         
 
-    // normalise the measurements
-    norm = sqrt(ax*ax + ay*ay + az*az);       
-    ax = ax / norm;
-    ay = ay / norm;
-    az = az / norm;      
+//     halfT=dt/2.0;
 
-    // estimated direction of gravity
-    vx = 2*(q1*q3 - q0*q2);
-    vy = 2*(q0*q1 + q2*q3);
-    vz = q0*q0 - q1*q1 - q2*q2 + q3*q3;
+//     // normalise the measurements
+//     norm = sqrt(ax*ax + ay*ay + az*az);       
+//     ax = ax / norm;
+//     ay = ay / norm;
+//     az = az / norm;      
 
-    // error is sum of cross product between reference direction of field and direction measured by sensor
-    ex = (ay*vz - az*vy);
-    ey = (az*vx - ax*vz);
-    ez = (ax*vy - ay*vx);
+//     // estimated direction of gravity
+//     vx = 2*(q1*q3 - q0*q2);
+//     vy = 2*(q0*q1 + q2*q3);
+//     vz = q0*q0 - q1*q1 - q2*q2 + q3*q3;
 
-    // integral error scaled integral gain
-    exInt = exInt + ex*Ki;
-    eyInt = eyInt + ey*Ki;
-    ezInt = ezInt + ez*Ki;
+//     // error is sum of cross product between reference direction of field and direction measured by sensor
+//     ex = (ay*vz - az*vy);
+//     ey = (az*vx - ax*vz);
+//     ez = (ax*vy - ay*vx);
 
-    // adjusted gyroscope measurements
-    gx = gx + Kp*ex + exInt;
-    gy = gy + Kp*ey + eyInt;
-    gz = gz + Kp*ez + ezInt;
+//     // integral error scaled integral gain
+//     exInt = exInt + ex*Ki;
+//     eyInt = eyInt + ey*Ki;
+//     ezInt = ezInt + ez*Ki;
 
-    // integrate quaternion rate and normalise
-    q0 = q0 + (-q1*gx - q2*gy - q3*gz)*halfT;
-    q1 = q1 + (q0*gx + q2*gz - q3*gy)*halfT;
-    q2 = q2 + (q0*gy - q1*gz + q3*gx)*halfT;
-    q3 = q3 + (q0*gz + q1*gy - q2*gx)*halfT;  
+//     // adjusted gyroscope measurements
+//     gx = gx + Kp*ex + exInt;
+//     gy = gy + Kp*ey + eyInt;
+//     gz = gz + Kp*ez + ezInt;
 
-    // normalise quaternion
-    norm = sqrt(q0*q0 + q1*q1 + q2*q2 + q3*q3);
-    q0 = q0 / norm;
-    q1 = q1 / norm;
-    q2 = q2 / norm;
-    q3 = q3 / norm;
+//     // integrate quaternion rate and normalise
+//     q0 = q0 + (-q1*gx - q2*gy - q3*gz)*halfT;
+//     q1 = q1 + (q0*gx + q2*gz - q3*gy)*halfT;
+//     q2 = q2 + (q0*gy - q1*gz + q3*gx)*halfT;
+//     q3 = q3 + (q0*gz + q1*gy - q2*gx)*halfT;  
 
-    toEuler();
-  }
+//     // normalise quaternion
+//     norm = sqrt(q0*q0 + q1*q1 + q2*q2 + q3*q3);
+//     q0 = q0 / norm;
+//     q1 = q1 / norm;
+//     q2 = q2 / norm;
+//     q3 = q3 / norm;
+
+//     toEuler();
+//   }
 
 void toEuler()
   {
